@@ -6,6 +6,11 @@ Tech stack:
 - React 19
 - TypeScript
 - [ShadCN UI](https://ui.shadcn.com/docs)
+- Tailwindcss
+- ESLint 9
+- Prettier
+- lucide-react (for icons)
+- next-themes (theme mode toggle)
 
 ## Getting Started
 
@@ -35,4 +40,25 @@ We can use the `Button` component from Shadcn. You can read more about the butto
 
 ```bash
 npx shadcn@latest add button
+```
+
+
+## Fix Hydration Issue
+
+Add the `surpressHydrationWarning` attribute to the `<html>` tag in the main layout.
+
+One of the reasons is listed as "Server/client branch like if (typeof window !== 'undefined')"
+
+We can fix this by making sure the component is mounted before the theme is set. We can do this by setting a `mounted` state and then checking if the component is mounted before setting the theme.
+
+```tsx
+const [mounted, setMounted] = useState(false);
+
+useEffect(() => {
+  setMounted(true);
+}, []);
+
+if (!mounted) {
+  return null;
+}
 ```
