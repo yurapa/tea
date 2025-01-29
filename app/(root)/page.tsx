@@ -1,4 +1,5 @@
-import { Button } from "@/components/ui/button";
+import ProductList from "@/components/shared/product/product-list";
+import sampleData from "@/db/sample-data";
 
 // const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
@@ -6,11 +7,12 @@ const HomePage = () => {
   // await delay(2000);
 
   return (
-    <div className="flex-center flex-col p-5 m-5">
-      <h1 className="h1-bold">The TeaVibe store</h1>
-      <div className="flex-center mt-5">
-        <Button>Button</Button>
-      </div>
+    <div className="space-y-8">
+      <ProductList
+        title="Newest Arrivals"
+        data={sampleData.products}
+        limit={4}
+      />
     </div>
   );
 };
