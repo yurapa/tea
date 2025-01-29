@@ -3,14 +3,20 @@
 Tech stack:
 
 - [Next.js v.15](https://nextjs.org/docs)
-- React 19
+- React v.19
 - TypeScript
-- [ShadCN UI](https://ui.shadcn.com/docs)
-- Tailwindcss
-- ESLint 9
-- Prettier
-- lucide-react (for icons)
-- next-themes (theme mode toggle)
+- [Zod](https://zod.dev) is a TypeScript-first schema declaration and validation library.
+- DB:
+  - PostgreSQL database (offered through [Vercel](https://vercel.com/docs/storage/vercel-postgres) but is managed and is hosted by [Neon](https://neon.tech))
+  - Prisma ORM [![Made with Prisma](http://made-with.prisma.io/indigo.svg)](https://prisma.io)
+- UI
+  - [ShadCN UI](https://ui.shadcn.com/docs)
+  - Tailwindcss
+  - lucide-react (for icons)
+  - next-themes (theme mode toggle)
+- Formatting
+  - ESLint v.9
+  - Prettier
 
 ## Getting Started
 
@@ -41,7 +47,6 @@ We can use the `Button` component from Shadcn. You can read more about the butto
 ```bash
 npx shadcn@latest add button
 ```
-
 
 ## Fix Hydration Issue
 
