@@ -1,26 +1,31 @@
 {
   "name": "tea",
-  "version": "25.01.01",
+  "version": "25.01.03",
   "private": false,
+  "repository": "https://github.com/yurapa/tea.git",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write .",
+    "format": "prettier --check .",
+    "format:write": "prettier --write .",
     "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@auth/prisma-adapter": "^2.7.4",
     "@neondatabase/serverless": "^0.10.4",
     "@prisma/adapter-neon": "^6.3.0",
     "@radix-ui/react-dialog": "^1.1.5",
     "@radix-ui/react-dropdown-menu": "^2.1.5",
     "@radix-ui/react-slot": "^1.1.1",
     "@vercel/analytics": "^1.4.1",
+    "bcrypt-ts-edge": "^3.0.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.474.0",
     "next": "15.1.6",
+    "next-auth": "^5.0.0-beta.25",
     "next-themes": "^0.4.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -46,5 +51,8 @@
     "prisma": "^6.3.0",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
+  },
+  "engines": {
+    "node": "^18.18.0 || ^20.8.0 || ^22.0.0"
   }
 }
