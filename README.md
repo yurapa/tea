@@ -67,3 +67,20 @@ if (!mounted) {
   return null;
 }
 ```
+
+@TODO:
+
+- [+] Theme toggle
+- [+] Latest Products on the homepage
+- [+] Product Details Page
+- [...] Auth,
+- [...] Login and Register pages
+- Add product to cart
+- Cart
+- Payment
+- Order History
+- Admin
+- Search
+- Rating
+- Send Email
+- Homepage components
