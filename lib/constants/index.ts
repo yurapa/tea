@@ -18,6 +18,14 @@ export const signUpDefaultValues = {
   confirmPassword: "password",
 };
 
+export const shippingAddressDefaultValues = {
+  fullName: "John Doe",
+  streetAddress: "123 Main St",
+  city: "Anytown",
+  postalCode: "12345",
+  country: "USA",
+};
+
 export const PRICE_TAX_RATE = 0.19;
 export const PRICE_SHIPPING = 10;
 export const PRICE_FREE_SHIPPING_LIMIT = 100;

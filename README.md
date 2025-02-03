@@ -14,8 +14,11 @@ A full-featured Ecommerce website built with Next.js, TypeScript, PostgreSQL and
 - Styling:
   - [ShadCN UI](https://ui.shadcn.com/docs)
   - Tailwindcss
-  - lucide-react (for icons)
-  - next-themes (theme mode toggle)
+  - `lucide-react`: icons
+  - `next-themes`: theme mode toggle
+- Forms:
+  - `react-hook-form`: This is a library that helps us manage forms in React. It integrates well with ShadCN form components. It takes care of things like managing form state, handling form submissions, validating form inputs and displaying error messages
+  - `@hookform/resolvers`: provides integrations between `react-hook-form` and validation libraries like Zod. It enables react-hook-form to leverage the validation schemas from these libraries directly, making it simpler to apply custom validation rules.
 - Code Formatting:
   - ESLint v.9
   - Prettier
