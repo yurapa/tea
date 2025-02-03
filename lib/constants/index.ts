@@ -17,3 +17,7 @@ export const signUpDefaultValues = {
   password: "password",
   confirmPassword: "password",
 };
+
+export const PRICE_TAX_RATE = 0.19;
+export const PRICE_SHIPPING = 10;
+export const PRICE_FREE_SHIPPING_LIMIT = 100;

@@ -8,15 +8,15 @@ A full-featured Ecommerce website built with Next.js, TypeScript, PostgreSQL and
 - React v.19
 - TypeScript
 - [Zod](https://zod.dev) is a TypeScript-first schema declaration and validation library.
-- DB:
+- Database:
   - PostgreSQL database (offered through [Vercel](https://vercel.com/docs/storage/vercel-postgres) but is managed and is hosted by [Neon](https://neon.tech))
   - Prisma ORM [![Made with Prisma](http://made-with.prisma.io/indigo.svg)](https://prisma.io)
-- UI
+- Styling:
   - [ShadCN UI](https://ui.shadcn.com/docs)
   - Tailwindcss
   - lucide-react (for icons)
   - next-themes (theme mode toggle)
-- Formatting
+- Code Formatting:
   - ESLint v.9
   - Prettier
 
