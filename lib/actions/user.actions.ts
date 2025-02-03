@@ -5,6 +5,7 @@ import { hashSync } from "bcrypt-ts-edge";
 
 import { signIn, signOut } from "@/auth";
 import { prisma } from "@/db/prisma";
+import { formatError } from "@/lib/utils";
 import { signInFormSchema, signUpFormSchema } from "@/lib/validator";
 
 // Sign in the user with credentials
@@ -71,7 +72,7 @@ export async function signUp(prevState: unknown, formData: FormData) {
 
     return {
       success: false,
-      message: "Something went wrong",
+      message: formatError(error),
     };
   }
 }

@@ -1,6 +1,8 @@
 # The TeaVibe store
 
-Tech stack:
+A full-featured Ecommerce website built with Next.js, TypeScript, PostgreSQL and Prisma.
+
+## Tech stack:
 
 - [Next.js v.15](https://nextjs.org/docs)
 - React v.19
@@ -18,27 +20,40 @@ Tech stack:
   - ESLint v.9
   - Prettier
 
-## Getting Started
-
-First, run the development server:
+### Getting Started
 
 ```bash
+
+# Run in development mode
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
+
+# Run in production mode
+npm start
+
+# Export static site
+npm run export
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Deploy on Vercel
+## Prisma Studio
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+To open Prisma Studio, run the following command:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npx prisma studio
+```
+
+## Seed Database
+
+To seed the database with sample data, run the following command:
+
+```bash
+npx tsx ./db/seed
+```
 
 ## ShadCN
 

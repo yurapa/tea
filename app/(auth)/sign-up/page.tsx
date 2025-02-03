@@ -1,6 +1,10 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+
+import { auth } from "@/auth";
+import { APP_NAME } from "@/lib/constants";
 import {
   Card,
   CardContent,
@@ -8,24 +12,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { APP_NAME } from "@/lib/constants";
-import { auth } from "@/auth";
-import { redirect } from "next/navigation";
 import SignUpForm from "./sign-up-form";
 
 export const metadata: Metadata = {
   title: "Sign Up",
 };
 
-const SignUp = async (props: {
+const SignUpPage = async (props: {
   searchParams: Promise<{
     callbackUrl: string;
   }>;
 }) => {
   const searchParams = await props.searchParams;
-
   const { callbackUrl } = searchParams;
-
   const session = await auth();
 
   if (session) {
@@ -58,4 +57,4 @@ const SignUp = async (props: {
   );
 };
 
-export default SignUp;
+export default SignUpPage;
