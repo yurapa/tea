@@ -1,6 +1,8 @@
 import { LATEST_PRODUCTS_LIMIT } from "@/lib/constants";
 import { getLatestProducts } from "@/lib/actions/product.actions";
 import ProductList from "@/components/shared/product/product-list";
+import IconBoxes from "@/components/icon-boxes";
+import DealCountdown from "@/components/deal-countdown";
 
 // const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
@@ -15,6 +17,8 @@ const HomePage = async () => {
         data={latestProducts}
         limit={LATEST_PRODUCTS_LIMIT}
       />
+      <DealCountdown />
+      <IconBoxes />
     </div>
   );
 };
