@@ -3,16 +3,17 @@
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { Prisma } from "@prisma/client";
-import { CartItem } from "@/types";
+
 import { auth } from "@/auth";
 import { prisma } from "@/db/prisma";
-import { cartItemSchema, insertCartSchema } from "@/lib/validator";
-import { convertToPlainObject, formatError, round2 } from "@/lib/utils";
 import {
   PRICE_FREE_SHIPPING_LIMIT,
   PRICE_SHIPPING,
   PRICE_TAX_RATE,
 } from "@/lib/constants";
+import { cartItemSchema, insertCartSchema } from "@/lib/validator";
+import { convertToPlainObject, formatError, round2 } from "@/lib/utils";
+import { CartItem } from "@/types";
 
 // Calculate cart prices
 const calcPrice = (items: CartItem[]) => {

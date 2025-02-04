@@ -19,11 +19,11 @@ export const signUpDefaultValues = {
 };
 
 export const shippingAddressDefaultValues = {
-  fullName: "John Doe",
-  streetAddress: "123 Main St",
-  city: "Anytown",
-  postalCode: "12345",
-  country: "USA",
+  fullName: "",
+  streetAddress: "",
+  city: "",
+  postalCode: "",
+  country: "",
 };
 
 export const PRICE_TAX_RATE = 0.19;
