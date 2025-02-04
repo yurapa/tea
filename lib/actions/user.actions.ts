@@ -1,10 +1,10 @@
 "use server";
 
 import { isRedirectError } from "next/dist/client/components/redirect-error";
-import { hashSync } from "bcrypt-ts-edge";
 
 import { auth, signIn, signOut } from "@/auth";
 import { prisma } from "@/db/prisma";
+import { hash } from "@/lib/encrypt";
 import { formatError } from "@/lib/utils";
 import {
   signInFormSchema,
@@ -51,7 +51,7 @@ export async function signUp(prevState: unknown, formData: FormData) {
 
     const plainPassword = user.password;
 
-    user.password = hashSync(user.password, 10);
+    user.password = await hash(user.password);
 
     await prisma.user.create({
       data: {
