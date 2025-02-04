@@ -1,10 +1,11 @@
-import { cookies } from "next/headers";
-import { NextResponse } from "next/server";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import NextAuth from "next-auth";
 import type { NextAuthConfig } from "next-auth";
+import { cookies } from "next/headers";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+import { authConfig } from "@/auth.config";
 import { prisma } from "@/db/prisma";
 import { compare } from "@/lib/encrypt";
 
@@ -55,6 +56,7 @@ export const config = {
     }),
   ],
   callbacks: {
+    ...authConfig.callbacks,
     async session({ session, user, trigger, token }: any) {
       // Set the user id on the session
       session.user.id = token.sub;
@@ -100,48 +102,6 @@ export const config = {
       }
 
       return token;
-    },
-    authorized({ request, auth }: any) {
-      // Array of regex patterns of protected paths
-      const protectedPaths = [
-        /\/shipping-address/,
-        /\/payment-method/,
-        /\/place-order/,
-        /\/profile/,
-        /\/user\/(.*)/,
-        /\/order\/(.*)/,
-        /\/admin/,
-      ];
-
-      // Get pathname from the req URL object
-      const { pathname } = request.nextUrl;
-
-      // Check if user is not authenticated and on a protected path
-      if (!auth && protectedPaths.some((p) => p.test(pathname))) return false;
-
-      // Check for cart cookie
-      if (!request.cookies.get("sessionCartId")) {
-        // Generate cart cookie
-        const sessionCartId = crypto.randomUUID();
-
-        // Clone the request headers
-        const newRequestHeaders = new Headers(request.headers);
-
-        // Create a new response and add the new headers
-        const response = NextResponse.next({
-          request: {
-            headers: newRequestHeaders,
-          },
-        });
-
-        // Set the newly generated sessionCartId in the response cookies
-        response.cookies.set("sessionCartId", sessionCartId);
-
-        // Return the response with the sessionCartId set
-        return response;
-      } else {
-        return true;
-      }
     },
   },
 } satisfies NextAuthConfig;

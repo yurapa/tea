@@ -1,7 +1,7 @@
 {
   "name": "tea",
-  "version": "25.02.05",
-  "private": false,
+  "version": "25.02.06",
+  "private": true,
   "repository": "https://github.com/yurapa/tea.git",
   "scripts": {
     "dev": "next dev",
@@ -55,6 +55,6 @@
     "typescript": "^5"
   },
   "engines": {
-    "node": "^18.18.0 || ^20.8.0 || ^22.0.0"
+    "node": "^20.8.0 || ^22.0.0"
   }
 }
