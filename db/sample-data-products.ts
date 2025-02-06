@@ -1,13 +1,14 @@
 const sampleDataProducts = [
   {
-    name: "Rose Hips Peel / Bulgaria",
-    slug: "polo-sporting-stretch-shirt",
+    name: "Alpiskiy Lug",
+    slug: "alpiskiy-lug",
     category: "Herbal Tea",
     description:
       "Rose hip varies from light to dark red, in autumn a real eye-catcher in the woods. The plant originates in Europe, The Middle East and North Africa. The rose hip is dried in wood-burning stoves, it is especially suitable as a single fruit  for a delicious and thirst-quenching infusion. In a fruit tea blends it is one of the most important  ingredients and almost indispensible.",
     images: [
-      "/images/sample-products/pu-8.jpg",
-      "/images/sample-products/pu-7.jpg",
+      "/images/products/p-01-1.jpg",
+      "/images/products/p-01-2.jpg",
+      "/images/products/p-01-3.jpg",
     ],
     price: 4.5,
     brand: "Bulgaria",
@@ -18,14 +19,15 @@ const sampleDataProducts = [
     banner: "/images/banner-1.jpg",
   },
   {
-    name: "Jade Snow/China",
-    slug: "jade-snow-china",
-    category: "Green Tea",
+    name: "Sir Charles Grey",
+    slug: "sir-charles-grey",
+    category: "Black Tea",
     description:
       "This area of Yunnan is known for its ability to produce needle leaves and other unusual shapes. This kind is special because three harvest periods of a tea are mixed together. A firework for the palate.",
     images: [
-      "/images/sample-products/pu-1.jpg",
-      "/images/sample-products/pu-2.jpg",
+      "/images/products/p-02-1.jpg",
+      "/images/products/p-02-2.jpg",
+      "/images/products/p-02-3.jpg",
     ],
     price: 7.9,
     brand: "Brooks Brothers",
@@ -36,14 +38,15 @@ const sampleDataProducts = [
     banner: "/images/banner-2.jpg",
   },
   {
-    name: "Box of Tea Assortment - Flavored Green Tea",
-    slug: "flavored-green-tea",
+    name: "English Aristokrat",
+    slug: "english-aristokrat",
     category: "Flavored Green",
     description:
       "Having chosen a box of tea assortment, you can try 5 types of tea and find your favorite taste.",
     images: [
-      "/images/sample-products/pu-3.jpg",
-      "/images/sample-products/pu-4.jpg",
+      "/images/products/p-03-1.jpg",
+      "/images/products/p-03-2.jpg",
+      "/images/products/p-03-3.jpg",
     ],
     price: 18.8,
     brand: "Tommy Hilfiger",
@@ -54,14 +57,15 @@ const sampleDataProducts = [
     banner: null,
   },
   {
-    name: "Christmas Tea",
-    slug: "christmas-tea",
+    name: "Bryzgy Shampanskogo",
+    slug: "bryzgy-shampanskogo",
     category: "Black Tea",
     description:
       "This harmonius China-Ceylon blend was enriched with almond pieces and different blossoms.Selected spices and ingredients like cloves and orange peel harmonise perfectly.The delicious walnut finally finds its Christmassy”goal”.A delightfull blend to warm up during the cold season.",
     images: [
-      "/images/sample-products/pu-5.jpg",
-      "/images/sample-products/pu-6.jpg",
+      "/images/products/p-04-1.jpg",
+      "/images/products/p-04-2.jpg",
+      "/images/products/p-04-3.jpg",
     ],
     price: 6.3,
     brand: "Black",
