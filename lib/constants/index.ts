@@ -28,7 +28,7 @@ export const shippingAddressDefaultValues = {
 
 export const PRICE_TAX_RATE = 0.19;
 export const PRICE_SHIPPING = 10;
-export const PRICE_FREE_SHIPPING_LIMIT = 100;
+export const PRICE_FREE_SHIPPING_LIMIT = 40;
 
 export const PAYMENT_METHODS = process.env.PAYMENT_METHODS
   ? process.env.PAYMENT_METHODS.split(", ")

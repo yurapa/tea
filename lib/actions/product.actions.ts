@@ -18,3 +18,12 @@ export async function getProductBySlug(slug: string) {
     where: { slug: slug },
   });
 }
+
+// test version:
+export async function getAllProducts() {
+  const data = await prisma.product.findMany({
+    orderBy: { createdAt: "desc" },
+  });
+
+  return convertToPlainObject(data);
+}
