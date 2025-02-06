@@ -91,10 +91,10 @@ if (!mounted) {
 - [+] Theme toggle
 - [+] Latest Products on the homepage
 - [+] Product Details Page
-- [...] Auth,
-- [...] Login and Register pages
-- Add product to cart
-- Cart
+- [+] Auth,
+- [+] Login and Register pages
+- [+] Add product to cart
+- [+] Cart
 - Payment
 - Order History
 - Admin
@@ -102,3 +102,5 @@ if (!mounted) {
 - Rating
 - Send Email
 - Homepage components
+- Release
+- Add possibility to add a "Comment" for the Order: Textarea field + DB

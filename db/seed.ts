@@ -1,7 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 
 import { hash } from "@/lib/encrypt";
-import sampleData from "@/db/sample-data";
+import sampleDataUsers from "@/db/sample-data-users";
+import sampleDataProducts from "@/db/sample-data-products";
 
 async function main() {
   const prisma = new PrismaClient();
@@ -12,17 +13,17 @@ async function main() {
   await prisma.verificationToken.deleteMany();
   await prisma.user.deleteMany();
 
-  await prisma.product.createMany({ data: sampleData.products });
+  await prisma.product.createMany({ data: sampleDataProducts });
 
   const users = [];
-  for (let i = 0; i < sampleData.users.length; i++) {
+  for (let i = 0; i < sampleDataUsers.length; i++) {
     users.push({
-      ...sampleData.users[i],
-      password: await hash(sampleData.users[i].password),
+      ...sampleDataUsers[i],
+      password: await hash(sampleDataUsers[i].password),
     });
     console.log(
-      sampleData.users[i].password,
-      await hash(sampleData.users[i].password),
+      sampleDataUsers[i].password,
+      await hash(sampleDataUsers[i].password),
     );
   }
   await prisma.user.createMany({ data: users });
