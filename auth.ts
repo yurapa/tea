@@ -101,6 +101,11 @@ export const config = {
         }
       }
 
+      // Handle session updates (e.g., name change)
+      if (session?.user.name && trigger === "update") {
+        token.name = session.user.name;
+      }
+
       return token;
     },
   },

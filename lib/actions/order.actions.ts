@@ -1,16 +1,17 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 
 import { auth } from "@/auth";
 import { prisma } from "@/db/prisma";
+import { paypal } from "@/lib/paypal";
+import { PAGE_SIZE } from "@/lib/constants";
 import { insertOrderSchema } from "@/lib/validator";
 import { getMyCart } from "@/lib/actions/cart.actions";
 import { getUserById } from "@/lib/actions/user.actions";
 import { convertToPlainObject, formatError } from "@/lib/utils";
 import { CartItem, PaymentResult } from "@/types";
-import { paypal } from "@/lib/paypal";
-import { revalidatePath } from "next/cache";
 
 export async function createOrder() {
   try {
@@ -249,4 +250,31 @@ async function updateOrderToPaid({
   if (!updatedOrder) {
     throw new Error("Order not found");
   }
+}
+
+export async function getMyOrders({
+  limit = PAGE_SIZE,
+  page,
+}: {
+  limit?: number;
+  page: number;
+}) {
+  const session = await auth();
+  if (!session) throw new Error("User is not authenticated");
+
+  const data = await prisma.order.findMany({
+    where: { userId: session?.user?.id },
+    orderBy: { createdAt: "desc" },
+    take: limit,
+    skip: (page - 1) * limit,
+  });
+
+  const dataCount = await prisma.order.count({
+    where: { userId: session?.user?.id },
+  });
+
+  return {
+    data,
+    totalPages: Math.ceil(dataCount / limit),
+  };
 }
