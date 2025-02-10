@@ -19,6 +19,8 @@ A full-featured Ecommerce website built with Next.js, TypeScript, PostgreSQL and
 - Forms:
   - `react-hook-form`: This is a library that helps us manage forms in React. It integrates well with ShadCN form components. It takes care of things like managing form state, handling form submissions, validating form inputs and displaying error messages
   - `@hookform/resolvers`: provides integrations between `react-hook-form` and validation libraries like Zod. It enables react-hook-form to leverage the validation schemas from these libraries directly, making it simpler to apply custom validation rules.
+- Charts:
+  - `recharts`: A composable charting library built on React components
 - Code Formatting:
   - ESLint v.9
   - Prettier
@@ -95,9 +97,9 @@ if (!mounted) {
 - [+] Login and Register pages
 - [+] Add product to cart
 - [+] Cart
-- Payment
-- Order History
-- Admin
+- [+] Payment PayPal
+- [+] Order History
+- [...]Admin
 - Search
 - Rating
 - Send Email

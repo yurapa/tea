@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { auth } from "@/auth";
 import { getOrderById } from "@/lib/actions/order.actions";
 import { ShippingAddress } from "@/types";
 import OrderDetailsTable from "./order-details-table";
@@ -19,6 +20,8 @@ const OrderDetailsPage = async (props: {
 
   if (!order) notFound();
 
+  const session = await auth();
+
   return (
     <OrderDetailsTable
       order={{
@@ -26,6 +29,11 @@ const OrderDetailsPage = async (props: {
         shippingAddress: order.shippingAddress as ShippingAddress,
       }}
       paypalClientId={process.env.PAYPAL_CLIENT_ID || "sb"}
+      isSuperUser={
+        session?.user?.role === "admin" ||
+        session?.user?.role === "editor" ||
+        false
+      }
     />
   );
 };

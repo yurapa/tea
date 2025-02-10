@@ -13,7 +13,7 @@ const HomePage = async () => {
   const latestProducts = await getLatestProducts();
 
   return (
-    <div className="space-y-8">
+    <div className="relative w-full mb-12">
       <Link href="/search">
         <Image
           priority={true}

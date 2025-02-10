@@ -1,27 +1,38 @@
 import Link from "next/link";
 import { Metadata } from "next";
 
-import { getMyOrders } from "@/lib/actions/order.actions";
-import { formatCurrency, formatDateTime, formatId } from "@/lib/utils";
+import { auth } from "@/auth";
+import { formatId, formatCurrency, formatDateTime } from "@/lib/utils";
+import { deleteOrder, getAllOrders } from "@/lib/actions/order.actions";
+import { Button } from "@/components/ui/button";
 import Pagination from "@/components/shared/pagination";
+import DeleteDialog from "@/components/shared/delete-dialog";
 import {
   Table,
-  TableBody,
-  TableCell,
-  TableHead,
   TableHeader,
   TableRow,
+  TableHead,
+  TableCell,
+  TableBody,
 } from "@/components/ui/table";
 
 export const metadata: Metadata = {
-  title: "My Orders",
+  title: "Admin Orders",
 };
 
-const OrdersPage = async (props: {
+const AdminOrdersPage = async (props: {
   searchParams: Promise<{ page: string }>;
 }) => {
   const { page = "1" } = await props.searchParams;
-  const orders = await getMyOrders({
+  const session = await auth();
+
+  const isAdmin = session?.user.role === "admin";
+
+  if (!isAdmin && session?.user.role !== "editor") {
+    throw new Error("admin or editor permission required");
+  }
+
+  const orders = await getAllOrders({
     page: Number(page),
   });
 
@@ -51,17 +62,20 @@ const OrdersPage = async (props: {
                 <TableCell>
                   {order.isPaid && order.paidAt
                     ? formatDateTime(order.paidAt).dateTime
-                    : "not paid"}
+                    : "Not Paid"}
                 </TableCell>
                 <TableCell>
                   {order.isDelivered && order.deliveredAt
                     ? formatDateTime(order.deliveredAt).dateTime
-                    : "not delivered"}
+                    : "Not Delivered"}
                 </TableCell>
                 <TableCell>
-                  <Link href={`/order/${order.id}`}>
-                    <span className="px-2">Details</span>
-                  </Link>
+                  <Button asChild variant="outline" size="sm">
+                    <Link href={`/order/${order.id}`}>Details</Link>
+                  </Button>
+                  {isAdmin && (
+                    <DeleteDialog id={order.id} action={deleteOrder} />
+                  )}
                 </TableCell>
               </TableRow>
             ))}
@@ -78,4 +92,4 @@ const OrdersPage = async (props: {
   );
 };
 
-export default OrdersPage;
+export default AdminOrdersPage;
