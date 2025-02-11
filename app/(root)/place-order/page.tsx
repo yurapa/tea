@@ -1,9 +1,10 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { auth } from "@/auth";
 
+import { auth } from "@/auth";
 import { formatCurrency } from "@/lib/utils";
 import { getMyCart } from "@/lib/actions/cart.actions";
 import { getUserById } from "@/lib/actions/user.actions";
@@ -21,7 +22,7 @@ import {
 import { ShippingAddress } from "@/types";
 import PlaceOrderForm from "./place-order-form";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Place Order",
 };
 

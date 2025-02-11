@@ -18,9 +18,11 @@ import {
 export default function DeleteDialog({
   id,
   action,
+  isDisabled = false,
 }: {
   id: string;
   action: (id: string) => Promise<{ success: boolean; message: string }>;
+  isDisabled?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
@@ -47,7 +49,7 @@ export default function DeleteDialog({
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button size="sm" variant="destructive" className="ml-2">
+        <Button size="sm" variant="destructive" disabled={isDisabled}>
           Delete
         </Button>
       </AlertDialogTrigger>

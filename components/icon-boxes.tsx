@@ -1,6 +1,7 @@
 import { Euro, Headset, ShoppingBag, WalletCards } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
+import { PRICE_FREE_SHIPPING_LIMIT } from "@/lib/constants";
 
 const IconBoxes = () => {
   return (
@@ -11,7 +12,8 @@ const IconBoxes = () => {
             <ShoppingBag />
             <div className="text-sm font-bold">Free Shipping</div>
             <div className="text-sm text-muted-foreground">
-              Free shipping for order above &euro;100
+              Delivery all over Cyprus! Free shipping over &euro;
+              {PRICE_FREE_SHIPPING_LIMIT}
             </div>
           </div>
           <div className="space-y-2">

@@ -17,7 +17,7 @@ const HomePage = async () => {
       <Link href="/search">
         <Image
           priority={true}
-          src="/images/banner-1.png"
+          src="https://utfs.io/f/K4RUBh9xn6WpApBngtXfRiGnFr9PBU8Q0lZ6XCIYasxO4pW1"
           width={600}
           height={200}
           className={`w-full`}

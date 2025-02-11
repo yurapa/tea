@@ -27,8 +27,10 @@ const AdminOrdersPage = async (props: {
   const session = await auth();
 
   const isAdmin = session?.user.role === "admin";
+  const isSuperUser =
+    session?.user.role === "admin" || session?.user.role === "editor";
 
-  if (!isAdmin && session?.user.role !== "editor") {
+  if (!isSuperUser) {
     throw new Error("admin or editor permission required");
   }
 
@@ -69,13 +71,15 @@ const AdminOrdersPage = async (props: {
                     ? formatDateTime(order.deliveredAt).dateTime
                     : "Not Delivered"}
                 </TableCell>
-                <TableCell>
+                <TableCell className="flex gap-1">
                   <Button asChild variant="outline" size="sm">
                     <Link href={`/order/${order.id}`}>Details</Link>
                   </Button>
-                  {isAdmin && (
-                    <DeleteDialog id={order.id} action={deleteOrder} />
-                  )}
+                  <DeleteDialog
+                    id={order.id}
+                    action={deleteOrder}
+                    isDisabled={!isAdmin}
+                  />
                 </TableCell>
               </TableRow>
             ))}

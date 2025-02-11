@@ -29,6 +29,7 @@ const AdminOverviewPage = async () => {
 
   const summary = await getOrderSummary();
 
+  console.log("s", summary);
   return (
     <div className="space-y-2">
       <h1 className="h2-bold">Dashboard</h1>
@@ -41,7 +42,7 @@ const AdminOverviewPage = async () => {
           <CardContent>
             <div className="text-2xl font-bold">
               {formatCurrency(
-                summary.totalSales._sum.totalPrice!.toString() || 0,
+                summary.totalSales._sum.totalPrice?.toString() || 0,
               )}
             </div>
           </CardContent>
