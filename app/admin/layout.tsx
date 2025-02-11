@@ -1,6 +1,8 @@
-import { APP_NAME } from "@/lib/constants";
-import Image from "next/image";
+import React from "react";
 import Link from "next/link";
+import Image from "next/image";
+
+import { APP_NAME } from "@/lib/constants";
 import { Input } from "@/components/ui/input";
 import Menu from "@/components/shared/header/menu";
 import MainNav from "./main-nav";

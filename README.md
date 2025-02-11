@@ -19,6 +19,7 @@ A full-featured Ecommerce website built with Next.js, TypeScript, PostgreSQL and
 - Forms:
   - `react-hook-form`: This is a library that helps us manage forms in React. It integrates well with ShadCN form components. It takes care of things like managing form state, handling form submissions, validating form inputs and displaying error messages
   - `@hookform/resolvers`: provides integrations between `react-hook-form` and validation libraries like Zod. It enables react-hook-form to leverage the validation schemas from these libraries directly, making it simpler to apply custom validation rules.
+  - `slugify`: convert names to slugs
 - Charts:
   - `recharts`: A composable charting library built on React components
 - Code Formatting:
@@ -62,10 +63,10 @@ npx tsx ./db/seed
 
 ## ShadCN
 
-We can use the `Button` component from Shadcn. You can read more about the button component [here](https://ui.shadcn.com/docs/components/button). Add the component:
+If you need a card or any other component, you can easily add it to your project using the Shadcn command line interface.
 
 ```bash
-npx shadcn@latest add button
+npx shadcn@latest add card
 ```
 
 ## Fix Hydration Issue

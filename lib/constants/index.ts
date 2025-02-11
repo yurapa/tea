@@ -6,26 +6,6 @@ export const SERVER_URL =
 export const LATEST_PRODUCTS_LIMIT =
   Number(process.env.LATEST_PRODUCTS_LIMIT) || 4;
 
-export const signInDefaultValues = {
-  email: "",
-  password: "",
-};
-
-export const signUpDefaultValues = {
-  name: "Steve Smith",
-  email: "steve@example.com",
-  password: "password",
-  confirmPassword: "password",
-};
-
-export const shippingAddressDefaultValues = {
-  fullName: "",
-  streetAddress: "",
-  city: "",
-  postalCode: "",
-  country: "",
-};
-
 export const PRICE_TAX_RATE = 0.19;
 export const PRICE_SHIPPING = 10;
 export const PRICE_FREE_SHIPPING_LIMIT = 40;
@@ -37,3 +17,38 @@ export const DEFAULT_PAYMENT_METHOD =
   process.env.DEFAULT_PAYMENT_METHOD || "PayPal";
 
 export const PAGE_SIZE = Number(process.env.PAGE_SIZE) || 2;
+
+export const signInDefaultValues = {
+  email: "",
+  password: "",
+};
+
+export const signUpDefaultValues = {
+  name: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
+
+export const shippingAddressDefaultValues = {
+  fullName: "",
+  streetAddress: "",
+  city: "",
+  postalCode: "",
+  country: "",
+};
+
+export const productDefaultValues = {
+  name: "",
+  slug: "",
+  category: "",
+  images: [],
+  brand: "",
+  description: "",
+  price: "0",
+  stock: 0,
+  rating: "0",
+  numReviews: "0",
+  isFeatured: false,
+  banner: null,
+};
