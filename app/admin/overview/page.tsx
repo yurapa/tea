@@ -29,7 +29,6 @@ const AdminOverviewPage = async () => {
 
   const summary = await getOrderSummary();
 
-  console.log("s", summary);
   return (
     <div className="space-y-2">
       <h1 className="h2-bold">Dashboard</h1>

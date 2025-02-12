@@ -18,6 +18,10 @@ export const DEFAULT_PAYMENT_METHOD =
 
 export const PAGE_SIZE = Number(process.env.PAGE_SIZE) || 10;
 
+export const USER_ROLES = process.env.USER_ROLES
+  ? process.env.USER_ROLES.split(", ")
+  : ["admin", "editor", "user"];
+
 export const signInDefaultValues = {
   email: "",
   password: "",
