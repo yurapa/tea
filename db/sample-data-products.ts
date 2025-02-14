@@ -133,7 +133,7 @@ const sampleDataProducts = [
     rating: 4.6,
     numReviews: 12,
     stock: 8,
-    isFeatured: true,
+    isFeatured: false,
     banner: null,
   },
   {
@@ -152,7 +152,7 @@ const sampleDataProducts = [
     rating: 4.6,
     numReviews: 12,
     stock: 8,
-    isFeatured: true,
+    isFeatured: false,
     banner: null,
   },
   {
@@ -170,7 +170,7 @@ const sampleDataProducts = [
     rating: 4.6,
     numReviews: 12,
     stock: 8,
-    isFeatured: true,
+    isFeatured: false,
     banner: null,
   },
   {
@@ -187,7 +187,7 @@ const sampleDataProducts = [
     rating: 4.6,
     numReviews: 12,
     stock: 8,
-    isFeatured: true,
+    isFeatured: false,
     banner: null,
   },
   {
@@ -205,7 +205,7 @@ const sampleDataProducts = [
     rating: 4.6,
     numReviews: 12,
     stock: 8,
-    isFeatured: true,
+    isFeatured: false,
     banner: null,
   },
 ];

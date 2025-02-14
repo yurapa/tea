@@ -1,34 +1,33 @@
-import { APP_NAME, LATEST_PRODUCTS_LIMIT } from "@/lib/constants";
-import { getLatestProducts } from "@/lib/actions/product.actions";
-import ProductList from "@/components/shared/product/product-list";
+import {
+  getFeaturedProducts,
+  getLatestProducts,
+} from "@/lib/actions/product.actions";
+import { LATEST_PRODUCTS_LIMIT } from "@/lib/constants";
 import IconBoxes from "@/components/icon-boxes";
 import DealCountdown from "@/components/deal-countdown";
-import Link from "next/link";
-import Image from "next/image";
+import ProductList from "@/components/shared/product/product-list";
+import ProductCarousel from "@/components/shared/product/product-carousel";
 
 // const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 const HomePage = async () => {
   // await delay(2000);
   const latestProducts = await getLatestProducts();
+  const featuredProducts = await getFeaturedProducts();
 
   return (
     <div className="relative w-full mb-12">
-      <Link href="/search">
-        <Image
-          priority={true}
-          src="https://utfs.io/f/K4RUBh9xn6WpApBngtXfRiGnFr9PBU8Q0lZ6XCIYasxO4pW1"
-          width={600}
-          height={200}
-          className={`w-full`}
-          alt={`${APP_NAME} banner`}
+      <div>
+        {featuredProducts.length > 0 && (
+          <ProductCarousel data={featuredProducts} />
+        )}
+        <ProductList
+          title="Newest Arrivals"
+          data={latestProducts}
+          limit={LATEST_PRODUCTS_LIMIT}
         />
-      </Link>
-      <ProductList
-        title="Newest Arrivals"
-        data={latestProducts}
-        limit={LATEST_PRODUCTS_LIMIT}
-      />
+      </div>
+
       <DealCountdown />
       <IconBoxes />
     </div>
