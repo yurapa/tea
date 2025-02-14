@@ -3,6 +3,7 @@ import { Metadata } from "next";
 
 import { getMyOrders } from "@/lib/actions/order.actions";
 import { formatCurrency, formatDateTime, formatId } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import Pagination from "@/components/shared/pagination";
 import {
   Table,
@@ -59,9 +60,11 @@ const OrdersPage = async (props: {
                     : "not delivered"}
                 </TableCell>
                 <TableCell>
-                  <Link href={`/order/${order.id}`}>
-                    <span className="px-2">Details</span>
-                  </Link>
+                  <Button asChild variant="outline" size="sm">
+                    <Link href={`/order/${order.id}`}>
+                      <span className="px-2">Details</span>
+                    </Link>
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}

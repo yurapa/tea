@@ -1,6 +1,6 @@
 "use client";
 
-import { useTransition } from "react";
+import React, { useTransition } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -16,6 +16,7 @@ import {
   deliverOrder,
   updateOrderToPaidByCOD,
 } from "@/lib/actions/order.actions";
+import { PRICE_TAX_RATE } from "@/lib/constants";
 import { formatCurrency, formatDateTime, formatId } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -221,11 +222,11 @@ const OrderDetailsTable = ({
             <CardContent className="p-4 space-y-4 gap-4">
               <h2 className="text-xl pb-4">Order Summary</h2>
               <div className="flex justify-between">
-                <div>Items</div>
+                <div>Subtotal</div>
                 <div>{formatCurrency(itemsPrice)}</div>
               </div>
               <div className="flex justify-between">
-                <div>Tax</div>
+                <div>VAT charged at {PRICE_TAX_RATE * 100}%</div>
                 <div>{formatCurrency(taxPrice)}</div>
               </div>
               <div className="flex justify-between">
@@ -233,7 +234,7 @@ const OrderDetailsTable = ({
                 <div>{formatCurrency(shippingPrice)}</div>
               </div>
               <div className="flex justify-between border-t pt-4 font-bold">
-                <div>Total</div>
+                <div>TOTAL</div>
                 <div>{formatCurrency(totalPrice)}</div>
               </div>
               {!isPaid && paymentMethod === "PayPal" && (

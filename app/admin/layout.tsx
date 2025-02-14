@@ -3,8 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { APP_NAME } from "@/lib/constants";
-import { Input } from "@/components/ui/input";
 import Menu from "@/components/shared/header/menu";
+import AdminSearch from "@/components/shared/admin/admin-search";
 import MainNav from "./main-nav";
 
 export default async function AdminLayout({
@@ -27,13 +27,7 @@ export default async function AdminLayout({
             </Link>
             <MainNav className="mx-6" />
             <div className="ml-auto flex items-center space-x-4">
-              <div>
-                <Input
-                  type="search"
-                  placeholder="Search..."
-                  className="md:w-[100px] lg:w-[300px]"
-                />
-              </div>
+              <AdminSearch />
               <Menu />
             </div>
           </div>

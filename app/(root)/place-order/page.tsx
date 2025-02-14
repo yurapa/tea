@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/table";
 import { ShippingAddress } from "@/types";
 import PlaceOrderForm from "./place-order-form";
+import { PRICE_TAX_RATE } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Place Order",
@@ -124,11 +125,11 @@ const placeOrderPage = async () => {
           <Card>
             <CardContent className="p-4 gap-4 space-y-4">
               <div className="flex justify-between">
-                <div>Items</div>
+                <div>Subtotal</div>
                 <div>{formatCurrency(cart.itemsPrice)}</div>
               </div>
               <div className="flex justify-between">
-                <div>Tax</div>
+                <div>VAT charged at {PRICE_TAX_RATE * 100}%</div>
                 <div>{formatCurrency(cart.taxPrice)}</div>
               </div>
               <div className="flex justify-between">
@@ -136,7 +137,7 @@ const placeOrderPage = async () => {
                 <div>{formatCurrency(cart.shippingPrice)}</div>
               </div>
               <div className="flex justify-between border-t pt-4 font-bold">
-                <div>Total</div>
+                <div>TOTAL</div>
                 <div>{formatCurrency(cart.totalPrice)}</div>
               </div>
               <PlaceOrderForm />

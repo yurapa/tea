@@ -1,10 +1,9 @@
 "use client";
 
 import { z } from "zod";
-import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ControllerRenderProps } from "react-hook-form";
+import { useForm, ControllerRenderProps } from "react-hook-form";
 
 import { useToast } from "@/hooks/use-toast";
 import { USER_ROLES } from "@/lib/constants";
