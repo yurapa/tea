@@ -42,9 +42,9 @@ export async function getAllProducts({
   sort,
 }: {
   query: string;
+  category?: string;
   limit?: number;
   page: number;
-  category?: string;
   price?: string;
   rating?: string;
   sort?: string;
@@ -59,10 +59,8 @@ export async function getAllProducts({
         }
       : {};
 
-  // Category filter
   const categoryFilter = category && category !== "all" ? { category } : {};
 
-  // Price filter
   const priceFilter: Prisma.ProductWhereInput =
     price && price !== "all"
       ? {
@@ -73,7 +71,6 @@ export async function getAllProducts({
         }
       : {};
 
-  // Rating filter
   const ratingFilter =
     rating && rating !== "all"
       ? {
@@ -172,12 +169,10 @@ export async function updateProduct(data: z.infer<typeof updateProductSchema>) {
 }
 
 export async function getAllCategories() {
-  const data = await prisma.product.groupBy({
+  return await prisma.product.groupBy({
     by: ["category"],
     _count: true,
   });
-
-  return data;
 }
 
 export async function getFeaturedProducts() {

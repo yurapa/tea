@@ -6,6 +6,7 @@ import { LATEST_PRODUCTS_LIMIT } from "@/lib/constants";
 import IconBoxes from "@/components/icon-boxes";
 import DealCountdown from "@/components/deal-countdown";
 import ProductList from "@/components/shared/product/product-list";
+import ViewAllProductsButton from "@/components/view-all-products-button";
 import ProductCarousel from "@/components/shared/product/product-carousel";
 
 // const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
@@ -26,6 +27,9 @@ const HomePage = async () => {
           data={latestProducts}
           limit={LATEST_PRODUCTS_LIMIT}
         />
+        <div className="flex justify-center items-center my-8">
+          <ViewAllProductsButton />
+        </div>
       </div>
 
       <DealCountdown />

@@ -6,7 +6,7 @@ import Image from "next/image";
 
 import { Button } from "./ui/button";
 
-const TARGET_DATE = new Date("2025-02-20T00:00:00");
+const TARGET_DATE = new Date("2025-03-08T00:00:00");
 
 // Function to calculate time remaining
 const calculateTimeRemaining = (targetDate: Date) => {
