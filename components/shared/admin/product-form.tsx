@@ -9,7 +9,7 @@ import { z } from "zod";
 
 import { useToast } from "@/hooks/use-toast";
 import { UploadButton } from "@/lib/uploadthing";
-import { productDefaultValues } from "@/lib/constants";
+import { productDefaultValues } from "@/lib/default-values";
 import { insertProductSchema, updateProductSchema } from "@/lib/validator";
 import { createProduct, updateProduct } from "@/lib/actions/product.actions";
 import { Input } from "@/components/ui/input";
@@ -92,7 +92,7 @@ const ProductForm = ({
   return (
     <Form {...form}>
       <form
-        method="POST"
+        method="post"
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-8"
       >

@@ -26,6 +26,9 @@ A full-featured Ecommerce website built with Next.js, TypeScript, PostgreSQL and
 - Code Formatting:
   - ESLint v.9
   - Prettier
+- Payment integration:
+  - PayPal
+  - Stripe
 
 ### Getting Started
 
@@ -100,10 +103,11 @@ if (!mounted) {
 - [+] Add product to cart
 - [+] Cart
 - [+] Payment PayPal
+- [...] Payment Stripe
 - [+] Order History
-- [...] Admin
-- Search
-- Rating
+- [+] Admin
+- [+] Search
+- [+] Rating
 - Send Email
 - Homepage components
 - Release

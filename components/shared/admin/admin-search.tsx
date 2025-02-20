@@ -22,7 +22,7 @@ const AdminSearch = () => {
   }, [searchParams]);
 
   return (
-    <form action={formActionUrl} method="GET">
+    <form action={formActionUrl} method="get">
       <Input
         type="search"
         placeholder="Search..."

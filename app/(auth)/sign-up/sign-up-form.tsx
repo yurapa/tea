@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 import { signUp } from "@/lib/actions/user.actions";
-import { signUpDefaultValues } from "@/lib/constants";
+import { signUpDefaultValues } from "@/lib/default-values";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

@@ -9,7 +9,7 @@ import { z } from "zod";
 
 import { useToast } from "@/hooks/use-toast";
 import { shippingAddressSchema } from "@/lib/validator";
-import { shippingAddressDefaultValues } from "@/lib/constants";
+import { shippingAddressDefaultValues } from "@/lib/default-values";
 import { updateUserAddress } from "@/lib/actions/user.actions";
 import {
   Form,
