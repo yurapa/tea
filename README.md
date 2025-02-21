@@ -28,7 +28,7 @@ A full-featured Ecommerce website built with Next.js, TypeScript, PostgreSQL and
   - Prettier
 - Payment integration:
   - PayPal
-  - Stripe
+  - [Stripe](https://dashboard.stripe.com/test/dashboard)
 
 ### Getting Started
 
@@ -73,6 +73,12 @@ If you need a card or any other component, you can easily add it to your project
 npx shadcn@latest add card
 ```
 
+## Test card details for Stripe
+
+- Card Number: 4242 4242 4242 4242
+- Expiry Date: 12/34
+- CVC: 123
+
 ## Fix Hydration Issue
 
 Add the `surpressHydrationWarning` attribute to the `<html>` tag in the main layout.
@@ -103,7 +109,7 @@ if (!mounted) {
 - [+] Add product to cart
 - [+] Cart
 - [+] Payment PayPal
-- [...] Payment Stripe
+- [+] Payment Stripe
 - [+] Order History
 - [+] Admin
 - [+] Search
