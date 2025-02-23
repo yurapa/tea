@@ -29,6 +29,10 @@ A full-featured Ecommerce website built with Next.js, TypeScript, PostgreSQL and
 - Payment integration:
   - PayPal
   - [Stripe](https://dashboard.stripe.com/test/dashboard)
+- E-mail:
+  - `resend`: a simple API for sending emails
+  - `react-email`: a library for creating email templates in React
+  - `@react-email/components`: a set of pre-built components
 
 ### Getting Started
 
