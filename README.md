@@ -105,22 +105,5 @@ if (!mounted) {
 
 @TODO:
 
-- [+] Theme toggle
-- [+] Latest Products on the homepage
-- [+] Product Details Page
-- [+] Auth,
-- [+] Login and Register pages
-- [+] Add product to cart
-- [+] Cart
-- [+] Payment PayPal
-- [+] Payment Stripe
-- [+] Order History
-- [+] Admin
-- [+] Search
-- [+] Rating
-- Send Email
-- Homepage components
-- Release
-- [Split prisma to separate files](https://www.prisma.io/blog/organize-your-prisma-schema-with-multi-file-support), [official video](https://www.youtube.com/watch?v=zS_vJgRPYo8)
 - Add possibility to add a "Comment" for the Order: Textarea field + DB
 - (Add map to the Contacts page)[https://react-leaflet.js.org]
