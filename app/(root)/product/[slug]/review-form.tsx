@@ -1,21 +1,18 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { StarIcon } from "lucide-react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { useState } from 'react';
+import { StarIcon } from 'lucide-react';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 
-import { useToast } from "@/hooks/use-toast";
-import { insertReviewSchema } from "@/lib/validator";
-import { reviewFormDefaultValues } from "@/lib/default-values";
-import {
-  createUpdateReview,
-  getReviewByProductId,
-} from "@/lib/actions/review.actions";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
+import { useToast } from '@/hooks/use-toast';
+import { insertReviewSchema } from '@/lib/validator';
+import { reviewFormDefaultValues } from '@/lib/default-values';
+import { createUpdateReview, getReviewByProductId } from '@/lib/actions/review.actions';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
 import {
   Dialog,
   DialogContent,
@@ -23,22 +20,9 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/dialog';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 type CustomerReview = z.infer<typeof insertReviewSchema>;
 
@@ -60,15 +44,15 @@ const ReviewForm = ({
   });
 
   const handleOpenForm = async () => {
-    form.setValue("productId", productId);
-    form.setValue("userId", userId);
+    form.setValue('productId', productId);
+    form.setValue('userId', userId);
 
     const review = await getReviewByProductId({ productId });
 
     if (review) {
-      form.setValue("title", review.title);
-      form.setValue("description", review.description);
-      form.setValue("rating", review.rating);
+      form.setValue('title', review.title);
+      form.setValue('description', review.description);
+      form.setValue('rating', review.rating);
     }
     setOpen(true);
   };
@@ -78,7 +62,7 @@ const ReviewForm = ({
 
     if (!res.success) {
       return toast({
-        variant: "destructive",
+        variant: 'destructive',
         description: res.message,
       });
     }
@@ -102,9 +86,7 @@ const ReviewForm = ({
           <form method="post" onSubmit={form.handleSubmit(onSubmit)}>
             <DialogHeader>
               <DialogTitle>Write a review</DialogTitle>
-              <DialogDescription>
-                Share your thoughts with other customers
-              </DialogDescription>
+              <DialogDescription>Share your thoughts with other customers</DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
               <FormField
@@ -139,10 +121,7 @@ const ReviewForm = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Rating</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      value={field.value.toString()}
-                    >
+                    <Select onValueChange={field.onChange} value={field.value.toString()}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select a rating" />
@@ -150,12 +129,8 @@ const ReviewForm = ({
                       </FormControl>
                       <SelectContent>
                         {Array.from({ length: 5 }).map((_, index) => (
-                          <SelectItem
-                            key={index}
-                            value={(index + 1).toString()}
-                          >
-                            {index + 1}{" "}
-                            <StarIcon className="inline items-center h-4 w-4" />
+                          <SelectItem key={index} value={(index + 1).toString()}>
+                            {index + 1} <StarIcon className="inline h-4 w-4 items-center" />
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -166,13 +141,8 @@ const ReviewForm = ({
               />
             </div>
             <DialogFooter>
-              <Button
-                type="submit"
-                size="lg"
-                className="w-full"
-                disabled={form.formState.isSubmitting}
-              >
-                {form.formState.isSubmitting ? "Submitting..." : "Submit"}
+              <Button type="submit" size="lg" className="w-full" disabled={form.formState.isSubmitting}>
+                {form.formState.isSubmitting ? 'Submitting...' : 'Submit'}
               </Button>
             </DialogFooter>
           </form>

@@ -1,15 +1,9 @@
-import { SearchIcon } from "lucide-react";
+import { SearchIcon } from 'lucide-react';
 
-import { getAllCategories } from "@/lib/actions/product.actions";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { getAllCategories } from '@/lib/actions/product.actions';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const Search = async () => {
   const categories = await getAllCategories();
@@ -22,7 +16,7 @@ const Search = async () => {
             <SelectValue placeholder="All" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem key={"All"} value={"all"}>
+            <SelectItem key={'All'} value={'all'}>
               All
             </SelectItem>
             {categories.map((x) => (
@@ -32,12 +26,7 @@ const Search = async () => {
             ))}
           </SelectContent>
         </Select>
-        <Input
-          name="q"
-          type="text"
-          placeholder="Search..."
-          className="md:w-[100px] lg:w-[300px]"
-        />
+        <Input name="q" type="text" placeholder="Search..." className="md:w-[100px] lg:w-[300px]" />
         <Button>
           <SearchIcon />
         </Button>

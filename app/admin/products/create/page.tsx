@@ -1,9 +1,9 @@
-import { Metadata } from "next";
+import { Metadata } from 'next';
 
-import ProductForm from "@/components/shared/admin/product-form";
+import ProductForm from '@/components/shared/admin/product-form';
 
 export const metadata: Metadata = {
-  title: "Create product",
+  title: 'Create product',
 };
 
 const CreateProductPage = () => {

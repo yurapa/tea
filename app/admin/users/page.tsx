@@ -1,24 +1,17 @@
-import Link from "next/link";
-import { Metadata } from "next";
+import Link from 'next/link';
+import { Metadata } from 'next';
 
-import { auth } from "@/auth";
-import { formatId } from "@/lib/utils";
-import { getAllUsers, deleteUser } from "@/lib/actions/user.actions";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import Pagination from "@/components/shared/pagination";
-import DeleteDialog from "@/components/shared/delete-dialog";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { auth } from '@/auth';
+import { formatId } from '@/lib/utils';
+import { getAllUsers, deleteUser } from '@/lib/actions/user.actions';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import Pagination from '@/components/shared/pagination';
+import DeleteDialog from '@/components/shared/delete-dialog';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 export const metadata: Metadata = {
-  title: "Admin Users",
+  title: 'Admin Users',
 };
 
 const AdminUserPage = async (props: {
@@ -27,10 +20,10 @@ const AdminUserPage = async (props: {
     query: string;
   }>;
 }) => {
-  const { page = "1", query: searchText } = await props.searchParams;
+  const { page = '1', query: searchText } = await props.searchParams;
   const users = await getAllUsers({ page: Number(page), query: searchText });
   const session = await auth();
-  const isAdmin = session?.user.role === "admin";
+  const isAdmin = session?.user.role === 'admin';
 
   return (
     <div className="space-y-2">
@@ -38,7 +31,7 @@ const AdminUserPage = async (props: {
         <h1 className="h2-bold">Users</h1>
         {searchText && (
           <div>
-            Filtered by <i>&quot;{searchText}&quot;</i>{" "}
+            Filtered by <i>&quot;{searchText}&quot;</i>{' '}
             <Link href={`/admin/users`}>
               <Button variant="outline" size="sm">
                 Remove Filter
@@ -65,33 +58,21 @@ const AdminUserPage = async (props: {
                 <TableCell>{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>
                 <TableCell>
-                  {user.role === "admin" && (
-                    <Badge variant="destructive">Admin</Badge>
-                  )}
-                  {user.role === "editor" && (
-                    <Badge variant="default">Editor</Badge>
-                  )}
-                  {user.role === "user" && (
-                    <Badge variant="secondary">User</Badge>
-                  )}
+                  {user.role === 'admin' && <Badge variant="destructive">Admin</Badge>}
+                  {user.role === 'editor' && <Badge variant="default">Editor</Badge>}
+                  {user.role === 'user' && <Badge variant="secondary">User</Badge>}
                 </TableCell>
                 <TableCell className="flex gap-1">
                   <Button asChild variant="outline" size="sm">
                     <Link href={`/admin/users/${user.id}`}>Edit</Link>
                   </Button>
-                  <DeleteDialog
-                    id={user.id}
-                    action={deleteUser}
-                    isDisabled={!isAdmin}
-                  />
+                  <DeleteDialog id={user.id} action={deleteUser} isDisabled={!isAdmin} />
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
-        {users.totalPages > 1 && (
-          <Pagination page={page} totalPages={users.totalPages} />
-        )}
+        {users.totalPages > 1 && <Pagination page={page} totalPages={users.totalPages} />}
       </div>
     </div>
   );

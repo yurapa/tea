@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useFormStatus } from "react-dom";
-import { useRouter } from "next/navigation";
-import { Check, Loader } from "lucide-react";
+import { useFormStatus } from 'react-dom';
+import { useRouter } from 'next/navigation';
+import { Check, Loader } from 'lucide-react';
 
-import { createOrder } from "@/lib/actions/order.actions";
-import { Button } from "@/components/ui/button";
+import { createOrder } from '@/lib/actions/order.actions';
+import { Button } from '@/components/ui/button';
 
 const PlaceOrderForm = () => {
   const router = useRouter();
@@ -24,13 +24,8 @@ const PlaceOrderForm = () => {
     const { pending } = useFormStatus();
 
     return (
-      <Button disabled={pending} className="w-full mt-2">
-        {pending ? (
-          <Loader className="w-4 h-4 animate-spin" />
-        ) : (
-          <Check className="w-4 h-4" />
-        )}{" "}
-        Place Order
+      <Button disabled={pending} className="mt-2 w-full">
+        {pending ? <Loader className="h-4 w-4 animate-spin" /> : <Check className="h-4 w-4" />} Place Order
       </Button>
     );
   };

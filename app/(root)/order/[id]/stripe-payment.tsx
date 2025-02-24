@@ -1,17 +1,11 @@
-import { useTheme } from "next-themes";
-import { FormEvent, useState } from "react";
-import { loadStripe } from "@stripe/stripe-js/pure";
-import {
-  Elements,
-  LinkAuthenticationElement,
-  PaymentElement,
-  useElements,
-  useStripe,
-} from "@stripe/react-stripe-js";
+import { useTheme } from 'next-themes';
+import { FormEvent, useState } from 'react';
+import { loadStripe } from '@stripe/stripe-js/pure';
+import { Elements, LinkAuthenticationElement, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
 
-import { SERVER_URL } from "@/lib/constants";
-import { formatCurrency } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { SERVER_URL } from '@/lib/constants';
+import { formatCurrency } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 
 const StripePayment = ({
   priceInCents,
@@ -22,9 +16,7 @@ const StripePayment = ({
   orderId: string;
   clientSecret: string;
 }) => {
-  const stripePromise = loadStripe(
-    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string,
-  );
+  const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
   const { theme, systemTheme } = useTheme();
 
   const StripeForm = () => {
@@ -46,13 +38,10 @@ const StripePayment = ({
           },
         })
         .then(({ error }) => {
-          if (
-            error?.type === "card_error" ||
-            error?.type === "validation_error"
-          ) {
+          if (error?.type === 'card_error' || error?.type === 'validation_error') {
             setErrorMessage(error?.message);
           } else {
-            setErrorMessage("An unknown error occurred");
+            setErrorMessage('An unknown error occurred');
           }
         })
         .finally(() => setIsLoading(false));
@@ -64,18 +53,10 @@ const StripePayment = ({
         {errorMessage && <div className="text-destructive">{errorMessage}</div>}
         <PaymentElement />
         <div>
-          <LinkAuthenticationElement
-            onChange={(e) => setEmail(e.value.email)}
-          />
+          <LinkAuthenticationElement onChange={(e) => setEmail(e.value.email)} />
         </div>
-        <Button
-          className="w-full"
-          size="lg"
-          disabled={stripe == null || elements == null || isLoading}
-        >
-          {isLoading
-            ? "Purchasing..."
-            : `Purchase ${formatCurrency(priceInCents / 100)}`}
+        <Button className="w-full" size="lg" disabled={stripe == null || elements == null || isLoading}>
+          {isLoading ? 'Purchasing...' : `Purchase ${formatCurrency(priceInCents / 100)}`}
         </Button>
       </form>
     );
@@ -87,13 +68,7 @@ const StripePayment = ({
         clientSecret,
         appearance: {
           theme:
-            theme === "dark"
-              ? "night"
-              : theme === "light"
-                ? "stripe"
-                : systemTheme === "light"
-                  ? "stripe"
-                  : "night",
+            theme === 'dark' ? 'night' : theme === 'light' ? 'stripe' : systemTheme === 'light' ? 'stripe' : 'night',
         },
       }}
       stripe={stripePromise}

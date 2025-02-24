@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { formUrlQuery } from "@/lib/utils";
+import { useRouter, useSearchParams } from 'next/navigation';
+import { formUrlQuery } from '@/lib/utils';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
 type PaginationProps = {
   page: number | string;
@@ -16,11 +16,11 @@ const Pagination = ({ page, totalPages, urlParamName }: PaginationProps) => {
   const searchParams = useSearchParams();
 
   const handleClick = (btnType: string) => {
-    const pageValue = btnType === "next" ? Number(page) + 1 : Number(page) - 1;
+    const pageValue = btnType === 'next' ? Number(page) + 1 : Number(page) - 1;
 
     const newUrl = formUrlQuery({
       params: searchParams.toString(),
-      key: urlParamName || "page",
+      key: urlParamName || 'page',
       value: pageValue.toString(),
     });
 
@@ -28,12 +28,12 @@ const Pagination = ({ page, totalPages, urlParamName }: PaginationProps) => {
   };
 
   return (
-    <div className="flex justify-center mt-12 gap-2">
+    <div className="mt-12 flex justify-center gap-2">
       <Button
         size="lg"
         variant="outline"
         className="w-28"
-        onClick={() => handleClick("prev")}
+        onClick={() => handleClick('prev')}
         disabled={Number(page) <= 1}
       >
         Previous
@@ -42,7 +42,7 @@ const Pagination = ({ page, totalPages, urlParamName }: PaginationProps) => {
         size="lg"
         variant="outline"
         className="w-28"
-        onClick={() => handleClick("next")}
+        onClick={() => handleClick('next')}
         disabled={Number(page) >= totalPages}
       >
         Next

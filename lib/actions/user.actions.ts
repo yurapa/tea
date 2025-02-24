@@ -1,44 +1,41 @@
-"use server";
+'use server';
 
-import { revalidatePath } from "next/cache";
-import { isRedirectError } from "next/dist/client/components/redirect-error";
-import { Prisma } from "@prisma/client";
-import { z } from "zod";
+import { revalidatePath } from 'next/cache';
+import { isRedirectError } from 'next/dist/client/components/redirect-error';
+import { Prisma } from '@prisma/client';
+import { z } from 'zod';
 
-import { auth, signIn, signOut } from "@/auth";
-import { prisma } from "@/db/prisma";
-import { hash } from "@/lib/encrypt";
-import { formatError } from "@/lib/utils";
-import { PAGE_SIZE } from "@/lib/constants";
+import { auth, signIn, signOut } from '@/auth';
+import { prisma } from '@/db/prisma';
+import { hash } from '@/lib/encrypt';
+import { formatError } from '@/lib/utils';
+import { PAGE_SIZE } from '@/lib/constants';
 import {
   signInFormSchema,
   signUpFormSchema,
   shippingAddressSchema,
   paymentMethodSchema,
   updateUserSchema,
-} from "@/lib/validator";
-import { ShippingAddress } from "@/types";
+} from '@/lib/validator';
+import { ShippingAddress } from '@/types';
 
-export async function signInWithCredentials(
-  prevState: unknown,
-  formData: FormData,
-) {
+export async function signInWithCredentials(prevState: unknown, formData: FormData) {
   try {
     // Set user from form and validate it with Zod schema
     const user = signInFormSchema.parse({
-      email: formData.get("email"),
-      password: formData.get("password"),
+      email: formData.get('email'),
+      password: formData.get('password'),
     });
 
-    await signIn("credentials", user);
+    await signIn('credentials', user);
 
-    return { success: true, message: "Signed in successfully" };
+    return { success: true, message: 'Signed in successfully' };
   } catch (error) {
     if (isRedirectError(error)) {
       throw error;
     }
 
-    return { success: false, message: "Invalid email or password" };
+    return { success: false, message: 'Invalid email or password' };
   }
 }
 
@@ -49,10 +46,10 @@ export async function signOutUser() {
 export async function signUp(prevState: unknown, formData: FormData) {
   try {
     const user = signUpFormSchema.parse({
-      name: formData.get("name"),
-      email: formData.get("email"),
-      password: formData.get("password"),
-      confirmPassword: formData.get("confirmPassword"),
+      name: formData.get('name'),
+      email: formData.get('email'),
+      password: formData.get('password'),
+      confirmPassword: formData.get('confirmPassword'),
     });
 
     const plainPassword = user.password;
@@ -67,12 +64,12 @@ export async function signUp(prevState: unknown, formData: FormData) {
       },
     });
 
-    await signIn("credentials", {
+    await signIn('credentials', {
       email: user.email,
       password: plainPassword,
     });
 
-    return { success: true, message: "User created successfully" };
+    return { success: true, message: 'User created successfully' };
   } catch (error) {
     if (isRedirectError(error)) {
       throw error;
@@ -90,7 +87,7 @@ export async function getUserById(userId: string) {
     where: { id: userId },
   });
 
-  if (!user) throw new Error("User not found");
+  if (!user) throw new Error('User not found');
   return user;
 }
 
@@ -102,7 +99,7 @@ export async function updateUserAddress(data: ShippingAddress) {
       where: { id: session?.user?.id },
     });
 
-    if (!currentUser) throw new Error("User not found");
+    if (!currentUser) throw new Error('User not found');
 
     const address = shippingAddressSchema.parse(data);
 
@@ -113,22 +110,20 @@ export async function updateUserAddress(data: ShippingAddress) {
 
     return {
       success: true,
-      message: "User updated successfully",
+      message: 'User updated successfully',
     };
   } catch (error) {
     return { success: false, message: formatError(error) };
   }
 }
 
-export async function updateUserPaymentMethod(
-  data: z.infer<typeof paymentMethodSchema>,
-) {
+export async function updateUserPaymentMethod(data: z.infer<typeof paymentMethodSchema>) {
   try {
     const session = await auth();
     const currentUser = await prisma.user.findFirst({
       where: { id: session?.user?.id },
     });
-    if (!currentUser) throw new Error("User not found");
+    if (!currentUser) throw new Error('User not found');
 
     const paymentMethod = paymentMethodSchema.parse(data);
 
@@ -139,7 +134,7 @@ export async function updateUserPaymentMethod(
 
     return {
       success: true,
-      message: "User updated successfully",
+      message: 'User updated successfully',
     };
   } catch (error) {
     return { success: false, message: formatError(error) };
@@ -156,7 +151,7 @@ export async function updateProfile(user: { name: string; email: string }) {
       },
     });
 
-    if (!currentUser) throw new Error("User not found");
+    if (!currentUser) throw new Error('User not found');
 
     await prisma.user.update({
       where: {
@@ -169,28 +164,20 @@ export async function updateProfile(user: { name: string; email: string }) {
 
     return {
       success: true,
-      message: "User updated successfully",
+      message: 'User updated successfully',
     };
   } catch (error) {
     return { success: false, message: formatError(error) };
   }
 }
 
-export async function getAllUsers({
-  limit = PAGE_SIZE,
-  page,
-  query,
-}: {
-  limit?: number;
-  page: number;
-  query: string;
-}) {
+export async function getAllUsers({ limit = PAGE_SIZE, page, query }: { limit?: number; page: number; query: string }) {
   const queryFilter: Prisma.UserWhereInput =
-    query && query !== "all"
+    query && query !== 'all'
       ? {
           name: {
             contains: query,
-            mode: "insensitive",
+            mode: 'insensitive',
           } as Prisma.StringFilter,
         }
       : {};
@@ -199,7 +186,7 @@ export async function getAllUsers({
     where: {
       ...queryFilter,
     },
-    orderBy: { createdAt: "desc" },
+    orderBy: { createdAt: 'desc' },
     take: limit,
     skip: (page - 1) * limit,
   });
@@ -216,11 +203,11 @@ export async function deleteUser(id: string) {
   try {
     await prisma.user.delete({ where: { id } });
 
-    revalidatePath("/admin/users");
+    revalidatePath('/admin/users');
 
     return {
       success: true,
-      message: "User deleted successfully",
+      message: 'User deleted successfully',
     };
   } catch (error) {
     return { success: false, message: formatError(error) };
@@ -237,11 +224,11 @@ export async function updateUser(user: z.infer<typeof updateUserSchema>) {
       },
     });
 
-    revalidatePath("/admin/users");
+    revalidatePath('/admin/users');
 
     return {
       success: true,
-      message: "User updated successfully",
+      message: 'User updated successfully',
     };
   } catch (error) {
     return { success: false, message: formatError(error) };

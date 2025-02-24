@@ -1,19 +1,17 @@
-import { notFound } from "next/navigation";
+import { notFound } from 'next/navigation';
 
-import { auth } from "@/auth";
-import { getMyCart } from "@/lib/actions/cart.actions";
-import { getProductBySlug } from "@/lib/actions/product.actions";
-import { Badge } from "@/components/ui/badge";
-import Rating from "@/components/shared/product/rating";
-import { Card, CardContent } from "@/components/ui/card";
-import AddToCart from "@/components/shared/product/add-to-cart";
-import ProductPrice from "@/components/shared/product/product-price";
-import ProductImages from "@/components/shared/product/product-images";
-import ReviewList from "./review-list";
+import { auth } from '@/auth';
+import { getMyCart } from '@/lib/actions/cart.actions';
+import { getProductBySlug } from '@/lib/actions/product.actions';
+import { Badge } from '@/components/ui/badge';
+import Rating from '@/components/shared/product/rating';
+import { Card, CardContent } from '@/components/ui/card';
+import AddToCart from '@/components/shared/product/add-to-cart';
+import ProductPrice from '@/components/shared/product/product-price';
+import ProductImages from '@/components/shared/product/product-images';
+import ReviewList from './review-list';
 
-const ProductDetailsPage = async (props: {
-  params: Promise<{ slug: string }>;
-}) => {
+const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) => {
   const { slug } = await props.params;
   const product = await getProductBySlug(slug);
   if (!product) notFound();
@@ -39,11 +37,11 @@ const ProductDetailsPage = async (props: {
               </p>
               <h1 className="h3-bold">{product.name}</h1>
               <Rating value={Number(product.rating)} />
-              <p>{product.numReviews} reviews</p>{" "}
+              <p>{product.numReviews} reviews</p>{' '}
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                 <ProductPrice
                   value={Number(product.price)}
-                  className="w-24 rounded-full bg-green-100 text-green-700 px-5 py-2"
+                  className="w-24 rounded-full bg-green-100 px-5 py-2 text-green-700"
                 />
               </div>
             </div>
@@ -92,11 +90,7 @@ const ProductDetailsPage = async (props: {
       </section>
       <section className="mt-10">
         <h2 className="h2-bold mb-5">Customer Reviews</h2>
-        <ReviewList
-          productId={product.id}
-          productSlug={product.slug}
-          userId={userId || ""}
-        />
+        <ReviewList productId={product.id} productSlug={product.slug} userId={userId || ''} />
       </section>
     </>
   );

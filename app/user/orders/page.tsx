@@ -1,27 +1,18 @@
-import Link from "next/link";
-import { Metadata } from "next";
+import Link from 'next/link';
+import { Metadata } from 'next';
 
-import { getMyOrders } from "@/lib/actions/order.actions";
-import { formatCurrency, formatDateTime, formatId } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import Pagination from "@/components/shared/pagination";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { getMyOrders } from '@/lib/actions/order.actions';
+import { formatCurrency, formatDateTime, formatId } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import Pagination from '@/components/shared/pagination';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 export const metadata: Metadata = {
-  title: "My Orders",
+  title: 'My Orders',
 };
 
-const OrdersPage = async (props: {
-  searchParams: Promise<{ page: string }>;
-}) => {
-  const { page = "1" } = await props.searchParams;
+const OrdersPage = async (props: { searchParams: Promise<{ page: string }> }) => {
+  const { page = '1' } = await props.searchParams;
   const orders = await getMyOrders({
     page: Number(page),
   });
@@ -45,19 +36,15 @@ const OrdersPage = async (props: {
             {orders.data.map((order) => (
               <TableRow key={order.id}>
                 <TableCell>{formatId(order.id)}</TableCell>
-                <TableCell>
-                  {formatDateTime(order.createdAt).dateTime}
-                </TableCell>
+                <TableCell>{formatDateTime(order.createdAt).dateTime}</TableCell>
                 <TableCell>{formatCurrency(order.totalPrice)}</TableCell>
                 <TableCell>
-                  {order.isPaid && order.paidAt
-                    ? formatDateTime(order.paidAt).dateTime
-                    : "not paid"}
+                  {order.isPaid && order.paidAt ? formatDateTime(order.paidAt).dateTime : 'not paid'}
                 </TableCell>
                 <TableCell>
                   {order.isDelivered && order.deliveredAt
                     ? formatDateTime(order.deliveredAt).dateTime
-                    : "not delivered"}
+                    : 'not delivered'}
                 </TableCell>
                 <TableCell>
                   <Button asChild variant="outline" size="sm">
@@ -70,12 +57,7 @@ const OrdersPage = async (props: {
             ))}
           </TableBody>
         </Table>
-        {orders.totalPages > 1 && (
-          <Pagination
-            page={Number(page) || 1}
-            totalPages={orders?.totalPages}
-          />
-        )}
+        {orders.totalPages > 1 && <Pagination page={Number(page) || 1} totalPages={orders?.totalPages} />}
       </div>
     </div>
   );

@@ -1,32 +1,21 @@
-"use client";
+'use client';
 
-import { useTransition } from "react";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { ArrowRight, Loader } from "lucide-react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { useTransition } from 'react';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { ArrowRight, Loader } from 'lucide-react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 
-import { useToast } from "@/hooks/use-toast";
-import { paymentMethodSchema } from "@/lib/validator";
-import { updateUserPaymentMethod } from "@/lib/actions/user.actions";
-import { DEFAULT_PAYMENT_METHOD, PAYMENT_METHODS } from "@/lib/constants";
-import { Button } from "@/components/ui/button";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { useToast } from '@/hooks/use-toast';
+import { paymentMethodSchema } from '@/lib/validator';
+import { updateUserPaymentMethod } from '@/lib/actions/user.actions';
+import { DEFAULT_PAYMENT_METHOD, PAYMENT_METHODS } from '@/lib/constants';
+import { Button } from '@/components/ui/button';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 
-const PaymentMethodForm = ({
-  preferredPaymentMethod,
-}: {
-  preferredPaymentMethod: string | null;
-}) => {
+const PaymentMethodForm = ({ preferredPaymentMethod }: { preferredPaymentMethod: string | null }) => {
   const router = useRouter();
   const { toast } = useToast();
 
@@ -45,29 +34,23 @@ const PaymentMethodForm = ({
 
       if (!res.success) {
         toast({
-          variant: "destructive",
+          variant: 'destructive',
           description: res.message,
         });
 
         return;
       }
 
-      router.push("/place-order");
+      router.push('/place-order');
     });
   }
 
   return (
-    <div className="max-w-md mx-auto">
+    <div className="mx-auto max-w-md">
       <Form {...form}>
-        <form
-          method="post"
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-4"
-        >
+        <form method="post" onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <h1 className="h2-bold mt-4">Payment Method</h1>
-          <p className="text-sm text-muted-foreground">
-            Please select your preferred payment method
-          </p>
+          <p className="text-sm text-muted-foreground">Please select your preferred payment method</p>
           <div className="flex flex-col gap-5 md:flex-row">
             <FormField
               control={form.control}
@@ -75,24 +58,13 @@ const PaymentMethodForm = ({
               render={({ field }) => (
                 <FormItem className="space-y-3">
                   <FormControl>
-                    <RadioGroup
-                      onValueChange={field.onChange}
-                      className="flex flex-col space-y-2"
-                    >
+                    <RadioGroup onValueChange={field.onChange} className="flex flex-col space-y-2">
                       {PAYMENT_METHODS.map((paymentMethod) => (
-                        <FormItem
-                          key={paymentMethod}
-                          className="flex items-center space-x-3 space-y-0"
-                        >
+                        <FormItem key={paymentMethod} className="flex items-center space-x-3 space-y-0">
                           <FormControl>
-                            <RadioGroupItem
-                              value={paymentMethod}
-                              checked={field.value === paymentMethod}
-                            />
+                            <RadioGroupItem value={paymentMethod} checked={field.value === paymentMethod} />
                           </FormControl>
-                          <FormLabel className="font-normal">
-                            {paymentMethod}
-                          </FormLabel>
+                          <FormLabel className="font-normal">{paymentMethod}</FormLabel>
                         </FormItem>
                       ))}
                     </RadioGroup>
@@ -104,11 +76,7 @@ const PaymentMethodForm = ({
           </div>
           <div className="flex gap-2">
             <Button type="submit" disabled={isPending}>
-              {isPending ? (
-                <Loader className="w-4 h-4 animate-spin" />
-              ) : (
-                <ArrowRight className="w-4 h-4" />
-              )}
+              {isPending ? <Loader className="h-4 w-4 animate-spin" /> : <ArrowRight className="h-4 w-4" />}
               Continue
             </Button>
           </div>

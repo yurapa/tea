@@ -1,22 +1,16 @@
-import Link from "next/link";
-import { EllipsisVertical, ShoppingCart } from "lucide-react";
+import Link from 'next/link';
+import { EllipsisVertical, ShoppingCart } from 'lucide-react';
 
-import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetTitle,
-  SheetDescription,
-} from "@/components/ui/sheet";
-import ModeToggle from "@/components/shared/header/mode-toggle";
-import UserButton from "@/components/shared/header/user-button";
-import Search from "./search";
+import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/ui/sheet';
+import ModeToggle from '@/components/shared/header/mode-toggle';
+import UserButton from '@/components/shared/header/user-button';
+import Search from './search';
 
 const Menu = () => {
   return (
     <div className="flex justify-end gap-3">
-      <nav className="hidden md:flex w-full max-w-xs gap-1">
+      <nav className="hidden w-full max-w-xs gap-1 md:flex">
         <ModeToggle />
         <Button asChild variant="ghost">
           <Link href="/cart">
