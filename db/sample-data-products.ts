@@ -61,7 +61,7 @@ const sampleDataProducts = [
   {
     name: "Splashes of Champagne",
     slug: "splashes-of-champagne",
-    category: "Black Tea",
+    category: "Black and Green Tea",
     description:
       "Blend of Ceylon Black Tea and Chinese Green Tea with goji berries, strawberry pieces and cornflower petals. Bright brown infusion with slightly tart, astringent and berry flavor with wild strawberry aroma.",
     images: [
@@ -181,7 +181,7 @@ const sampleDataProducts = [
   {
     name: "1001 Nights",
     slug: "1001-nights",
-    category: "Black Tea",
+    category: "Black and Green Tea",
     description:
       "Blend of Ceylon Black Tea and Chinese Green Tea with apple pieces, petals and buds of the Chinese rose, petals of calendula, safflower and cornflower. Bright brown infusion with pleasant tart and flower honey-dew flavor and grape aroma.",
     images: [
