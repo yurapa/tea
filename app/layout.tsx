@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
-import { ThemeProvider } from 'next-themes';
 import { Inter } from 'next/font/google';
+import { ThemeProvider } from 'next-themes';
+import { GoogleTagManager } from '@next/third-parties/google';
 
 import { APP_DESCRIPTION, APP_NAME, SERVER_URL } from '@/lib/constants';
 import { Toaster } from '@/components/ui/toaster';
@@ -25,6 +26,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isGTM = !!process.env.NEXT_PUBLIC_GTM_ID;
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} antialiased`}>
@@ -32,6 +35,7 @@ export default function RootLayout({
           {children}
           <Toaster />
         </ThemeProvider>
+        {isGTM && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID as string} />}
       </body>
     </html>
   );
