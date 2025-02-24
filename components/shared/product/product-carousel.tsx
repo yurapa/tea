@@ -51,8 +51,8 @@ const ProductCarousel = ({ data }: { data: Product[] }) => {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious className="hidden lg:flex" />
+      <CarouselNext className="hidden lg:flex" />
     </Carousel>
   );
 };
