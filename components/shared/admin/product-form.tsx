@@ -132,19 +132,6 @@ const ProductForm = ({
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="brand"
-            render={({ field }: { field: ControllerRenderProps<z.infer<typeof insertProductSchema>, 'brand'> }) => (
-              <FormItem className="w-full">
-                <FormLabel>Brand</FormLabel>
-                <FormControl>
-                  <Input placeholder="Enter product brand" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
         </div>
         <div className="flex flex-col gap-5 md:flex-row">
           <FormField

@@ -26,8 +26,6 @@ const ProductCard = async ({ product }: { product: Product }) => {
         </Link>
       </CardHeader>
       <CardContent className="grid gap-4 p-4">
-        <div className="text-xs">{product.brand}</div>
-
         <Link href={`/product/${product.slug}`}>
           <h2 className="text-base font-semibold">{product.name}</h2>
         </Link>
