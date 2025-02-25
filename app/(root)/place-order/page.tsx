@@ -106,6 +106,7 @@ const placeOrderPage = async () => {
         <div>
           <Card>
             <CardContent className="gap-4 space-y-4 p-4">
+              <h3 className="mb-6 text-xl font-medium md:text-2xl">Order Summary</h3>
               <div className="flex justify-between">
                 <div>Subtotal</div>
                 <div>{formatCurrency(cart.itemsPrice)}</div>

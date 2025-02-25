@@ -23,8 +23,10 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
     <>
       <h1 className="h2-bold py-4">Shopping Cart</h1>
       {!cart || cart.items.length === 0 ? (
-        <div>
-          Cart is empty. <Link href="/">Go shopping</Link>
+        <div className="py-12 text-center">
+          <div className="mb-10 text-2xl">:(</div>
+          <p className="mb-10">Currently, you don&#39;t have any products in the cart</p>
+          <Link href="/">Go shopping</Link>
         </div>
       ) : (
         <div className="grid md:grid-cols-4 md:gap-5">
@@ -93,7 +95,8 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
           </div>
           <Card>
             <CardContent className="gap-4 p-4">
-              <div className="pb-3 text-xl">
+              <h3 className="mb-6 text-xl font-medium md:text-2xl">Order Summary</h3>
+              <div className="my-8 text-xl">
                 Subtotal ({cart.items.reduce((a, c) => a + c.qty, 0)}):
                 {formatCurrency(cart.itemsPrice)}
               </div>
