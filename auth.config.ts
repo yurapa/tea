@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { NextAuthConfig } from "next-auth";
-import { NextResponse } from "next/server";
+import type { NextAuthConfig } from 'next-auth';
+import { NextResponse } from 'next/server';
 
 export const authConfig = {
   providers: [], // Required by NextAuthConfig type
@@ -24,7 +24,7 @@ export const authConfig = {
       if (!auth && protectedPaths.some((p) => p.test(pathname))) return false;
 
       // Check for session cart cookie
-      if (!request.cookies.get("sessionCartId")) {
+      if (!request.cookies.get('sessionCartId')) {
         // Generate new session cart id cookie
         const sessionCartId = crypto.randomUUID();
 
@@ -39,7 +39,7 @@ export const authConfig = {
         });
 
         // Set newly generated sessionCartId in the response cookies
-        response.cookies.set("sessionCartId", sessionCartId);
+        response.cookies.set('sessionCartId', sessionCartId);
 
         return response;
       }

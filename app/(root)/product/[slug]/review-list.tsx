@@ -1,33 +1,19 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { Calendar, User } from "lucide-react";
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { Calendar, User } from 'lucide-react';
 
-import { getReviews } from "@/lib/actions/review.actions";
+import { getReviews } from '@/lib/actions/review.actions';
 
-import { Review } from "@/types";
-import { useToast } from "@/hooks/use-toast";
-import { formatDateTime } from "@/lib/utils";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import ReviewForm from "./review-form";
-import Rating from "@/components/shared/product/rating";
+import { Review } from '@/types';
+import { useToast } from '@/hooks/use-toast';
+import { formatDateTime } from '@/lib/utils';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import ReviewForm from './review-form';
+import Rating from '@/components/shared/product/rating';
 
-const ReviewList = ({
-  userId,
-  productId,
-  productSlug,
-}: {
-  userId: string;
-  productId: string;
-  productSlug: string;
-}) => {
+const ReviewList = ({ userId, productId, productSlug }: { userId: string; productId: string; productSlug: string }) => {
   const [reviews, setReviews] = useState<Review[]>([]);
   const { toast } = useToast();
 
@@ -47,8 +33,8 @@ const ReviewList = ({
     } catch (err) {
       console.log(err);
       toast({
-        variant: "destructive",
-        description: "Error in fetching reviews",
+        variant: 'destructive',
+        description: 'Error in fetching reviews',
       });
     }
   };
@@ -57,20 +43,16 @@ const ReviewList = ({
     <div className="space-y-4">
       {reviews.length === 0 && <div>No reviews yet</div>}
       {userId ? (
-        <ReviewForm
-          userId={userId}
-          productId={productId}
-          onReviewSubmitted={reload}
-        />
+        <ReviewForm userId={userId} productId={productId} onReviewSubmitted={reload} />
       ) : (
         <div>
-          Please{" "}
+          Please{' '}
           <Link
-            className="text-blue-700 underline hover:no-underline px-1"
+            className="px-1 text-blue-700 underline hover:no-underline"
             href={`/sign-in?callbackUrl=/product/${productSlug}`}
           >
             login
-          </Link>{" "}
+          </Link>{' '}
           to write a review
         </div>
       )}
@@ -88,7 +70,7 @@ const ReviewList = ({
                 <Rating value={review.rating} />
                 <div className="flex items-center">
                   <User className="mr-1 h-3 w-3" />
-                  {review.user ? review.user.name : "User"}
+                  {review.user ? review.user.name : 'User'}
                 </div>
                 <div className="flex items-center">
                   <Calendar className="mr-1 h-3 w-3" />

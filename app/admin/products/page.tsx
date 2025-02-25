@@ -1,19 +1,12 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import { auth } from "@/auth";
-import { formatCurrency, formatId } from "@/lib/utils";
-import { getAllProducts, deleteProduct } from "@/lib/actions/product.actions";
-import { Button } from "@/components/ui/button";
-import Pagination from "@/components/shared/pagination";
-import DeleteDialog from "@/components/shared/delete-dialog";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { auth } from '@/auth';
+import { formatCurrency, formatId } from '@/lib/utils';
+import { getAllProducts, deleteProduct } from '@/lib/actions/product.actions';
+import { Button } from '@/components/ui/button';
+import Pagination from '@/components/shared/pagination';
+import DeleteDialog from '@/components/shared/delete-dialog';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 const AdminProductsPage = async (props: {
   searchParams: Promise<{
@@ -26,8 +19,8 @@ const AdminProductsPage = async (props: {
   const session = await auth();
 
   const page = Number(searchParams.page) || 1;
-  const searchText = searchParams.query || "";
-  const category = searchParams.category || "";
+  const searchText = searchParams.query || '';
+  const category = searchParams.category || '';
 
   const products = await getAllProducts({
     query: searchText,
@@ -35,7 +28,7 @@ const AdminProductsPage = async (props: {
     category,
   });
 
-  const isAdmin = session?.user.role === "admin";
+  const isAdmin = session?.user.role === 'admin';
 
   return (
     <div className="space-y-2">
@@ -44,7 +37,7 @@ const AdminProductsPage = async (props: {
           <h1 className="h2-bold">Products</h1>
           {searchText && (
             <div>
-              Filtered by <i>&quot;{searchText}&quot;</i>{" "}
+              Filtered by <i>&quot;{searchText}&quot;</i>{' '}
               <Link href={`/admin/products`}>
                 <Button variant="outline" size="sm">
                   Remove Filter
@@ -74,14 +67,10 @@ const AdminProductsPage = async (props: {
             {products?.data.map((product) => (
               <TableRow key={product.id}>
                 <TableCell>
-                  <Link href={`/product/${product.slug}`}>
-                    {formatId(product.id)}
-                  </Link>
+                  <Link href={`/product/${product.slug}`}>{formatId(product.id)}</Link>
                 </TableCell>
                 <TableCell>{product.name}</TableCell>
-                <TableCell className="text-right">
-                  {formatCurrency(product.price)}
-                </TableCell>
+                <TableCell className="text-right">{formatCurrency(product.price)}</TableCell>
                 <TableCell>{product.category}</TableCell>
                 <TableCell>{product.stock}</TableCell>
                 <TableCell>{product.rating}</TableCell>
@@ -89,19 +78,13 @@ const AdminProductsPage = async (props: {
                   <Button asChild variant="outline" size="sm">
                     <Link href={`/admin/products/${product.id}`}>Edit</Link>
                   </Button>
-                  <DeleteDialog
-                    id={product.id}
-                    action={deleteProduct}
-                    isDisabled={!isAdmin}
-                  />
+                  <DeleteDialog id={product.id} action={deleteProduct} isDisabled={!isAdmin} />
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
-        {products.totalPages > 1 && (
-          <Pagination page={page} totalPages={products.totalPages} />
-        )}
+        {products.totalPages > 1 && <Pagination page={page} totalPages={products.totalPages} />}
       </div>
     </div>
   );

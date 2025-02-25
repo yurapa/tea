@@ -1,22 +1,16 @@
-"use client";
+'use client';
 
-import { useForm } from "react-hook-form";
-import { useSession } from "next-auth/react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { useForm } from 'react-hook-form';
+import { useSession } from 'next-auth/react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 
-import { useToast } from "@/hooks/use-toast";
-import { updateProfile } from "@/lib/actions/user.actions";
-import { updateProfileSchema } from "@/lib/validator";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
+import { useToast } from '@/hooks/use-toast';
+import { updateProfile } from '@/lib/actions/user.actions';
+import { updateProfileSchema } from '@/lib/validator';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 
 const ProfileForm = () => {
   const { data: session, update } = useSession();
@@ -25,8 +19,8 @@ const ProfileForm = () => {
   const form = useForm<z.infer<typeof updateProfileSchema>>({
     resolver: zodResolver(updateProfileSchema),
     defaultValues: {
-      name: session?.user?.name ?? "",
-      email: session?.user?.email ?? "",
+      name: session?.user?.name ?? '',
+      email: session?.user?.email ?? '',
     },
   });
 
@@ -35,7 +29,7 @@ const ProfileForm = () => {
 
     if (!res.success)
       return toast({
-        variant: "destructive",
+        variant: 'destructive',
         description: res.message,
       });
 
@@ -56,10 +50,7 @@ const ProfileForm = () => {
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-5"
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5">
         <div className="flex flex-col gap-5">
           <FormField
             control={form.control}
@@ -67,12 +58,7 @@ const ProfileForm = () => {
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormControl>
-                  <Input
-                    disabled
-                    placeholder="Email"
-                    className="input-field"
-                    {...field}
-                  />
+                  <Input disabled placeholder="Email" className="input-field" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -84,24 +70,15 @@ const ProfileForm = () => {
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormControl>
-                  <Input
-                    placeholder="Name"
-                    className="input-field"
-                    {...field}
-                  />
+                  <Input placeholder="Name" className="input-field" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
         </div>
-        <Button
-          type="submit"
-          size="lg"
-          className="button col-span-2 w-full"
-          disabled={form.formState.isSubmitting}
-        >
-          {form.formState.isSubmitting ? "Submitting..." : "Update Profile"}
+        <Button type="submit" size="lg" className="button col-span-2 w-full" disabled={form.formState.isSubmitting}>
+          {form.formState.isSubmitting ? 'Submitting...' : 'Update Profile'}
         </Button>
       </form>
     </Form>

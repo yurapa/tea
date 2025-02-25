@@ -1,12 +1,12 @@
-import { Metadata } from "next";
-import { auth } from "@/auth";
+import { Metadata } from 'next';
+import { auth } from '@/auth';
 
-import { getUserById } from "@/lib/actions/user.actions";
-import CheckoutSteps from "@/components/shared/checkout-steps";
-import PaymentMethodForm from "./payment-method-form";
+import { getUserById } from '@/lib/actions/user.actions';
+import CheckoutSteps from '@/components/shared/checkout-steps';
+import PaymentMethodForm from './payment-method-form';
 
 export const metadata: Metadata = {
-  title: "Select Payment Method",
+  title: 'Select Payment Method',
 };
 
 const PaymentMethodPage = async () => {
@@ -14,7 +14,7 @@ const PaymentMethodPage = async () => {
   const userId = session?.user?.id;
 
   if (!userId) {
-    throw new Error("User ID not found");
+    throw new Error('User ID not found');
   }
 
   const user = await getUserById(userId);

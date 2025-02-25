@@ -1,40 +1,39 @@
 export const signInDefaultValues = {
-  email: "",
-  password: "",
+  email: '',
+  password: '',
 };
 
 export const signUpDefaultValues = {
-  name: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
+  name: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
 };
 
 export const shippingAddressDefaultValues = {
-  fullName: "",
-  streetAddress: "",
-  city: "",
-  postalCode: "",
-  country: "",
+  fullName: '',
+  streetAddress: '',
+  city: '',
+  postalCode: '',
+  country: '',
 };
 
 export const productDefaultValues = {
-  name: "",
-  slug: "",
-  category: "",
+  name: '',
+  slug: '',
+  category: '',
   images: [],
-  brand: "",
-  description: "",
-  price: "0",
+  description: '',
+  price: '0',
   stock: 0,
-  rating: "0",
-  numReviews: "0",
+  rating: '0',
+  numReviews: '0',
   isFeatured: false,
   banner: null,
 };
 
 export const reviewFormDefaultValues = {
-  title: "",
-  comment: "",
+  title: '',
+  comment: '',
   rating: 0,
 };

@@ -1,30 +1,23 @@
-import Link from "next/link";
-import { Metadata } from "next";
-import { BadgeEuro, Barcode, CreditCard, Users } from "lucide-react";
+import Link from 'next/link';
+import { Metadata } from 'next';
+import { BadgeEuro, Barcode, CreditCard, Users } from 'lucide-react';
 
-import { auth } from "@/auth";
-import { getOrderSummary } from "@/lib/actions/order.actions";
-import { formatCurrency, formatDateTime, formatNumber } from "@/lib/utils";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import Charts from "@/app/admin/overview/charts";
+import { auth } from '@/auth';
+import { getOrderSummary } from '@/lib/actions/order.actions';
+import { formatCurrency, formatDateTime, formatNumber } from '@/lib/utils';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Charts from '@/app/admin/overview/charts';
 
 export const metadata: Metadata = {
-  title: "Admin Dashboard",
+  title: 'Admin Dashboard',
 };
 
 const AdminOverviewPage = async () => {
   const session = await auth();
 
-  if (session?.user.role !== "admin" && session?.user.role !== "editor") {
-    throw new Error("admin or editor permission required");
+  if (session?.user.role !== 'admin' && session?.user.role !== 'editor') {
+    throw new Error('admin or editor permission required');
   }
 
   const summary = await getOrderSummary();
@@ -40,9 +33,7 @@ const AdminOverviewPage = async () => {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {formatCurrency(
-                summary.totalSales._sum.totalPrice?.toString() || 0,
-              )}
+              {formatCurrency(summary.totalSales._sum.totalPrice?.toString() || 0)}
             </div>
           </CardContent>
         </Card>
@@ -52,9 +43,7 @@ const AdminOverviewPage = async () => {
             <CreditCard />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
-              {formatNumber(summary.ordersCount)}
-            </div>
+            <div className="text-2xl font-bold">{formatNumber(summary.ordersCount)}</div>
           </CardContent>
         </Card>
         <Card>
@@ -102,12 +91,8 @@ const AdminOverviewPage = async () => {
               <TableBody>
                 {summary.latestOrders.map((order) => (
                   <TableRow key={order.id}>
-                    <TableCell>
-                      {order?.user?.name ? order.user.name : "Deleted user"}
-                    </TableCell>
-                    <TableCell>
-                      {formatDateTime(order.createdAt).dateOnly}
-                    </TableCell>
+                    <TableCell>{order?.user?.name ? order.user.name : 'Deleted user'}</TableCell>
+                    <TableCell>{formatDateTime(order.createdAt).dateOnly}</TableCell>
                     <TableCell>{formatCurrency(order.totalPrice)}</TableCell>
                     <TableCell>
                       <Link href={`/order/${order.id}`}>

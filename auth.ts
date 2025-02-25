@@ -1,29 +1,29 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import NextAuth from "next-auth";
-import type { NextAuthConfig } from "next-auth";
-import { cookies } from "next/headers";
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import CredentialsProvider from "next-auth/providers/credentials";
+import NextAuth from 'next-auth';
+import type { NextAuthConfig } from 'next-auth';
+import { cookies } from 'next/headers';
+import { PrismaAdapter } from '@auth/prisma-adapter';
+import CredentialsProvider from 'next-auth/providers/credentials';
 
-import { authConfig } from "@/auth.config";
-import { prisma } from "@/db/prisma";
-import { compare } from "@/lib/encrypt";
+import { authConfig } from '@/auth.config';
+import { prisma } from '@/db/prisma';
+import { compare } from '@/lib/encrypt';
 
 export const config = {
   pages: {
-    signIn: "/sign-in",
-    error: "/sign-in",
+    signIn: '/sign-in',
+    error: '/sign-in',
   },
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60,
   },
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
       credentials: {
-        email: { type: "email" },
-        password: { type: "password" },
+        email: { type: 'email' },
+        password: { type: 'password' },
       },
       async authorize(credentials) {
         if (credentials == null) return null;
@@ -36,10 +36,7 @@ export const config = {
         });
         // Check if user exists and password is correct
         if (user && user.password) {
-          const isMatch = await compare(
-            credentials.password as string,
-            user.password,
-          );
+          const isMatch = await compare(credentials.password as string, user.password);
           // If password is correct, return user object
           if (isMatch) {
             return {
@@ -64,7 +61,7 @@ export const config = {
       session.user.name = token.name;
 
       // If there is an update, set the name on the session
-      if (trigger === "update") {
+      if (trigger === 'update') {
         session.user.name = user.name;
       }
       return session;
@@ -75,9 +72,9 @@ export const config = {
         token.id = user.id;
         token.role = user.role;
 
-        if (trigger === "signIn" || trigger === "signUp") {
+        if (trigger === 'signIn' || trigger === 'signUp') {
           const cookiesObject = await cookies();
-          const sessionCartId = cookiesObject.get("sessionCartId")?.value;
+          const sessionCartId = cookiesObject.get('sessionCartId')?.value;
 
           if (sessionCartId) {
             const sessionCart = await prisma.cart.findFirst({
@@ -102,7 +99,7 @@ export const config = {
       }
 
       // Handle session updates (e.g., name change)
-      if (session?.user.name && trigger === "update") {
+      if (session?.user.name && trigger === 'update') {
         token.name = session.user.name;
       }
 
