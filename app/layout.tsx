@@ -26,19 +26,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const isGTM = !!process.env.NEXT_PUBLIC_GTM_ID;
+  const isGTM = !!process.env.NEXT_PUBLIC_GTM_ID;
 
-  // console.log('RootLayout -> isGTM', isGTM);
+  console.log('RootLayout -> isGTM', isGTM);
   console.log('RootLayout -> process.env.NEXT_PUBLIC_GTM_ID;', process.env.NEXT_PUBLIC_GTM_ID);
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID as string} />
+      {isGTM && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID as string} />}
       <body className={`${inter.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           {children}
           <Toaster />
         </ThemeProvider>
+        {process.env.NEXT_PUBLIC_GTM_ID}
       </body>
     </html>
   );
