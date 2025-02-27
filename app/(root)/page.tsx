@@ -1,5 +1,5 @@
-import { getFeaturedProducts, getLatestProducts } from '@/lib/actions/product.actions';
 import { LATEST_PRODUCTS_LIMIT } from '@/lib/constants';
+import { getFeaturedProducts, getLatestProducts } from '@/lib/actions/product.actions';
 import IconBoxes from '@/components/icon-boxes';
 import DealCountdown from '@/components/deal-countdown';
 import ProductList from '@/components/shared/product/product-list';
@@ -14,18 +14,15 @@ const HomePage = async () => {
   const featuredProducts = await getFeaturedProducts();
 
   return (
-    <div className="relative mb-12 w-full">
-      <div>
-        {featuredProducts.length > 0 && <ProductCarousel data={featuredProducts} />}
-        <ProductList title="Newest Arrivals" data={latestProducts} limit={LATEST_PRODUCTS_LIMIT} />
-        <div className="my-8 flex items-center justify-center">
-          <ViewAllProductsButton />
-        </div>
+    <>
+      {featuredProducts.length > 0 && <ProductCarousel data={featuredProducts} />}
+      <ProductList title="Newest Arrivals" data={latestProducts} limit={LATEST_PRODUCTS_LIMIT} />
+      <div className="my-8 flex items-center justify-center">
+        <ViewAllProductsButton label="View All Products" />
       </div>
-
       <DealCountdown />
       <IconBoxes />
-    </div>
+    </>
   );
 };
 
