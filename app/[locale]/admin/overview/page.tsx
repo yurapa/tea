@@ -7,7 +7,7 @@ import { getOrderSummary } from '@/lib/actions/order.actions';
 import { formatCurrency, formatDateTime, formatNumber } from '@/lib/utils';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import Charts from '@/app/admin/overview/charts';
+import Charts from '@/app/[locale]/admin/overview/charts';
 
 export const metadata: Metadata = {
   title: 'Admin Dashboard',

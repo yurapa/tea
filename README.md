@@ -33,6 +33,8 @@ A full-featured Ecommerce website built with Next.js, TypeScript, PostgreSQL and
   - `resend`: a simple API for sending emails
   - `react-email`: a library for creating email templates in React
   - `@react-email/components`: a set of pre-built components
+- Internationalization:
+  - `next-intl`
 
 ### Getting Started
 

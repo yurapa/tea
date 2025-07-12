@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { SessionProvider } from 'next-auth/react';
 
 import { auth } from '@/auth';
-import ProfileForm from '@/app/user/profile/profile-form';
+import ProfileForm from '@/app/[locale]/user/profile/profile-form';
 
 export const metadata: Metadata = {
   title: 'Customer Profile',

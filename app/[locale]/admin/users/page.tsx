@@ -32,7 +32,7 @@ const AdminUserPage = async (props: {
         {searchText && (
           <div>
             Filtered by <i>&quot;{searchText}&quot;</i>{' '}
-            <Link href={`/admin/users`}>
+            <Link href={`/app/%5Blocale%5D/admin/users`}>
               <Button variant="outline" size="sm">
                 Remove Filter
               </Button>

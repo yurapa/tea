@@ -63,7 +63,7 @@ const CredentialsSignInForm = () => {
 
         <div className="text-center text-sm text-muted-foreground">
           Don&apos;t have an account?{' '}
-          <Link target="_self" className="link" href="/sign-up">
+          <Link href="/sign-up" className="link">
             Sign Up
           </Link>
         </div>

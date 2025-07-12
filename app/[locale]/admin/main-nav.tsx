@@ -3,30 +3,32 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
+import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 
 const links = [
   {
-    title: 'Overview',
+    titleKey: 'overview',
     href: '/admin/overview',
   },
   {
-    title: 'Products',
+    titleKey: 'products',
     href: '/admin/products',
   },
   {
-    title: 'Orders',
+    titleKey: 'orders',
     href: '/admin/orders',
   },
   {
-    title: 'Users',
+    titleKey: 'users',
     href: '/admin/users',
   },
 ];
 
 export default function MainNav({ className, ...props }: React.HTMLAttributes<HTMLElement>) {
   const pathname = usePathname();
+  const t = useTranslations('AdminNav');
+  const locale = pathname.split('/')[1];
 
   return (
     <nav className={cn('flex items-center space-x-4 lg:space-x-6', className)} {...props}>
@@ -36,10 +38,10 @@ export default function MainNav({ className, ...props }: React.HTMLAttributes<HT
           href={item.href}
           className={cn(
             'text-sm font-medium transition-colors hover:text-primary',
-            pathname.includes(item.href) ? '' : 'text-muted-foreground',
+            pathname === `/${locale}${item.href}` ? '' : 'text-muted-foreground',
           )}
         >
-          {item.title}
+          {t(item.titleKey)}
         </Link>
       ))}
     </nav>

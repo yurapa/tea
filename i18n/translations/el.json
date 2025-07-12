@@ -1,0 +1,12 @@
+{
+  "HomePage": {
+    "title": "Hello world!",
+    "about": "Go to the about page"
+  },
+  "AdminNav": {
+    "overview": "Dashboard",
+    "products": "Products",
+    "orders": "Orders",
+    "users": "Users"
+  }
+}

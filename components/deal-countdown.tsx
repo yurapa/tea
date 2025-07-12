@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import { Button } from '@/components/ui/button';
+import { useTranslations } from 'use-intl';
 
 const TARGET_DATE = new Date('2025-03-08T00:00:00');
 
@@ -29,6 +30,8 @@ const StatBox = ({ label, value }: { label: string; value: number }) => (
 
 const DealCountdown = () => {
   const [time, setTime] = useState<ReturnType<typeof calculateTimeRemaining>>();
+
+  const t = useTranslations('HomePage');
 
   useEffect(() => {
     // Calculate initial time remaining on the client
@@ -62,6 +65,8 @@ const DealCountdown = () => {
   if (time.days === 0 && time.hours === 0 && time.minutes === 0 && time.seconds === 0) {
     return (
       <section className="my-20 grid grid-cols-1 md:grid-cols-2">
+        <h1>{t('title')}</h1>
+
         <div className="flex flex-col justify-center gap-2">
           <h3 className="text-3xl font-bold">Deal Has Ended</h3>
           <p>This deal is no longer available. Check out our latest promotions!</p>

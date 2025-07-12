@@ -39,3 +39,11 @@ export type Review = z.infer<typeof insertReviewSchema> & {
   createdAt: Date;
   user?: { name: string };
 };
+
+export type Config = {
+  i18n: {
+    locales: { [locale: string]: { label: string } };
+    defaultLocale: string;
+    localeCookieName: string;
+  };
+};

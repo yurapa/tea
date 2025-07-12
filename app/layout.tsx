@@ -1,17 +1,8 @@
-import React from 'react';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import { ThemeProvider } from 'next-themes';
-
+import type { PropsWithChildren } from 'react';
 import { APP_DESCRIPTION, APP_NAME, SERVER_URL } from '@/lib/constants';
-import { Toaster } from '@/components/ui/toaster';
-import { GoogleAnalytics } from '@/components/analytics/google-analytics';
 
 import '@/assets/styles/globals.css';
-
-const inter = Inter({
-  subsets: ['latin'],
-});
 
 export const metadata: Metadata = {
   title: {
@@ -22,20 +13,6 @@ export const metadata: Metadata = {
   metadataBase: new URL(SERVER_URL),
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          {children}
-          <Toaster />
-        </ThemeProvider>
-        <GoogleAnalytics />
-      </body>
-    </html>
-  );
+export default function RootLayout({ children }: PropsWithChildren) {
+  return children;
 }

@@ -1,0 +1,12 @@
+{
+  "HomePage": {
+    "title": "ru",
+    "about": "ru"
+  },
+  "AdminNav": {
+    "overview": "Обзор",
+    "products": "Продукты",
+    "orders": "Заказы",
+    "users": "Пользователи"
+  }
+}
