@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { Button } from './ui/button';
+import { Button } from '@/components/ui/button';
+import { useTranslations } from 'use-intl';
 
 const TARGET_DATE = new Date('2025-03-08T00:00:00');
 
-// Function to calculate time remaining
 const calculateTimeRemaining = (targetDate: Date) => {
   const currentTime = new Date();
   const timeDifference = Math.max(Number(targetDate) - Number(currentTime), 0);
@@ -21,8 +21,17 @@ const calculateTimeRemaining = (targetDate: Date) => {
   };
 };
 
+const StatBox = ({ label, value }: { label: string; value: number }) => (
+  <li className="w-full p-4 text-center">
+    <p className="text-3xl font-bold">{value}</p>
+    <p>{label}</p>
+  </li>
+);
+
 const DealCountdown = () => {
   const [time, setTime] = useState<ReturnType<typeof calculateTimeRemaining>>();
+
+  const t = useTranslations('HomePage');
 
   useEffect(() => {
     // Calculate initial time remaining on the client
@@ -56,17 +65,19 @@ const DealCountdown = () => {
   if (time.days === 0 && time.hours === 0 && time.minutes === 0 && time.seconds === 0) {
     return (
       <section className="my-20 grid grid-cols-1 md:grid-cols-2">
+        <h1>{t('title')}</h1>
+
         <div className="flex flex-col justify-center gap-2">
           <h3 className="text-3xl font-bold">Deal Has Ended</h3>
           <p>This deal is no longer available. Check out our latest promotions!</p>
-          <div className="text-center">
+          <div className="mb-6 text-center">
             <Button asChild>
               <Link href="/search">View Products</Link>
             </Button>
           </div>
         </div>
         <div className="flex justify-center">
-          <Image src="/images/promo.png" alt="promotion" width={310} height={300} />
+          <Image src="/images/promo.png" width={310} height={300} alt="promotion" />
         </div>
       </section>
     );
@@ -99,12 +110,5 @@ const DealCountdown = () => {
     </section>
   );
 };
-
-const StatBox = ({ label, value }: { label: string; value: number }) => (
-  <li className="w-full p-4 text-center">
-    <p className="text-3xl font-bold">{value}</p>
-    <p>{label}</p>
-  </li>
-);
 
 export default DealCountdown;

@@ -1,21 +1,26 @@
 import Link from 'next/link';
 import { EllipsisVertical, ShoppingCart } from 'lucide-react';
+import { getTranslations } from 'next-intl/server';
 
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import ModeToggle from '@/components/shared/header/mode-toggle';
 import UserButton from '@/components/shared/header/user-button';
+import LocaleSwitch from '@/components/shared/header/locale-switch';
 import Search from './search';
 
-const Menu = () => {
+const Menu = async () => {
+  const t = await getTranslations();
+  
   return (
     <div className="flex justify-end gap-3">
       <nav className="hidden w-full max-w-xs gap-1 md:flex">
         <ModeToggle />
+        <LocaleSwitch />
         <Button asChild variant="ghost">
           <Link href="/cart">
             <ShoppingCart />
-            Cart
+            {t('Navigation.cart')}
           </Link>
         </Button>
         <UserButton />
@@ -30,12 +35,13 @@ const Menu = () => {
             <div className="mt-10">
               <Search />
             </div>
-            <SheetTitle>Menu</SheetTitle>
+            <SheetTitle>{t('Common.menu')}</SheetTitle>
             <ModeToggle />
+            <LocaleSwitch />
             <Button asChild variant="ghost">
               <Link href="/cart">
                 <ShoppingCart />
-                Cart
+                {t('Navigation.cart')}
               </Link>
             </Button>
             <UserButton />

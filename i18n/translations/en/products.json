@@ -1,0 +1,16 @@
+{
+  "title": "Products",
+  "create": "Create Product",
+  "edit": "Edit Product",
+  "delete": "Delete Product",
+  "noProductsFound": "No products found",
+  "filteredBy": "Filtered by",
+  "removeFilter": "Remove Filter",
+  "stock": "Stock",
+  "category": "Category",
+  "rating": "Rating",
+  "price": "Price",
+  "name": "Name",
+  "actions": "Actions",
+  "id": "ID"
+}

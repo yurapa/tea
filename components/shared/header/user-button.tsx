@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { UserIcon } from 'lucide-react';
+import { getTranslations } from 'next-intl/server';
 
 import { auth } from '@/auth';
 import { signOutUser } from '@/lib/actions/user.actions';
@@ -14,12 +15,13 @@ import {
 
 const UserButton = async () => {
   const session = await auth();
+  const t = await getTranslations();
 
   if (!session) {
     return (
       <Link href="/sign-in">
         <Button>
-          <UserIcon /> Sign In
+          <UserIcon /> {t('Auth.signIn')}
         </Button>
       </Link>
     );
@@ -71,7 +73,7 @@ const UserButton = async () => {
           <DropdownMenuItem className="mb-1 p-0">
             <form action={signOutUser} className="w-full">
               <Button className="h-4 w-full justify-start px-2 py-4" variant="ghost">
-                Sign Out
+                {t('Auth.signOut')}
               </Button>
             </form>
           </DropdownMenuItem>
