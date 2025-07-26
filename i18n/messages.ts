@@ -4,7 +4,7 @@ import type { AbstractIntlMessages } from 'next-intl';
 import { localeConfig } from '@/i18n/locale-config';
 
 export const importLocale = async (locale: string): Promise<AbstractIntlMessages> => {
-  return (await import(`@/i18n/translations/${locale}.json`)).default;
+  return (await import(`@/i18n/translations/${locale}/index.ts`)).default;
 };
 
 export const getMessagesForLocale = async (locale: string): Promise<AbstractIntlMessages> => {
