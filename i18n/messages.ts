@@ -1,13 +1,13 @@
 import deepmerge from 'deepmerge';
+import type { AbstractIntlMessages } from 'next-intl';
 
 import { CONFIG } from '@/lib/constants';
-import type { Messages } from '@/types/locale';
 
-export const importLocale = async (locale: string): Promise<Messages> => {
-  return (await import(`@/i18n/translations/${locale}.json`)).default as Messages;
+export const importLocale = async (locale: string): Promise<AbstractIntlMessages> => {
+  return (await import(`@/i18n/translations/${locale}.json`)).default;
 };
 
-export const getMessagesForLocale = async (locale: string): Promise<Messages> => {
+export const getMessagesForLocale = async (locale: string): Promise<AbstractIntlMessages> => {
   const localeMessages = await importLocale(locale);
   if (locale === CONFIG.i18n.defaultLocale) {
     return localeMessages;

@@ -2,7 +2,7 @@
 
 import { LanguagesIcon } from 'lucide-react';
 import { useLocale } from 'next-intl';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter } from '@/i18n/navigation';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -23,15 +23,7 @@ const LocaleSwitch = () => {
 
   const handleLocaleChange = (newLocale: string) => {
     setValue(newLocale);
-    let newPath;
-
-    if (pathname.startsWith(`/${currentLocale}`)) {
-      newPath = pathname.replace(`/${currentLocale}`, `/${newLocale}`);
-    } else {
-      newPath = `/${newLocale}${pathname}`;
-    }
-
-    router.push(newPath);
+    router.replace(pathname, { locale: newLocale });
   };
 
   return (

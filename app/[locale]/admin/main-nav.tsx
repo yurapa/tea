@@ -8,22 +8,22 @@ import { cn } from '@/lib/utils';
 
 const links = [
   {
-    titleKey: 'overview',
+    titleKey: 'overview' as const,
     href: '/admin/overview',
   },
   {
-    titleKey: 'products',
+    titleKey: 'products' as const,
     href: '/admin/products',
   },
   {
-    titleKey: 'orders',
+    titleKey: 'orders' as const,
     href: '/admin/orders',
   },
   {
-    titleKey: 'users',
+    titleKey: 'users' as const,
     href: '/admin/users',
   },
-];
+] as const;
 
 export default function MainNav({ className, ...props }: React.HTMLAttributes<HTMLElement>) {
   const pathname = usePathname();
