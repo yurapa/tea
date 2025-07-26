@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { getTranslations } from 'next-intl/server';
 
 import { auth } from '@/auth';
 import { formatCurrency, formatId } from '@/lib/utils';
@@ -17,6 +18,7 @@ const AdminProductsPage = async (props: {
 }) => {
   const searchParams = await props.searchParams;
   const session = await auth();
+  const t = await getTranslations();
 
   const page = Number(searchParams.page) || 1;
   const searchText = searchParams.query || '';
@@ -34,33 +36,33 @@ const AdminProductsPage = async (props: {
     <div className="space-y-2">
       <div className="flex-between">
         <div className="flex items-center gap-3">
-          <h1 className="h2-bold">Products</h1>
+          <h1 className="h2-bold">{t('Products.title')}</h1>
           {searchText && (
             <div>
-              Filtered by <i>&quot;{searchText}&quot;</i>{' '}
+              {t('Products.filteredBy')} <i>&quot;{searchText}&quot;</i>{' '}
               <Link href="/app/admin/products">
                 <Button variant="outline" size="sm">
-                  Remove Filter
+                  {t('Products.removeFilter')}
                 </Button>
               </Link>
             </div>
           )}
         </div>
         <Button asChild variant="default">
-          <Link href="/admin/products/create">Create Product</Link>
+          <Link href="/admin/products/create">{t('Products.create')}</Link>
         </Button>
       </div>
       <div>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>ID</TableHead>
-              <TableHead>NAME</TableHead>
-              <TableHead className="text-right">PRICE</TableHead>
-              <TableHead>CATEGORY</TableHead>
-              <TableHead>STOCK</TableHead>
-              <TableHead>RATING</TableHead>
-              <TableHead className="w-[100px]">ACTIONS</TableHead>
+              <TableHead>{t('Products.id')}</TableHead>
+              <TableHead>{t('Products.name')}</TableHead>
+              <TableHead className="text-right">{t('Products.price')}</TableHead>
+              <TableHead>{t('Products.category')}</TableHead>
+              <TableHead>{t('Products.stock')}</TableHead>
+              <TableHead>{t('Products.rating')}</TableHead>
+              <TableHead className="w-[100px]">{t('Products.actions')}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -76,7 +78,7 @@ const AdminProductsPage = async (props: {
                 <TableCell>{product.rating}</TableCell>
                 <TableCell className="flex gap-1">
                   <Button asChild variant="outline" size="sm">
-                    <Link href={`/admin/products/${product.id}`}>Edit</Link>
+                    <Link href={`/admin/products/${product.id}`}>{t('Common.edit')}</Link>
                   </Button>
                   <DeleteDialog id={product.id} action={deleteProduct} isDisabled={!isAdmin} />
                 </TableCell>

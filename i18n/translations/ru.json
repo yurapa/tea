@@ -1,12 +1,116 @@
 {
+  "Common": {
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "submit": "Отправить",
+    "cancel": "Отменить",
+    "delete": "Удалить",
+    "edit": "Редактировать",
+    "create": "Создать",
+    "save": "Сохранить",
+    "close": "Закрыть",
+    "yes": "Да",
+    "no": "Нет",
+    "confirm": "Подтвердить",
+    "back": "Назад",
+    "next": "Далее",
+    "previous": "Предыдущий",
+    "search": "Поиск",
+    "filter": "Фильтр",
+    "clear": "Очистить",
+    "apply": "Применить",
+    "reset": "Сбросить",
+    "menu": "Меню"
+  },
+  "Auth": {
+    "signIn": "Войти",
+    "signOut": "Выйти",
+    "signUp": "Зарегистрироваться",
+    "signingIn": "Вход...",
+    "email": "Электронная почта",
+    "password": "Пароль",
+    "signInTitle": "Вход",
+    "signInDescription": "Выберите способ входа в ваш аккаунт",
+    "signInWithCredentials": "Войти с учетными данными",
+    "dontHaveAccount": "Нет аккаунта?",
+    "alreadyHaveAccount": "Уже есть аккаунт?"
+  },
+  "Navigation": {
+    "home": "Главная",
+    "products": "Товары",
+    "cart": "Корзина",
+    "search": "Поиск",
+    "categories": "Категории"
+  },
   "HomePage": {
-    "title": "ru",
-    "about": "ru"
+    "title": "Привет мир!",
+    "about": "Перейти на страницу о нас",
+    "newestArrivals": "Новинки",
+    "viewAllProducts": "Посмотреть все товары",
+    "featuredProducts": "Рекомендуемые товары"
   },
   "AdminNav": {
     "overview": "Обзор",
-    "products": "Продукты",
+    "products": "Товары",
     "orders": "Заказы",
     "users": "Пользователи"
+  },
+  "Products": {
+    "title": "Товары",
+    "create": "Создать товар",
+    "edit": "Редактировать товар",
+    "delete": "Удалить товар",
+    "noProductsFound": "Товары не найдены",
+    "filteredBy": "Отфильтровано по",
+    "removeFilter": "Убрать фильтр",
+    "stock": "Остаток",
+    "category": "Категория",
+    "rating": "Рейтинг",
+    "price": "Цена",
+    "name": "Название",
+    "actions": "Действия",
+    "id": "ID"
+  },
+  "Cart": {
+    "title": "Корзина покупок",
+    "orderSummary": "Итоги заказа",
+    "addToCart": "Добавить в корзину",
+    "removeFromCart": "Удалить из корзины",
+    "cart": "Корзина",
+    "emptyCart": "Ваша корзина пуста",
+    "subtotal": "Промежуточный итог",
+    "total": "Всего",
+    "checkout": "Оформить заказ"
+  },
+  "DeleteDialog": {
+    "title": "Вы абсолютно уверены?",
+    "description": "Это действие нельзя отменить.",
+    "deleting": "Удаление...",
+    "confirmDelete": "Удалить"
+  },
+  "Forms": {
+    "required": "Это поле обязательное",
+    "invalidEmail": "Пожалуйста, введите действительный email",
+    "passwordTooShort": "Пароль должен содержать не менее 6 символов",
+    "passwordMismatch": "Пароли не совпадают"
+  },
+  "Toast": {
+    "success": "Успех",
+    "error": "Ошибка",
+    "warning": "Предупреждение",
+    "info": "Информация"
+  },
+  "Pagination": {
+    "previous": "Предыдущий",
+    "next": "Следующий",
+    "page": "Страница",
+    "of": "из",
+    "showing": "Показано",
+    "results": "результатов"
+  },
+  "Search": {
+    "placeholder": "Поиск товаров...",
+    "noResults": "Результатов не найдено",
+    "searchResults": "Результаты поиска"
   }
 }

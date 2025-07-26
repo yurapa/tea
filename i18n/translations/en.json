@@ -1,12 +1,116 @@
 {
+  "Common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "save": "Save",
+    "close": "Close",
+    "yes": "Yes",
+    "no": "No",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "filter": "Filter",
+    "clear": "Clear",
+    "apply": "Apply",
+    "reset": "Reset",
+    "menu": "Menu"
+  },
+  "Auth": {
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "signUp": "Sign Up",
+    "signingIn": "Signing In...",
+    "email": "Email",
+    "password": "Password",
+    "signInTitle": "Sign In",
+    "signInDescription": "Select a method to sign in to your account",
+    "signInWithCredentials": "Sign In with credentials",
+    "dontHaveAccount": "Don't have an account?",
+    "alreadyHaveAccount": "Already have an account?"
+  },
+  "Navigation": {
+    "home": "Home",
+    "products": "Products",
+    "cart": "Cart",
+    "search": "Search",
+    "categories": "Categories"
+  },
   "HomePage": {
     "title": "Hello world!",
-    "about": "Go to the about page"
+    "about": "Go to the about page",
+    "newestArrivals": "Newest Arrivals",
+    "viewAllProducts": "View All Products",
+    "featuredProducts": "Featured Products"
   },
   "AdminNav": {
     "overview": "Overview",
     "products": "Products",
     "orders": "Orders",
     "users": "Users"
+  },
+  "Products": {
+    "title": "Products",
+    "create": "Create Product",
+    "edit": "Edit Product",
+    "delete": "Delete Product",
+    "noProductsFound": "No products found",
+    "filteredBy": "Filtered by",
+    "removeFilter": "Remove Filter",
+    "stock": "Stock",
+    "category": "Category",
+    "rating": "Rating",
+    "price": "Price",
+    "name": "Name",
+    "actions": "Actions",
+    "id": "ID"
+  },
+  "Cart": {
+    "title": "Shopping Cart",
+    "orderSummary": "Order Summary",
+    "addToCart": "Add to Cart",
+    "removeFromCart": "Remove from Cart",
+    "cart": "Cart",
+    "emptyCart": "Your cart is empty",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "checkout": "Checkout"
+  },
+  "DeleteDialog": {
+    "title": "Are you absolutely sure?",
+    "description": "This action cannot be undone.",
+    "deleting": "Deleting...",
+    "confirmDelete": "Delete"
+  },
+  "Forms": {
+    "required": "This field is required",
+    "invalidEmail": "Please enter a valid email",
+    "passwordTooShort": "Password must be at least 6 characters",
+    "passwordMismatch": "Passwords do not match"
+  },
+  "Toast": {
+    "success": "Success",
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Information"
+  },
+  "Pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page",
+    "of": "of",
+    "showing": "Showing",
+    "results": "results"
+  },
+  "Search": {
+    "placeholder": "Search products...",
+    "noResults": "No results found",
+    "searchResults": "Search Results"
   }
 }

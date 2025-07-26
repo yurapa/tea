@@ -1,12 +1,116 @@
 {
+  "Common": {
+    "loading": "Φόρτωση...",
+    "error": "Σφάλμα",
+    "submit": "Υποβολή",
+    "cancel": "Ακύρωση",
+    "delete": "Διαγραφή",
+    "edit": "Επεξεργασία",
+    "create": "Δημιουργία",
+    "save": "Αποθήκευση",
+    "close": "Κλείσιμο",
+    "yes": "Ναι",
+    "no": "Όχι",
+    "confirm": "Επιβεβαίωση",
+    "back": "Πίσω",
+    "next": "Επόμενο",
+    "previous": "Προηγούμενο",
+    "search": "Αναζήτηση",
+    "filter": "Φίλτρο",
+    "clear": "Καθαρισμός",
+    "apply": "Εφαρμογή",
+    "reset": "Επαναφορά",
+    "menu": "Μενού"
+  },
+  "Auth": {
+    "signIn": "Σύνδεση",
+    "signOut": "Αποσύνδεση",
+    "signUp": "Εγγραφή",
+    "signingIn": "Σύνδεση...",
+    "email": "Email",
+    "password": "Κωδικός πρόσβασης",
+    "signInTitle": "Σύνδεση",
+    "signInDescription": "Επιλέξτε μέθοδο σύνδεσης στο λογαριασμό σας",
+    "signInWithCredentials": "Σύνδεση με διαπιστευτήρια",
+    "dontHaveAccount": "Δεν έχετε λογαριασμό;",
+    "alreadyHaveAccount": "Έχετε ήδη λογαριασμό;"
+  },
+  "Navigation": {
+    "home": "Αρχική",
+    "products": "Προϊόντα",
+    "cart": "Καλάθι",
+    "search": "Αναζήτηση",
+    "categories": "Κατηγορίες"
+  },
   "HomePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page"
+    "title": "Γεια σου κόσμε!",
+    "about": "Πηγαίνετε στη σελίδα σχετικά με εμάς",
+    "newestArrivals": "Νεότερες αφίξεις",
+    "viewAllProducts": "Προβολή όλων των προϊόντων",
+    "featuredProducts": "Προτεινόμενα προϊόντα"
   },
   "AdminNav": {
-    "overview": "Dashboard",
-    "products": "Products",
-    "orders": "Orders",
-    "users": "Users"
+    "overview": "Επισκόπηση",
+    "products": "Προϊόντα",
+    "orders": "Παραγγελίες",
+    "users": "Χρήστες"
+  },
+  "Products": {
+    "title": "Προϊόντα",
+    "create": "Δημιουργία προϊόντος",
+    "edit": "Επεξεργασία προϊόντος",
+    "delete": "Διαγραφή προϊόντος",
+    "noProductsFound": "Δεν βρέθηκαν προϊόντα",
+    "filteredBy": "Φιλτράρισμα κατά",
+    "removeFilter": "Αφαίρεση φίλτρου",
+    "stock": "Απόθεμα",
+    "category": "Κατηγορία",
+    "rating": "Αξιολόγηση",
+    "price": "Τιμή",
+    "name": "Όνομα",
+    "actions": "Ενέργειες",
+    "id": "ID"
+  },
+  "Cart": {
+    "title": "Καλάθι αγορών",
+    "orderSummary": "Περίληψη παραγγελίας",
+    "addToCart": "Προσθήκη στο καλάθι",
+    "removeFromCart": "Αφαίρεση από καλάθι",
+    "cart": "Καλάθι",
+    "emptyCart": "Το καλάθι σας είναι άδειο",
+    "subtotal": "Υποσύνολο",
+    "total": "Σύνολο",
+    "checkout": "Ολοκλήρωση παραγγελίας"
+  },
+  "DeleteDialog": {
+    "title": "Είστε απολύτως σίγουροι;",
+    "description": "Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.",
+    "deleting": "Διαγραφή...",
+    "confirmDelete": "Διαγραφή"
+  },
+  "Forms": {
+    "required": "Αυτό το πεδίο είναι υποχρεωτικό",
+    "invalidEmail": "Παρακαλώ εισάγετε έγκυρο email",
+    "passwordTooShort": "Ο κωδικός πρόσβασης πρέπει να έχει τουλάχιστον 6 χαρακτήρες",
+    "passwordMismatch": "Οι κωδικοί πρόσβασης δεν ταιριάζουν"
+  },
+  "Toast": {
+    "success": "Επιτυχία",
+    "error": "Σφάλμα",
+    "warning": "Προειδοποίηση",
+    "info": "Πληροφορία"
+  },
+  "Pagination": {
+    "previous": "Προηγούμενο",
+    "next": "Επόμενο",
+    "page": "Σελίδα",
+    "of": "από",
+    "showing": "Εμφάνιση",
+    "results": "αποτελεσμάτων"
+  },
+  "Search": {
+    "placeholder": "Αναζήτηση προϊόντων...",
+    "noResults": "Δεν βρέθηκαν αποτελέσματα",
+    "searchResults": "Αποτελέσματα αναζήτησης"
   }
 }

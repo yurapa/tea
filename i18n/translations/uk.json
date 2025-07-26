@@ -1,12 +1,116 @@
 {
+  "Common": {
+    "loading": "Завантаження...",
+    "error": "Помилка",
+    "submit": "Відправити",
+    "cancel": "Скасувати",
+    "delete": "Видалити",
+    "edit": "Редагувати",
+    "create": "Створити",
+    "save": "Зберегти",
+    "close": "Закрити",
+    "yes": "Так",
+    "no": "Ні",
+    "confirm": "Підтвердити",
+    "back": "Назад",
+    "next": "Далі",
+    "previous": "Попередній",
+    "search": "Пошук",
+    "filter": "Фільтр",
+    "clear": "Очистити",
+    "apply": "Застосувати",
+    "reset": "Скинути",
+    "menu": "Меню"
+  },
+  "Auth": {
+    "signIn": "Увійти",
+    "signOut": "Вийти",
+    "signUp": "Зареєструватися",
+    "signingIn": "Вхід...",
+    "email": "Електронна пошта",
+    "password": "Пароль",
+    "signInTitle": "Вхід",
+    "signInDescription": "Оберіть спосіб входу до вашого акаунту",
+    "signInWithCredentials": "Увійти з обліковими даними",
+    "dontHaveAccount": "Немає акаунту?",
+    "alreadyHaveAccount": "Вже маєте акаунт?"
+  },
+  "Navigation": {
+    "home": "Головна",
+    "products": "Товари",
+    "cart": "Кошик",
+    "search": "Пошук",
+    "categories": "Категорії"
+  },
   "HomePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page"
+    "title": "Привіт світ!",
+    "about": "Перейти на сторінку про нас",
+    "newestArrivals": "Новинки",
+    "viewAllProducts": "Переглянути всі товари",
+    "featuredProducts": "Рекомендовані товари"
   },
   "AdminNav": {
     "overview": "Огляд",
-    "products": "Продукти",
+    "products": "Товари",
     "orders": "Замовлення",
     "users": "Користувачі"
+  },
+  "Products": {
+    "title": "Товари",
+    "create": "Створити товар",
+    "edit": "Редагувати товар",
+    "delete": "Видалити товар",
+    "noProductsFound": "Товари не знайдено",
+    "filteredBy": "Відфільтровано за",
+    "removeFilter": "Прибрати фільтр",
+    "stock": "Залишок",
+    "category": "Категорія",
+    "rating": "Рейтинг",
+    "price": "Ціна",
+    "name": "Назва",
+    "actions": "Дії",
+    "id": "ID"
+  },
+  "Cart": {
+    "title": "Кошик для покупок",
+    "orderSummary": "Підсумок замовлення",
+    "addToCart": "Додати до кошика",
+    "removeFromCart": "Видалити з кошика",
+    "cart": "Кошик",
+    "emptyCart": "Ваш кошик порожній",
+    "subtotal": "Проміжний підсумок",
+    "total": "Всього",
+    "checkout": "Оформити замовлення"
+  },
+  "DeleteDialog": {
+    "title": "Ви абсолютно впевнені?",
+    "description": "Цю дію неможливо відмінити.",
+    "deleting": "Видалення...",
+    "confirmDelete": "Видалити"
+  },
+  "Forms": {
+    "required": "Це поле обов'язкове",
+    "invalidEmail": "Будь ласка, введіть дійсну електронну пошту",
+    "passwordTooShort": "Пароль повинен містити щонайменше 6 символів",
+    "passwordMismatch": "Паролі не співпадають"
+  },
+  "Toast": {
+    "success": "Успіх",
+    "error": "Помилка",
+    "warning": "Попередження",
+    "info": "Інформація"
+  },
+  "Pagination": {
+    "previous": "Попередній",
+    "next": "Наступний",
+    "page": "Сторінка",
+    "of": "з",
+    "showing": "Показано",
+    "results": "результатів"
+  },
+  "Search": {
+    "placeholder": "Пошук товарів...",
+    "noResults": "Результатів не знайдено",
+    "searchResults": "Результати пошуку"
   }
 }
