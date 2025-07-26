@@ -1,8 +1,9 @@
 import { getRequestConfig } from 'next-intl/server';
 
-import { Locale, routing } from '@/i18n/routing';
+import { routing } from '@/i18n/routing';
 import { getUserLocale } from '@/i18n/locale-cookie';
 import { getMessagesForLocale } from '@/i18n/messages';
+import { type LocaleCode, isValidLocale } from '@/i18n/locale-config';
 
 export default getRequestConfig(async ({ requestLocale }) => {
   let locale = await requestLocale;
@@ -11,12 +12,12 @@ export default getRequestConfig(async ({ requestLocale }) => {
     locale = await getUserLocale();
   }
 
-  if (!locale || !routing.locales.includes(locale as Locale)) {
+  if (!locale || !isValidLocale(locale)) {
     locale = routing.defaultLocale;
   }
 
   return {
-    locale,
+    locale: locale as LocaleCode,
     messages: await getMessagesForLocale(locale),
   };
 });

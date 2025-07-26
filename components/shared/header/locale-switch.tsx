@@ -5,6 +5,7 @@ import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from '@/i18n/navigation';
 import { useState } from 'react';
 
+import { localeConfig, type LocaleCode } from '@/i18n/locale-config';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -13,7 +14,6 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { CONFIG } from '@/lib/constants';
 
 const LocaleSwitch = () => {
   const router = useRouter();
@@ -23,7 +23,7 @@ const LocaleSwitch = () => {
 
   const handleLocaleChange = (newLocale: string) => {
     setValue(newLocale);
-    router.replace(pathname, { locale: newLocale });
+    router.replace(pathname, { locale: newLocale as LocaleCode });
   };
 
   return (
@@ -41,7 +41,7 @@ const LocaleSwitch = () => {
 
       <DropdownMenuContent align="end">
         <DropdownMenuRadioGroup value={value} onValueChange={handleLocaleChange}>
-          {Object.entries(CONFIG.i18n.locales).map(([code, { label }]) => (
+          {Object.entries(localeConfig.locales).map(([code, { label }]) => (
             <DropdownMenuRadioItem key={code} value={code}>
               {label}
             </DropdownMenuRadioItem>
