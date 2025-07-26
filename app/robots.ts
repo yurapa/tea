@@ -5,6 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
+      disallow: ['/admin/', '/user/', '/profile/', '/order/', '/payment-method/', '/place-order/'],
     },
     sitemap: 'https://teavibe.store/sitemap.xml',
   };
