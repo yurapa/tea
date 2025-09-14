@@ -33,6 +33,16 @@ const PUBLIC_PATHS = [
   '/ru/sign-up',
   '/el/sign-up',
   '/uk/sign-up',
+  '/cart',
+  '/en/cart',
+  '/ru/cart',
+  '/el/cart',
+  '/uk/cart',
+  '/search',
+  '/en/search',
+  '/ru/search',
+  '/el/search',
+  '/uk/search',
 ];
 
 export default auth((req) => {
