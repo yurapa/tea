@@ -1,5 +1,7 @@
 import { MetadataRoute } from 'next';
 
+import { SERVER_URL } from '@/lib/constants';
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
@@ -7,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/admin/', '/user/', '/profile/', '/order/', '/payment-method/', '/place-order/'],
     },
-    sitemap: 'https://teavibe.store/sitemap.xml',
+    sitemap: `${SERVER_URL}/sitemap.xml`,
   };
 }

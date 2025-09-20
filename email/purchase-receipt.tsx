@@ -13,9 +13,12 @@ import {
   Text,
 } from '@react-email/components';
 
+import { SERVER_URL } from '@/lib/constants';
 import { Order } from '@/types';
 import { formatCurrency } from '@/lib/utils';
 import sampleDataProducts from '@/db/sample-data-products';
+
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 require('dotenv').config();
 
 type OrderInformationProps = {
@@ -101,7 +104,7 @@ export default function PurchaseReceiptEmail({ order }: OrderInformationProps) {
                       alt={item.name}
                       className="rounded"
                       src={
-                        item.image.startsWith('/') ? `${process.env.NEXT_PUBLIC_SERVER_URL}${item.image}` : item.image
+                        item.image.startsWith('/') ? `${SERVER_URL}${item.image}` : item.image
                       }
                     />
                   </Column>

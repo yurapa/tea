@@ -15,3 +15,5 @@ model Product {
   OrderItem   OrderItem[]
   Review      Review[]
 }
+
+//@TODO: category as a separate table with parent category
