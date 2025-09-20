@@ -8,6 +8,12 @@ import { formatCurrency, formatDateTime, formatNumber } from '@/lib/utils';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Charts from '@/app/[locale]/admin/overview/charts';
+import { Order } from '@/types';
+
+// Type for latest orders with limited user info
+type LatestOrder = Omit<Order, 'user' | 'orderItems' | 'paymentResult'> & {
+  user: { name: string };
+};
 
 export const metadata: Metadata = {
   title: 'Admin Dashboard',
@@ -89,7 +95,7 @@ const AdminOverviewPage = async () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {summary.latestOrders.map((order) => (
+                {summary.latestOrders.map((order: LatestOrder) => (
                   <TableRow key={order.id}>
                     <TableCell>{order?.user?.name ? order.user.name : 'Deleted user'}</TableCell>
                     <TableCell>{formatDateTime(order.createdAt).dateOnly}</TableCell>

@@ -12,7 +12,7 @@ import CheckoutSteps from '@/components/shared/checkout-steps';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { ShippingAddress } from '@/types';
+import { ShippingAddress, CartItem } from '@/types';
 import PlaceOrderForm from './place-order-form';
 import { PRICE_TAX_RATE } from '@/lib/constants';
 
@@ -81,7 +81,7 @@ const placeOrderPage = async () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {cart.items.map((item) => (
+                  {cart.items.map((item: CartItem) => (
                     <TableRow key={item.slug}>
                       <TableCell>
                         <Link href={`/product/${item.slug}`} className="flex items-center">

@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import Pagination from '@/components/shared/pagination';
 import DeleteDialog from '@/components/shared/delete-dialog';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { IUser } from '@/types';
 
 export const metadata: Metadata = {
   title: 'Admin Users',
@@ -52,7 +53,7 @@ const AdminUserPage = async (props: {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {users?.data.map((user) => (
+            {users?.data.map((user: IUser) => (
               <TableRow key={user.id}>
                 <TableCell>{formatId(user.id)}</TableCell>
                 <TableCell>{user.name}</TableCell>

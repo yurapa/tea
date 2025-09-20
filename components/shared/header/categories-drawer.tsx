@@ -5,6 +5,12 @@ import { getAllCategories } from '@/lib/actions/product.actions';
 import { Button } from '@/components/ui/button';
 import { Drawer, DrawerClose, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from '@/components/ui/drawer';
 
+// Type for category object returned by groupBy
+interface Category {
+  category: string;
+  _count: number;
+}
+
 const CategoriesDrawer = async () => {
   const categories = await getAllCategories();
 
@@ -19,7 +25,7 @@ const CategoriesDrawer = async () => {
         <DrawerHeader>
           <DrawerTitle>Select a category</DrawerTitle>
           <div className="mt-4 space-y-1">
-            {categories.map((x) => (
+            {categories.map((x: Category) => (
               <Button className="w-full justify-start" variant="ghost" key={x.category} asChild>
                 <DrawerClose asChild>
                   <Link href={`/search?category=${x.category}`}>

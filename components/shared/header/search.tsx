@@ -5,6 +5,12 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
+// Type for category object returned by groupBy
+interface Category {
+  category: string;
+  _count: number;
+}
+
 const Search = async () => {
   const categories = await getAllCategories();
 
@@ -19,7 +25,7 @@ const Search = async () => {
             <SelectItem key={'All'} value={'all'}>
               All
             </SelectItem>
-            {categories.map((x) => (
+            {categories.map((x: Category) => (
               <SelectItem key={x.category} value={x.category}>
                 {x.category}
               </SelectItem>

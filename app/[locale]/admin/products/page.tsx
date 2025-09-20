@@ -9,6 +9,16 @@ import Pagination from '@/components/shared/pagination';
 import DeleteDialog from '@/components/shared/delete-dialog';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
+type Product = {
+  id: string;
+  name: string;
+  slug: string;
+  category: string;
+  price: string; // Extended prisma client converts this to string
+  stock: number;
+  rating: string; // Extended prisma client converts this to string
+};
+
 const AdminProductsPage = async (props: {
   searchParams: Promise<{
     page: string;
@@ -66,7 +76,7 @@ const AdminProductsPage = async (props: {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {products?.data.map((product) => (
+            {products?.data.map((product: Product) => (
               <TableRow key={product.id}>
                 <TableCell>
                   <Link href={`/product/${product.slug}`}>{formatId(product.id)}</Link>

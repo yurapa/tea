@@ -39,3 +39,17 @@ export type Review = z.infer<typeof insertReviewSchema> & {
   createdAt: Date;
   user?: { name: string };
 };
+
+export interface IUser {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  password?: string | null;
+  emailVerified?: Date | null;
+  image?: string | null;
+  address?: Record<string, unknown> | null;
+  paymentMethod?: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+}
