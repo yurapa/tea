@@ -5,6 +5,7 @@ import { ThemeProvider } from 'next-themes';
 import { getMessages } from 'next-intl/server';
 import { Locale } from '@/i18n/routing';
 import { NextIntlClientProvider } from 'next-intl';
+import { GoogleTagManager } from '@next/third-parties/google'
 
 import { localeConfig, getAllLocales, isValidLocale } from '@/i18n/locale-config';
 import { Toaster } from '@/components/ui/toaster';
@@ -23,6 +24,7 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
 }>) {
   const { locale } = await params;
+  const isGTM = !!process.env.NEXT_PUBLIC_GTM_ID;
 
   if (!isValidLocale(locale)) {
     notFound();
@@ -42,6 +44,7 @@ export default async function RootLayout({
           />
         ))}
         <link rel="alternate" hrefLang="x-default" href={`${SERVER_URL}/`} />
+        {isGTM && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID as string} />}
       </head>
       <body className={`${inter.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
