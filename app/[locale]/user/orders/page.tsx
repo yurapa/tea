@@ -6,6 +6,7 @@ import { formatCurrency, formatDateTime, formatId } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import Pagination from '@/components/shared/pagination';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Order } from '@/types';
 
 export const metadata: Metadata = {
   title: 'My Orders',
@@ -33,7 +34,7 @@ const OrdersPage = async (props: { searchParams: Promise<{ page: string }> }) =>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {orders.data.map((order) => (
+            {orders.data.map((order: Order) => (
               <TableRow key={order.id}>
                 <TableCell>{formatId(order.id)}</TableCell>
                 <TableCell>{formatDateTime(order.createdAt).dateTime}</TableCell>

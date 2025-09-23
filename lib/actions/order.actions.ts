@@ -58,7 +58,7 @@ export async function createOrder() {
       totalPrice: cart.totalPrice,
     });
 
-    const insertedOrderId = await prisma.$transaction(async (tx) => {
+    const insertedOrderId = await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
       const insertedOrder = await tx.order.create({ data: order });
       for (const item of cart.items as CartItem[]) {
         await tx.orderItem.create({
@@ -215,7 +215,7 @@ export async function updateOrderToPaid({
   if (order.isPaid) throw new Error('Order is already paid');
 
   // Transaction to update the order and update the product quantities
-  await prisma.$transaction(async (tx) => {
+  await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
     // Update all item quantities in the database
     for (const item of order.orderItems) {
       await tx.product.update({
@@ -300,7 +300,7 @@ export async function getOrderSummary() {
     Array<{ month: string; totalSales: Prisma.Decimal }>
   >`SELECT to_char("createdAt", 'MM/YY') as "month", sum("totalPrice") as "totalSales" FROM "Order" GROUP BY to_char("createdAt", 'MM/YY')`;
 
-  const salesData: SalesDataType = salesDataRaw.map((entry) => ({
+  const salesData: SalesDataType = salesDataRaw.map((entry: { month: string; totalSales: Prisma.Decimal }) => ({
     month: entry.month,
     totalSales: Number(entry.totalSales), // Convert Decimal to number
   }));

@@ -2,6 +2,7 @@
 
 import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
+import { Prisma } from '@prisma/client';
 
 import { auth } from '@/auth';
 import { prisma } from '@/db/prisma';
@@ -35,7 +36,7 @@ export async function createUpdateReview(data: z.infer<typeof insertReviewSchema
     });
 
     // If review exists, update it, otherwise create a new one
-    await prisma.$transaction(async (tx) => {
+    await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
       if (reviewExists) {
         await tx.review.update({
           where: { id: reviewExists.id },

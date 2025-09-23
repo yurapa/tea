@@ -4,6 +4,7 @@ import { getAllCategories, getAllProducts } from '@/lib/actions/product.actions'
 import { Button } from '@/components/ui/button';
 import Pagination from '@/components/shared/pagination';
 import ProductCard from '@/components/shared/product/product-card';
+import { Product } from '@/types';
 
 const prices = [
   {
@@ -115,7 +116,7 @@ const SearchPage = async (props: {
                 Any
               </Link>
             </li>
-            {categories.map((x) => (
+            {categories.map((x: { category: string; _count: { _all: number } }) => (
               <li key={x.category}>
                 <Link href={getFilterUrl({ c: x.category })} className={`${category === x.category && 'font-bold'}`}>
                   {x.category}
@@ -190,7 +191,7 @@ const SearchPage = async (props: {
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           {products!.data.length === 0 && <div>No product found</div>}
-          {products!.data.map((product) => (
+          {products!.data.map((product: Product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>

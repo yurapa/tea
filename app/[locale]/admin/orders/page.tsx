@@ -8,6 +8,12 @@ import { Button } from '@/components/ui/button';
 import Pagination from '@/components/shared/pagination';
 import DeleteDialog from '@/components/shared/delete-dialog';
 import { Table, TableHeader, TableRow, TableHead, TableCell, TableBody } from '@/components/ui/table';
+import { Order } from '@/types';
+
+// Type for admin orders with limited user info
+type AdminOrder = Omit<Order, 'user' | 'orderItems' | 'paymentResult'> & {
+  user: { name: string };
+};
 
 export const metadata: Metadata = {
   title: 'Admin Orders',
@@ -37,7 +43,7 @@ const AdminOrdersPage = async (props: { searchParams: Promise<{ page: string; qu
         {searchText && (
           <div>
             Filtered by <i>&quot;{searchText}&quot;</i>{' '}
-            <Link href={`/app/%5Blocale%5D/admin/orders`}>
+            <Link href={`/admin/orders`}>
               <Button variant="outline" size="sm">
                 Remove Filter
               </Button>
@@ -59,7 +65,7 @@ const AdminOrdersPage = async (props: { searchParams: Promise<{ page: string; qu
             </TableRow>
           </TableHeader>
           <TableBody>
-            {orders.data.map((order) => (
+            {orders.data.map((order: AdminOrder) => (
               <TableRow key={order.id}>
                 <TableCell>{formatId(order.id)}</TableCell>
                 <TableCell>{formatDateTime(order.createdAt).dateTime}</TableCell>
