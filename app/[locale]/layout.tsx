@@ -1,20 +1,33 @@
 import React from 'react';
+import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { ThemeProvider } from 'next-themes';
 import { getMessages } from 'next-intl/server';
-import { Locale } from '@/i18n/routing';
 import { NextIntlClientProvider } from 'next-intl';
 import { GoogleTagManager } from '@next/third-parties/google'
 
-import { localeConfig, getAllLocales, isValidLocale } from '@/i18n/locale-config';
+import { Locale } from '@/i18n/routing';
+import { isValidLocale } from '@/i18n/locale-config';
 import { Toaster } from '@/components/ui/toaster';
 import { GoogleAnalytics } from '@/components/analytics/google-analytics';
-import { SERVER_URL } from '@/lib/constants';
+import { APP_DESCRIPTION, APP_NAME, SERVER_URL } from '@/lib/constants';
 
 const inter = Inter({
   subsets: ['latin'],
 });
+
+export const metadata: Metadata = {
+  title: {
+    template: `%s | ${APP_NAME}`,
+    default: APP_NAME,
+  },
+  description: APP_DESCRIPTION,
+  metadataBase: new URL(SERVER_URL),
+  icons: {
+    icon: '/favicon.ico',
+  },
+};
 
 export default async function RootLayout({
   children,
@@ -34,18 +47,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <head>
-        {getAllLocales().map((localeCode) => (
-          <link
-            key={localeCode}
-            rel="alternate"
-            hrefLang={localeCode}
-            href={`${SERVER_URL}/${localeCode === localeConfig.defaultLocale ? '' : localeCode}`}
-          />
-        ))}
-        <link rel="alternate" hrefLang="x-default" href={`${SERVER_URL}/`} />
-        {isGTM && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID as string} />}
-      </head>
+      {isGTM && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID as string} />}
       <body className={`${inter.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <NextIntlClientProvider locale={locale as Locale} messages={messages}>
