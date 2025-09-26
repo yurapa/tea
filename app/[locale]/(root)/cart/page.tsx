@@ -5,6 +5,15 @@ import CartTable from './cart-table';
 
 export const metadata: Metadata = {
   title: 'Shopping Cart',
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en': '/cart',
+      'ru': '/ru/cart',
+      'uk': '/uk/cart',
+      'el': '/el/cart',
+    },
+  },
 };
 
 const CartPage = async () => {
