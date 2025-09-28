@@ -17,44 +17,45 @@ const getLocale = (pathname: string): string => {
   return Object.entries(LOCALE_PREFIXES).find(([_, prefix]) => pathname.startsWith(prefix))?.[0] || 'en';
 };
 
-const PUBLIC_PATHS = [
-  '/',
-  '/en',
-  '/el',
-  '/uk',
-  '/ru',
-  '/sign-in',
-  '/en/sign-in',
-  '/ru/sign-in',
-  '/el/sign-in',
-  '/uk/sign-in',
-  '/sign-up',
-  '/en/sign-up',
-  '/ru/sign-up',
-  '/el/sign-up',
-  '/uk/sign-up',
-  '/cart',
-  '/en/cart',
-  '/ru/cart',
-  '/el/cart',
-  '/uk/cart',
-  '/search',
-  '/en/search',
-  '/ru/search',
-  '/el/search',
-  '/uk/search',
+// Define public pages that don't require authentication
+const PUBLIC_PAGE_TYPES = [
+  '',          // home page
+  'sign-in',
+  'sign-up',
+  'cart',
+  'search',
+  'product',   // all product pages
 ];
 
+// Check if path is public (works with all locale prefixes)
+const isPublicPath = (pathname: string): boolean => {
+  // Remove locale prefix if present
+  const pathWithoutLocale = pathname.replace(/^\/(en|el|uk|ru)/, '');
+  
+  // Check if it's the root or a locale root
+  if (pathname === '/' || /^\/(en|el|uk|ru)$/.test(pathname)) {
+    return true;
+  }
+  
+  // Check if path starts with any public page type
+  return PUBLIC_PAGE_TYPES.some(type => {
+    if (type === '') return false; // Skip empty string (already handled above)
+    return pathWithoutLocale === `/${type}` || 
+           pathWithoutLocale.startsWith(`/${type}/`);
+  });
+};
+
 export default auth((req) => {
-  const isPublicPage = PUBLIC_PATHS.includes(req.nextUrl.pathname);
-  const isLogoutPage = req.nextUrl.pathname.includes('signout');
+  const pathname = req.nextUrl.pathname;
+  const isPublicPage = isPublicPath(pathname);
+  const isLogoutPage = pathname.includes('signout');
 
   if (isPublicPage || isLogoutPage) {
     return intlMiddleware(req);
   }
 
   if (!req.auth) {
-    const locale = getLocale(req.nextUrl.pathname);
+    const locale = getLocale(pathname);
     const signInUrl = new URL(`/${locale}/sign-in`, req.nextUrl);
     signInUrl.searchParams.set('callbackUrl', req.nextUrl.href);
     return Response.redirect(signInUrl);
