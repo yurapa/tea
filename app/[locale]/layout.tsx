@@ -5,13 +5,13 @@ import { notFound } from 'next/navigation';
 import { ThemeProvider } from 'next-themes';
 import { getMessages } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
+import { GoogleTagManager } from '@next/third-parties/google'
 
 import { Locale } from '@/i18n/routing';
 import { isValidLocale } from '@/i18n/locale-config';
 import { Toaster } from '@/components/ui/toaster';
 import { GoogleAnalytics } from '@/components/analytics/google-analytics';
 import { APP_DESCRIPTION, APP_NAME, SERVER_URL } from '@/lib/constants';
-import { GTM } from '@/components/analytics/gtm';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -37,6 +37,7 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
 }>) {
   const { locale } = await params;
+  const isGTM = !!process.env.NEXT_PUBLIC_GTM_ID;
 
   if (!isValidLocale(locale)) {
     notFound();
@@ -46,8 +47,8 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <GTM />
-      <body className={`${inter.className} antialiased`}>
+    {isGTM && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID as string} />}
+    <body className={`${inter.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <NextIntlClientProvider locale={locale as Locale} messages={messages}>
             {children}
