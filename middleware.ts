@@ -2,6 +2,7 @@ import NextAuth from 'next-auth';
 import createMiddleware from 'next-intl/middleware';
 import { routing } from '@/i18n/routing';
 import { authConfig } from '@/auth.config';
+import { gtmMiddleware } from './middleware-gtm';
 
 const { auth } = NextAuth(authConfig);
 const intlMiddleware = createMiddleware(routing);
@@ -46,6 +47,10 @@ const isPublicPath = (pathname: string): boolean => {
 };
 
 export default auth((req) => {
+  // Check GTM verification first (minimal overhead)
+  const gtmResponse = gtmMiddleware(req);
+  if (gtmResponse) return gtmResponse;
+  
   const pathname = req.nextUrl.pathname;
   const isPublicPage = isPublicPath(pathname);
   const isLogoutPage = pathname.includes('signout');
@@ -65,5 +70,8 @@ export default auth((req) => {
 });
 
 export const config = {
-  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)'],
+  matcher: [
+    // Match all paths except static files and api routes
+    '/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+  ],
 };
