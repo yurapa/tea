@@ -18,6 +18,7 @@ import {
   updateUserSchema,
 } from '@/lib/validator';
 import { ShippingAddress } from '@/types';
+import { sendLoginWelcome } from '@/email';
 
 export async function signInWithCredentials(prevState: unknown, formData: FormData) {
   try {
@@ -28,6 +29,12 @@ export async function signInWithCredentials(prevState: unknown, formData: FormDa
     });
 
     await signIn('credentials', user);
+
+    await sendLoginWelcome({
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      email: formData.get('email'),
+    })
 
     return { success: true, message: 'Signed in successfully' };
   } catch (error) {

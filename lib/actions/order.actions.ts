@@ -250,7 +250,7 @@ export async function updateOrderToPaid({
   }
 
   // Send the purchase receipt email with the updated order
-  sendPurchaseReceipt({
+  await sendPurchaseReceipt({
     order: {
       ...updatedOrder,
       shippingAddress: updatedOrder.shippingAddress as ShippingAddress,
