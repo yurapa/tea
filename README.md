@@ -34,7 +34,7 @@ A full-featured Ecommerce website built with Next.js, TypeScript, PostgreSQL and
   - `react-email`: a library for creating email templates in React
   - `@react-email/components`: a set of pre-built components
 - Internationalization:
-  - `next-intl`
+  - [next-intl](https://next-intl.dev/docs/routing/configuration)
 
 ### Getting Started
 

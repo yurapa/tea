@@ -3,6 +3,7 @@
 import { useActionState } from 'react';
 import { useFormStatus } from 'react-dom';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 
 import { signUp } from '@/lib/actions/user.actions';
@@ -12,6 +13,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
 const SignUpForm = () => {
+  const t = useTranslations('Auth');
   const [data, action] = useActionState(signUp, {
     message: '',
     success: false,
@@ -24,7 +26,7 @@ const SignUpForm = () => {
     const { pending } = useFormStatus();
     return (
       <Button disabled={pending} className="w-full" variant="default">
-        {pending ? 'Submitting...' : 'Sign Up'}
+        {pending ? `${t('signUp')}...` : t('signUp')}
       </Button>
     );
   };
@@ -34,7 +36,7 @@ const SignUpForm = () => {
       <input type="hidden" name="callbackUrl" value={callbackUrl} />
       <div className="space-y-6">
         <div>
-          <Label htmlFor="name">Name</Label>
+          <Label htmlFor="name">{t('name')}</Label>
           <Input
             id="name"
             name="name"
@@ -45,7 +47,7 @@ const SignUpForm = () => {
           />
         </div>
         <div>
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email">{t('email')}</Label>
           <Input
             id="email"
             name="email"
@@ -56,7 +58,7 @@ const SignUpForm = () => {
           />
         </div>
         <div>
-          <Label htmlFor="password">Password</Label>
+          <Label htmlFor="password">{t('password')}</Label>
           <Input
             id="password"
             name="password"
@@ -67,7 +69,7 @@ const SignUpForm = () => {
           />
         </div>
         <div>
-          <Label htmlFor="confirmPassword">Confirm Password</Label>
+          <Label htmlFor="confirmPassword">{t('passwordConfirm')}</Label>
           <Input
             id="confirmPassword"
             name="confirmPassword"
@@ -84,9 +86,9 @@ const SignUpForm = () => {
         {!data.success && <div className="text-center text-destructive">{data.message}</div>}
 
         <div className="text-center text-sm text-muted-foreground">
-          Already have an account?{' '}
+          {t('alreadyHaveAccount')}{' '}
           <Link target="_self" className="link" href={`/sign-in?callbackUrl=${callbackUrl}`}>
-            Sign In
+            {t('signIn')}
           </Link>
         </div>
       </div>
