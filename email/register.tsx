@@ -15,26 +15,35 @@ import {
 
 import { APP_NAME, SERVER_URL } from '@/lib/constants';
 
-export const LoginEmail = () => (
+interface SignupWelcomeEmailProps {
+  name: string;
+}
+
+export const RegisterWelcomeEmail = ({ name }: SignupWelcomeEmailProps) => (
   <Html>
     <Head />
     <Body style={main}>
-      <Preview>Confirm your email address</Preview>
+      <Preview>Welcome to {APP_NAME}! Your account has been created successfully</Preview>
       <Container style={container}>
         <Section style={logoContainer}>
           <Img src={`${SERVER_URL}/images/logo.jpeg`} width="120" height="120" alt="TeaVibe" />
         </Section>
-        <Heading style={h1}>You Are Logged In</Heading>
+        <Heading style={h1}>Welcome to {APP_NAME}, {name}!</Heading>
         <Text style={heroText}>
-          You have successfully logged in on {APP_NAME} platform from a known device.
+          Thank you for joining {APP_NAME}! Your account has been successfully created and you&apos;re all set to
+          explore our premium tea collection.
         </Text>
 
-        <Section style={codeBox}>
-          <Text style={confirmationCodeText}>{APP_NAME}</Text>
+        <Section style={benefitsBox}>
+          <Text style={benefitsTitle}>What&apos;s next?</Text>
+          <Text style={benefitItem}>🍵 Browse our exclusive tea collection</Text>
+          <Text style={benefitItem}>🎁 Enjoy special member-only discounts</Text>
+          <Text style={benefitItem}>📦 Track your orders in real-time</Text>
+          <Text style={benefitItem}>⭐ Share your tea experiences with reviews</Text>
         </Section>
 
         <Text style={text}>
-          If you didn&apos;t request this email, there&apos;s nothing to worry about, you can safely ignore it.
+          If you have any questions, our support team is always here to help. Happy tea shopping!
         </Text>
 
         <Section>
@@ -48,7 +57,7 @@ export const LoginEmail = () => (
                   src={`${SERVER_URL}/static/slack-twitter.png`}
                   width="32"
                   height="32"
-                  alt="Slack"
+                  alt="Twitter"
                   style={socialMediaIcon}
                 />
               </Link>
@@ -57,7 +66,7 @@ export const LoginEmail = () => (
                   src={`${SERVER_URL}/static/slack-facebook.png`}
                   width="32"
                   height="32"
-                  alt="Slack"
+                  alt="Facebook"
                   style={socialMediaIcon}
                 />
               </Link>
@@ -66,7 +75,7 @@ export const LoginEmail = () => (
                   src={`${SERVER_URL}/static/slack-linkedin.png`}
                   width="32"
                   height="32"
-                  alt="Slack"
+                  alt="LinkedIn"
                   style={socialMediaIcon}
                 />
               </Link>
@@ -75,30 +84,19 @@ export const LoginEmail = () => (
         </Section>
 
         <Section>
-          <Link style={footerLink} href="https://slackhq.com" target="_blank" rel="noopener noreferrer">
-            Our blog
+          <Link style={footerLink} href={`${SERVER_URL}/about`} target="_blank" rel="noopener noreferrer">
+            About Us
           </Link>
           &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-          <Link style={footerLink} href="https://slack.com/legal" target="_blank" rel="noopener noreferrer">
-            Policies
+          <Link style={footerLink} href={`${SERVER_URL}/contact`} target="_blank" rel="noopener noreferrer">
+            Contact
           </Link>
           &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-          <Link style={footerLink} href="https://slack.com/help" target="_blank" rel="noopener noreferrer">
-            Help center
-          </Link>
-          &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-          <Link
-            style={footerLink}
-            href="https://slack.com/community"
-            target="_blank"
-            rel="noopener noreferrer"
-            data-auth="NotApplicable"
-            data-linkindex="6"
-          >
-            Slack Community
+          <Link style={footerLink} href={`${SERVER_URL}/help`} target="_blank" rel="noopener noreferrer">
+            Help Center
           </Link>
           <Text style={footerText}>
-            &copy; 2025 TeaVibe LTD, a Salesforce company. <br />
+            &copy; 2025 {APP_NAME}, a Premium Tea Company. <br />
             Larnaca, Cyprus <br />
             <br />
             All rights reserved.
@@ -109,7 +107,7 @@ export const LoginEmail = () => (
   </Html>
 );
 
-export default LoginEmail;
+export default RegisterWelcomeEmail;
 
 const footerText = {
   fontSize: '12px',
@@ -166,17 +164,25 @@ const heroText = {
   marginBottom: '30px',
 };
 
-const codeBox = {
+const benefitsBox = {
   background: 'rgb(245, 244, 245)',
   borderRadius: '4px',
   marginBottom: '30px',
-  padding: '40px 10px',
+  padding: '30px 20px',
 };
 
-const confirmationCodeText = {
-  fontSize: '30px',
-  textAlign: 'center' as const,
-  verticalAlign: 'middle',
+const benefitsTitle = {
+  fontSize: '20px',
+  fontWeight: '600',
+  marginBottom: '16px',
+  color: '#1d1c1d',
+};
+
+const benefitItem = {
+  fontSize: '16px',
+  lineHeight: '28px',
+  marginBottom: '8px',
+  color: '#000',
 };
 
 const text = {
