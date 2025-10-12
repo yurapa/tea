@@ -8,6 +8,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { authConfig } from '@/auth.config';
 import { prisma } from '@/db/prisma';
 import { compare } from '@/lib/encrypt';
+import { sendLoginWelcome, sendRegisterWelcome } from '@/email';
 
 export const config = {
   pages: {
@@ -94,6 +95,16 @@ export const config = {
                 data: { userId: user.id },
               });
             }
+          }
+
+          // Send welcome email after successful sign-in
+          if (trigger === 'signIn' && user.email) {
+            await sendLoginWelcome({ email: user.email });
+          }
+
+          // Send welcome email after successful sign-up
+          if (trigger === 'signUp' && user.email && user.name) {
+            await sendRegisterWelcome({ email: user.email, name: user.name });
           }
         }
       }
