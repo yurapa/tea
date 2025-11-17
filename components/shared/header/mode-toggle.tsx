@@ -19,6 +19,7 @@ const ModeToggle = () => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Required for hydration safety with next-themes
     setMounted(true);
   }, []);
 

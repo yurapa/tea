@@ -18,6 +18,7 @@ const AdminSearch = () => {
   const [queryValue, setQueryValue] = useState(searchParams.get('query') || '');
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Required for syncing with URL search params
     setQueryValue(searchParams.get('query') || '');
   }, [searchParams]);
 

@@ -18,7 +18,7 @@ import { Order } from '@/types';
 import { formatCurrency } from '@/lib/utils';
 import sampleDataProducts from '@/db/sample-data-products';
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports
+ 
 require('dotenv').config();
 
 type OrderInformationProps = {
