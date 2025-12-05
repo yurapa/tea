@@ -40,7 +40,7 @@ export const LoginEmail = () => (
         <Section>
           <Row style={footerLogos}>
             <Column style={{ width: '66%' }}>
-              <Img src={`${SERVER_URL}/images/logo.jpeg`} width="80" height="80" alt="TeaVibe" />
+              <Img src={`${SERVER_URL}/images/logo.jpeg`} width="60" height="60" alt="TeaVibe" />
             </Column>
             <Column align="right">
               <Link href="/">
@@ -91,14 +91,14 @@ export const LoginEmail = () => (
             style={footerLink}
             href="https://slack.com/community"
             target="_blank"
-            rel="noopener noreferrer"
+          rel="noopener noreferrer"
             data-auth="NotApplicable"
             data-linkindex="6"
           >
             Slack Community
           </Link>
           <Text style={footerText}>
-            &copy; 2025 TeaVibe LTD, a Salesforce company. <br />
+            &copy; 2025 TeaVibe House LTD<br />
             Larnaca, Cyprus <br />
             <br />
             All rights reserved.
@@ -148,6 +148,7 @@ const container = {
 };
 
 const logoContainer = {
+  textAlign: 'center' as const,
   marginTop: '32px',
 };
 
@@ -158,11 +159,13 @@ const h1 = {
   margin: '30px 0',
   padding: '0',
   lineHeight: '42px',
+  textAlign: 'center' as const,
 };
 
 const heroText = {
   fontSize: '20px',
   lineHeight: '28px',
+  textAlign: 'center' as const,
   marginBottom: '30px',
 };
 
