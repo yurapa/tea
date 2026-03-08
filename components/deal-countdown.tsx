@@ -35,6 +35,7 @@ const DealCountdown = () => {
 
   useEffect(() => {
     // Calculate initial time remaining on the client
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Required for client-side timer initialization
     setTime(calculateTimeRemaining(TARGET_DATE));
 
     const timerInterval = setInterval(() => {

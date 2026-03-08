@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import NextAuth from 'next-auth';
 import type { NextAuthConfig } from 'next-auth';
 import { cookies } from 'next/headers';

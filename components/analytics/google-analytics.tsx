@@ -1,7 +1,7 @@
 'use client';
 import Script from 'next/script';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 
 const googleAnalyticsId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID as string;
 
