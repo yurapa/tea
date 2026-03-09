@@ -43,4 +43,7 @@ yarn-error.log*
 next-env.d.ts
 
 # AI
+.claude
+.claude/
 CLAUDE.md
+/plans/

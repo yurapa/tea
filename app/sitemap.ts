@@ -80,7 +80,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
 
     // Add each product page
-    products.forEach((product) => {
+    products.forEach((product: { slug: string; createdAt: Date }) => {
       addUrlWithLocales(
         `/product/${product.slug}`,
         product.createdAt,
@@ -102,7 +102,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
 
     // Add category search pages
-    categories.forEach(({ category }) => {
+    categories.forEach(({ category }: { category: string }) => {
       // Convert category to URL-friendly slug
       const categorySlug = category
         .toLowerCase()
