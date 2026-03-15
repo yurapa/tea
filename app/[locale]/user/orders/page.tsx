@@ -19,18 +19,18 @@ const OrdersPage = async (props: { searchParams: Promise<{ page: string }> }) =>
   });
 
   return (
-    <div className="space-y-2">
-      <h2 className="h2-bold">Orders</h2>
-      <div className="overflow-x-auto">
+    <div className="space-y-4">
+      <h2 className="text-2xl font-bold text-foreground">Orders</h2>
+      <div className="overflow-x-auto rounded-xl border border-border bg-card">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>ID</TableHead>
-              <TableHead>DATE</TableHead>
-              <TableHead>TOTAL</TableHead>
-              <TableHead>PAID</TableHead>
-              <TableHead>DELIVERED</TableHead>
-              <TableHead>ACTIONS</TableHead>
+              <TableHead className="text-accent font-medium">ID</TableHead>
+              <TableHead className="text-accent font-medium">DATE</TableHead>
+              <TableHead className="text-accent font-medium">TOTAL</TableHead>
+              <TableHead className="text-accent font-medium">PAID</TableHead>
+              <TableHead className="text-accent font-medium">DELIVERED</TableHead>
+              <TableHead className="text-accent font-medium">ACTIONS</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>

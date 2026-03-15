@@ -1,25 +1,18 @@
 'use client';
 
-import React, { useTransition } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { PayPalButtons, PayPalScriptProvider, usePayPalScriptReducer } from '@paypal/react-paypal-js';
+import { CreditCard, MapPin, Package } from 'lucide-react';
 
 import { useToast } from '@/hooks/use-toast';
-import {
-  approvePayPalOrder,
-  createPayPalOrder,
-  deliverOrder,
-  updateOrderToPaidByCOD,
-} from '@/lib/actions/order.actions';
+import { approvePayPalOrder, createPayPalOrder } from '@/lib/actions/order.actions';
 import { PRICE_TAX_RATE } from '@/lib/constants';
 import { formatCurrency, formatDateTime, formatId } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Order } from '@/types';
 import StripePayment from './stripe-payment';
+import { MarkAsPaidButton, MarkAsDeliveredButton } from './order-action-buttons';
 
 const OrderDetailsTable = ({
   order,
@@ -33,210 +26,125 @@ const OrderDetailsTable = ({
   isSuperUser: boolean;
 }) => {
   const {
-    id,
-    shippingAddress,
-    orderItems,
-    itemsPrice,
-    taxPrice,
-    shippingPrice,
-    totalPrice,
-    paymentMethod,
-    isPaid,
-    paidAt,
-    isDelivered,
-    deliveredAt,
+    id, shippingAddress, orderItems, itemsPrice, taxPrice,
+    shippingPrice, totalPrice, paymentMethod, isPaid, paidAt, isDelivered, deliveredAt,
   } = order;
 
   const { toast } = useToast();
 
-  // Checks the loading status of the PayPal script
   function PrintLoadingState() {
     const [{ isPending, isRejected }] = usePayPalScriptReducer();
-    let status = '';
-
-    if (isPending) {
-      status = 'Loading PayPal...';
-    } else if (isRejected) {
-      status = 'Error in loading PayPal.';
-    }
-
-    return status;
+    if (isPending) return 'Loading PayPal...';
+    if (isRejected) return 'Error in loading PayPal.';
+    return null;
   }
 
   const handleCreatePayPalOrder = async () => {
     const res = await createPayPalOrder(order.id);
     if (!res.success) {
-      return toast({
-        description: res.message,
-        variant: 'destructive',
-      });
+      toast({ description: res.message, variant: 'destructive' });
+      return;
     }
-
     return res.data;
   };
 
   const handleApprovePayPalOrder = async (data: { orderID: string }) => {
     const res = await approvePayPalOrder(order.id, data);
-
-    toast({
-      description: res.message,
-      variant: res.success ? 'default' : 'destructive',
-    });
-  };
-
-  const MarkAsPaidButton = () => {
-    const [isPending, startTransition] = useTransition();
-    const { toast } = useToast();
-
-    return (
-      <Button
-        type="button"
-        disabled={isPending}
-        onClick={() =>
-          startTransition(async () => {
-            const res = await updateOrderToPaidByCOD(order.id);
-            toast({
-              variant: res.success ? 'default' : 'destructive',
-              description: res.message,
-            });
-          })
-        }
-      >
-        {isPending ? 'processing...' : 'Mark As Paid'}
-      </Button>
-    );
-  };
-
-  const MarkAsDeliveredButton = () => {
-    const [isPending, startTransition] = useTransition();
-    const { toast } = useToast();
-
-    return (
-      <Button
-        type="button"
-        disabled={isPending}
-        onClick={() =>
-          startTransition(async () => {
-            const res = await deliverOrder(order.id);
-            toast({
-              variant: res.success ? 'default' : 'destructive',
-              description: res.message,
-            });
-          })
-        }
-      >
-        {isPending ? 'processing...' : 'Mark As Delivered'}
-      </Button>
-    );
+    toast({ description: res.message, variant: res.success ? 'default' : 'destructive' });
   };
 
   return (
     <>
-      <h1 className="py-4 text-2xl"> Order {formatId(id)}</h1>
-      <div className="grid md:grid-cols-3 md:gap-5">
-        <div className="space-y-4 overflow-x-auto md:col-span-2">
-          <Card>
-            <CardContent className="gap-4 p-4">
-              <h2 className="pb-4 text-xl">Payment Method</h2>
-              <p>{paymentMethod}</p>
-              {isPaid && paidAt ? (
-                <Badge variant="secondary">Paid at {formatDateTime(paidAt).dateTime}</Badge>
-              ) : (
-                <Badge variant="destructive">Not paid</Badge>
-              )}
-            </CardContent>
-          </Card>
+      <h1 className="text-2xl font-bold text-foreground mb-6">Order {formatId(id)}</h1>
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-8">
+        <div className="space-y-4">
+          <div className="rounded-xl border border-border bg-card p-5">
+            <div className="flex items-center gap-2 mb-3">
+              <CreditCard className="h-4 w-4 text-muted-foreground" />
+              <h2 className="font-semibold text-foreground text-sm">Payment Method</h2>
+            </div>
+            <p className="text-sm text-muted-foreground mb-2">{paymentMethod}</p>
+            {isPaid && paidAt ? (
+              <Badge className="bg-primary/10 text-primary border-0">Paid {formatDateTime(paidAt).dateTime}</Badge>
+            ) : (
+              <Badge variant="destructive">Not paid</Badge>
+            )}
+          </div>
 
-          <Card>
-            <CardContent className="gap-4 p-4">
-              <h2 className="pb-4 text-xl">Shipping Address</h2>
-              <p>{shippingAddress.fullName}</p>
-              <p>
-                {shippingAddress.streetAddress}, {shippingAddress.city}, {shippingAddress.postalCode},{' '}
-                {shippingAddress.country}{' '}
-              </p>
-              {isDelivered && deliveredAt ? (
-                <Badge variant="secondary">Delivered at {formatDateTime(deliveredAt).dateTime}</Badge>
-              ) : (
-                <Badge variant="destructive">Not delivered</Badge>
-              )}
-            </CardContent>
-          </Card>
+          <div className="rounded-xl border border-border bg-card p-5">
+            <div className="flex items-center gap-2 mb-3">
+              <MapPin className="h-4 w-4 text-muted-foreground" />
+              <h2 className="font-semibold text-foreground text-sm">Shipping Address</h2>
+            </div>
+            <p className="text-sm text-muted-foreground">{shippingAddress.fullName}</p>
+            <p className="text-sm text-muted-foreground mb-2">
+              {shippingAddress.streetAddress}, {shippingAddress.city}, {shippingAddress.postalCode}, {shippingAddress.country}
+            </p>
+            {isDelivered && deliveredAt ? (
+              <Badge className="bg-accent/10 text-accent border-0">Delivered {formatDateTime(deliveredAt).dateTime}</Badge>
+            ) : (
+              <Badge variant="destructive">Not delivered</Badge>
+            )}
+          </div>
 
-          <Card>
-            <CardContent className="gap-4 p-4">
-              <h2 className="pb-4 text-xl">Order Items</h2>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Item</TableHead>
-                    <TableHead>Quantity</TableHead>
-                    <TableHead>Price</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {orderItems.map((item) => (
-                    <TableRow key={item.slug}>
-                      <TableCell>
-                        <Link href={`/product/${item.slug}`} className="flex items-center">
-                          <Image src={item.image} width={50} height={50} alt={item.name} />
-                          <span className="px-2">{item.name}</span>
-                        </Link>
-                      </TableCell>
-                      <TableCell>
-                        <span className="px-2">{item.qty}</span>
-                      </TableCell>
-                      <TableCell className="text-right">&euro;{item.price}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
+          <div className="rounded-xl border border-border bg-card p-5">
+            <div className="flex items-center gap-2 mb-3">
+              <Package className="h-4 w-4 text-muted-foreground" />
+              <h2 className="font-semibold text-foreground text-sm">Order Items</h2>
+            </div>
+            <div className="space-y-3">
+              {orderItems.map((item) => (
+                <div key={item.slug} className="flex items-center gap-4">
+                  <Link href={`/product/${item.slug}`}>
+                    <Image src={item.image} width={56} height={56} alt={item.name} className="rounded-lg" />
+                  </Link>
+                  <div className="flex-1 min-w-0">
+                    <Link href={`/product/${item.slug}`} className="text-sm font-medium hover:text-accent transition-colors">
+                      {item.name}
+                    </Link>
+                    <p className="text-xs text-muted-foreground">Qty: {item.qty}</p>
+                  </div>
+                  <span className="text-sm font-medium">&euro;{item.price}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
-        <div>
-          <Card>
-            <CardContent className="gap-4 space-y-4 p-4">
-              <h2 className="pb-4 text-xl">Order Summary</h2>
-              <div className="flex justify-between">
-                <div>Subtotal</div>
-                <div>{formatCurrency(itemsPrice)}</div>
-              </div>
-              <div className="flex justify-between">
-                <div>VAT charged at {PRICE_TAX_RATE * 100}%</div>
-                <div>{formatCurrency(taxPrice)}</div>
-              </div>
-              <div className="flex justify-between">
-                <div>Shipping</div>
-                <div>{formatCurrency(shippingPrice)}</div>
-              </div>
-              <div className="flex justify-between border-t pt-4 font-bold">
-                <div>TOTAL</div>
-                <div>{formatCurrency(totalPrice)}</div>
-              </div>
-              {!isPaid && paymentMethod === 'PayPal' && (
-                <div>
-                  <PayPalScriptProvider options={{ clientId: paypalClientId, currency: 'EUR' }}>
-                    <PrintLoadingState />
-                    <PayPalButtons createOrder={handleCreatePayPalOrder} onApprove={handleApprovePayPalOrder} />
-                  </PayPalScriptProvider>
-                </div>
-              )}
+        <div className="rounded-xl border border-border bg-card p-6 h-fit lg:sticky lg:top-24">
+          <h2 className="text-lg font-bold text-foreground mb-4">Order Summary</h2>
+          <div className="space-y-3 text-sm">
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Subtotal</span>
+              <span>{formatCurrency(itemsPrice)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">VAT ({PRICE_TAX_RATE * 100}%)</span>
+              <span>{formatCurrency(taxPrice)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Shipping</span>
+              <span>{formatCurrency(shippingPrice)}</span>
+            </div>
+            <div className="flex justify-between border-t pt-3 font-bold text-base">
+              <span>Total</span>
+              <span>{formatCurrency(totalPrice)}</span>
+            </div>
+          </div>
 
-              {!isPaid && paymentMethod === 'Stripe' && stripeClientSecret && (
-                <StripePayment
-                  priceInCents={Number(order.totalPrice) * 100}
-                  orderId={order.id}
-                  clientSecret={stripeClientSecret}
-                />
-              )}
-
-              {isSuperUser && !isPaid && paymentMethod === 'CashOnDelivery' && <MarkAsPaidButton />}
-
-              {isSuperUser && isPaid && !isDelivered && <MarkAsDeliveredButton />}
-            </CardContent>
-          </Card>
+          <div className="mt-6 space-y-3">
+            {!isPaid && paymentMethod === 'PayPal' && (
+              <PayPalScriptProvider options={{ clientId: paypalClientId, currency: 'EUR' }}>
+                <PrintLoadingState />
+                <PayPalButtons createOrder={handleCreatePayPalOrder} onApprove={handleApprovePayPalOrder} />
+              </PayPalScriptProvider>
+            )}
+            {!isPaid && paymentMethod === 'Stripe' && stripeClientSecret && (
+              <StripePayment priceInCents={Number(order.totalPrice) * 100} orderId={order.id} clientSecret={stripeClientSecret} />
+            )}
+            {isSuperUser && !isPaid && paymentMethod === 'CashOnDelivery' && <MarkAsPaidButton orderId={order.id} />}
+            {isSuperUser && isPaid && !isDelivered && <MarkAsDeliveredButton orderId={order.id} />}
+          </div>
         </div>
       </div>
     </>

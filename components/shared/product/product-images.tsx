@@ -10,24 +10,34 @@ const ProductImages = ({ images }: { images: string[] }) => {
 
   return (
     <div className="space-y-4">
-      <Image
-        src={images![current]}
-        alt="hero image"
-        width={1000}
-        height={1000}
-        className="min-h-[300px] object-cover object-center"
-      />
-      <div className="flex">
+      <div className="aspect-square rounded-lg overflow-hidden bg-muted mb-4">
+        <Image
+          src={images![current]}
+          alt="product image"
+          width={1000}
+          height={1000}
+          className="w-full h-full object-cover object-center"
+        />
+      </div>
+      <div className="flex gap-3">
         {images.map((image, index) => (
           <div
             key={image}
             className={cn(
-              'mr-2 cursor-pointer border hover:border-orange-600',
-              current === index && 'border-orange-500',
+              'w-20 h-20 rounded-md overflow-hidden border-2 transition-colors cursor-pointer',
+              current === index
+                ? 'border-accent'
+                : 'border-transparent hover:border-muted-foreground',
             )}
             onClick={() => setCurrent(index)}
           >
-            <Image src={image} width={100} height={100} alt={'image'} />
+            <Image
+              src={image}
+              width={100}
+              height={100}
+              alt="product thumbnail"
+              className="w-full h-full object-cover object-center"
+            />
           </div>
         ))}
       </div>

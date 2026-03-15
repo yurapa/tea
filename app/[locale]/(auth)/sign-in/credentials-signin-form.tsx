@@ -64,7 +64,7 @@ const CredentialsSignInForm = () => {
 
         <div className="text-center text-sm text-muted-foreground">
           {t('dontHaveAccount')}{' '}
-          <Link href="/sign-up" className="link">
+          <Link href="/sign-up" className="text-accent hover:underline font-medium">
             {t('signUp')}
           </Link>
         </div>

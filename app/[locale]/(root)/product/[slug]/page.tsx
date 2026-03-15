@@ -1,11 +1,12 @@
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { ChevronLeft } from 'lucide-react';
 
 import { auth } from '@/auth';
 import { getMyCart } from '@/lib/actions/cart.actions';
 import { getProductBySlug } from '@/lib/actions/product.actions';
 import { Badge } from '@/components/ui/badge';
 import Rating from '@/components/shared/product/rating';
-import { Card, CardContent } from '@/components/ui/card';
 import AddToCart from '@/components/shared/product/add-to-cart';
 import ProductPrice from '@/components/shared/product/product-price';
 import ProductImages from '@/components/shared/product/product-images';
@@ -23,68 +24,105 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
   return (
     <>
       <section>
-        <div className="grid grid-cols-1 md:grid-cols-5">
+        {/* Breadcrumb */}
+        <Link
+          href="/search"
+          className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
+        >
+          <ChevronLeft className="h-4 w-4" />
+          Back to catalog
+        </Link>
+
+        {/* 3-column layout: images | details | action card */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr_280px] gap-8 lg:gap-12">
           {/* Images Column */}
-          <div className="col-span-2">
+          <div>
             <ProductImages images={product.images!} />
           </div>
 
           {/* Details Column */}
-          <div className="col-span-2 p-5">
-            <div className="flex flex-col gap-6">
-              <h1 className="h3-bold">{product.name}</h1>
+          <div className="flex flex-col gap-4">
+            <h1 className="font-playfair text-2xl lg:text-3xl font-bold text-foreground">
+              {product.name}
+            </h1>
+
+            <div className="flex items-center gap-3">
               <Rating value={Number(product.rating)} />
-              <p>{product.numReviews} reviews</p>{' '}
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                <ProductPrice
-                  value={Number(product.price)}
-                  className="w-24 rounded-full bg-green-100 px-5 py-2 text-green-700"
-                />
+              <span className="text-sm text-muted-foreground">
+                {product.numReviews} reviews
+              </span>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-semibold text-foreground mb-2">Weight:</h3>
+              <div className="flex flex-wrap gap-2">
+                {['50g', '100g', '250g'].map((w) => (
+                  <button
+                    key={w}
+                    disabled={w !== '100g'}
+                    className={`px-4 py-2 rounded-md border text-sm transition-colors ${
+                      w === '100g'
+                        ? 'border-accent text-accent bg-accent/10 font-medium'
+                        : 'border-border text-muted-foreground bg-background cursor-not-allowed opacity-50'
+                    }`}
+                  >
+                    {w}
+                  </button>
+                ))}
               </div>
             </div>
-            <div className="mt-10">
-              <p>Description:</p>
-              <p>{product.description}</p>
+
+            <div className="inline-flex items-baseline rounded-full bg-secondary px-4 py-2 mb-2 self-start">
+              <ProductPrice value={Number(product.price)} />
+            </div>
+
+            <div>
+              <h2 className="font-playfair text-lg font-semibold text-foreground mb-2">
+                Description
+              </h2>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {product.description}
+              </p>
             </div>
           </div>
-          {/* Action Column */}
-          <div>
-            <Card>
-              <CardContent className="p-4">
-                <div className="mb-2 flex justify-between">
-                  <div>Price</div>
-                  <div>
-                    <ProductPrice value={Number(product.price)} />
-                  </div>
-                </div>
-                <div className="mb-2 flex justify-between">
-                  <div>Status</div>
-                  {product.stock > 0 ? (
-                    <Badge variant="outline">In stock</Badge>
-                  ) : (
-                    <Badge variant="destructive">Unavailable</Badge>
-                  )}
-                </div>
-                {product.stock > 0 && (
-                  <div className="flex-center mt-4">
-                    <AddToCart
-                      cart={cart}
-                      item={{
-                        productId: product.id,
-                        name: product.name,
-                        slug: product.slug,
-                        price: product.price,
-                        qty: 1,
-                        image: product.images![0],
-                      }}
-                    />
-                  </div>
-                )}
-              </CardContent>
-            </Card>
+
+          {/* Action Card Column */}
+          <div className="lg:sticky lg:top-24 h-fit rounded-lg border border-border bg-card p-5 space-y-3">
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">Price</span>
+              <ProductPrice value={Number(product.price)} />
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">Weight</span>
+              <span className="text-sm font-medium text-foreground">100g</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">Status</span>
+              {product.stock > 0 ? (
+                <Badge variant="outline">In stock</Badge>
+              ) : (
+                <Badge variant="destructive">Unavailable</Badge>
+              )}
+            </div>
+            {product.stock > 0 && (
+              <div className="pt-2">
+                <AddToCart
+                  cart={cart}
+                  item={{
+                    productId: product.id,
+                    name: product.name,
+                    slug: product.slug,
+                    price: String(product.price),
+                    qty: 1,
+                    image: product.images![0],
+                  }}
+                />
+              </div>
+            )}
           </div>
         </div>
       </section>
+
       <section className="mt-10">
         <h2 className="h2-bold mb-5">Customer Reviews</h2>
         <ReviewList productId={product.id} productSlug={product.slug} userId={userId || ''} />

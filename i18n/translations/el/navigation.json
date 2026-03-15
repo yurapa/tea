@@ -3,5 +3,21 @@
   "products": "Προϊόντα",
   "cart": "Καλάθι",
   "search": "Αναζήτηση",
-  "categories": "Κατηγορίες"
+  "categories": "Κατηγορίες",
+  "shopTitle": "Κατάστημα",
+  "greenTea": "Πράσινο Τσάι",
+  "blackTea": "Μαύρο Τσάι",
+  "herbalTea": "Βότανα",
+  "oolongTea": "Τσάι Oolong",
+  "whiteTeaLink": "Λευκό Τσάι",
+  "allTeas": "Όλα τα Τσάγια",
+  "companyTitle": "Εταιρεία",
+  "about": "Σχετικά με εμάς",
+  "contact": "Επικοινωνία",
+  "faq": "Συχνές Ερωτήσεις",
+  "supportTitle": "Υποστήριξη",
+  "shipping": "Αποστολή",
+  "returns": "Επιστροφές",
+  "privacy": "Πολιτική Απορρήτου",
+  "terms": "Όροι Χρήσης"
 }

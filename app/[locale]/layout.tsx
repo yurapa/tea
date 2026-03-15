@@ -1,6 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Playfair_Display } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { ThemeProvider } from 'next-themes';
 import { getMessages } from 'next-intl/server';
@@ -14,7 +14,17 @@ import { GoogleAnalytics } from '@/components/analytics/google-analytics';
 import { APP_DESCRIPTION, APP_NAME, SERVER_URL } from '@/lib/constants';
 
 const inter = Inter({
-  subsets: ['latin'],
+  subsets: ['latin', 'cyrillic', 'greek'],
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const playfair = Playfair_Display({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-playfair',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -48,8 +58,8 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
     {isGTM && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID as string} />}
-    <body className={`${inter.className} antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+    <body className={`${inter.variable} ${playfair.variable} antialiased`}>
+        <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
           <NextIntlClientProvider locale={locale as Locale} messages={messages}>
             {children}
           </NextIntlClientProvider>

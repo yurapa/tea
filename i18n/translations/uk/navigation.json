@@ -3,5 +3,21 @@
   "products": "Товари",
   "cart": "Кошик",
   "search": "Пошук",
-  "categories": "Категорії"
+  "categories": "Категорії",
+  "shopTitle": "Магазин",
+  "greenTea": "Зелений чай",
+  "blackTea": "Чорний чай",
+  "herbalTea": "Трав'яний чай",
+  "oolongTea": "Чай Улун",
+  "whiteTeaLink": "Білий чай",
+  "allTeas": "Усі чаї",
+  "companyTitle": "Компанія",
+  "about": "Про нас",
+  "contact": "Контакти",
+  "faq": "Часті питання",
+  "supportTitle": "Підтримка",
+  "shipping": "Доставка",
+  "returns": "Повернення",
+  "privacy": "Політика конфіденційності",
+  "terms": "Умови використання"
 }

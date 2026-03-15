@@ -16,20 +16,16 @@ const AddToCart = ({ cart, item }: { cart?: Cart; item: Omit<CartItem, 'cartId'>
   const [isPending, startTransition] = useTransition();
 
   const existItem = cart && cart.items.find((x) => x.productId === item.productId);
+  const qty = existItem?.qty ?? 0;
+  const total = qty * Number(item.price);
 
   const handleAddToCart = async () => {
     startTransition(async () => {
-      // Execute the addItemToCart action
       const res = await addItemToCart(item);
-
       if (!res.success) {
-        toast({
-          variant: 'destructive',
-          description: res.message,
-        });
+        toast({ variant: 'destructive', description: res.message });
         return;
       }
-
       toast({
         description: res.message,
         action: (
@@ -48,31 +44,59 @@ const AddToCart = ({ cart, item }: { cart?: Cart; item: Omit<CartItem, 'cartId'>
   const handleRemoveFromCart = async () => {
     startTransition(async () => {
       const res = await removeItemFromCart(item.productId);
-
       toast({
         variant: res.success ? 'default' : 'destructive',
         description: res.message,
       });
-
-      return;
     });
   };
 
-  return existItem ? (
-    <div>
-      <Button type="button" variant="outline" onClick={handleRemoveFromCart}>
-        {isPending ? <Loader className="h-4 w-4 animate-spin" /> : <Minus className="h-4 w-4" />}
-      </Button>
-      <span className="px-2">{existItem.qty}</span>
-      <Button type="button" variant="outline" onClick={handleAddToCart}>
+  return (
+    <div className="space-y-3">
+      {existItem && (
+        <>
+          <div className="flex justify-between items-center">
+            <span className="text-sm text-muted-foreground">Qty</span>
+            <div className="flex items-center gap-1">
+              <Button
+                type="button"
+                variant="outline"
+                size="icon"
+                className="h-9 w-9"
+                disabled={isPending}
+                onClick={handleRemoveFromCart}
+              >
+                {isPending ? <Loader className="h-3.5 w-3.5 animate-spin" /> : <Minus className="h-3.5 w-3.5" />}
+              </Button>
+              <span className="w-8 text-center text-sm font-medium">{qty}</span>
+              <Button
+                type="button"
+                variant="outline"
+                size="icon"
+                className="h-9 w-9"
+                disabled={isPending}
+                onClick={handleAddToCart}
+              >
+                {isPending ? <Loader className="h-3.5 w-3.5 animate-spin" /> : <Plus className="h-3.5 w-3.5" />}
+              </Button>
+            </div>
+          </div>
+          <div className="border-t border-border" />
+          <div className="flex justify-between items-center">
+            <span className="text-sm font-medium text-foreground">Total</span>
+            <span className="text-foreground">
+              <span className="text-xs align-top">€</span>
+              <span className="text-xl font-bold">{Math.floor(total)}</span>
+              <span className="text-xs">.{(total % 1).toFixed(2).slice(2)}</span>
+            </span>
+          </div>
+        </>
+      )}
+      <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90" type="button" onClick={handleAddToCart} disabled={isPending}>
         {isPending ? <Loader className="h-4 w-4 animate-spin" /> : <Plus className="h-4 w-4" />}
+        Add to cart
       </Button>
     </div>
-  ) : (
-    <Button className="w-full" type="button" onClick={handleAddToCart}>
-      {isPending ? <Loader className="h-4 w-4 animate-spin" /> : <Plus className="h-4 w-4" />}
-      Add to cart
-    </Button>
   );
 };
 

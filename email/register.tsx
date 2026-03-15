@@ -5,8 +5,6 @@ import {
   Head,
   Heading,
   Html,
-  Img,
-  Link,
   Preview,
   Row,
   Section,
@@ -25,81 +23,56 @@ export const RegisterWelcomeEmail = ({ name }: SignupWelcomeEmailProps) => (
     <Body style={main}>
       <Preview>Welcome to {APP_NAME}! Your account has been created successfully</Preview>
       <Container style={container}>
-        <Section style={logoContainer}>
-          <Img src={`${SERVER_URL}/images/logo.jpeg`} width="120" height="120" alt="TeaVibe" />
-        </Section>
-        <Heading style={h1}>Welcome to {APP_NAME}, {name}!</Heading>
-        <Text style={heroText}>
-          Thank you for joining {APP_NAME}! Your account has been successfully created and you&apos;re all set to
-          explore our premium tea collection.
-        </Text>
-
-        <Section style={benefitsBox}>
-          <Text style={benefitsTitle}>What&apos;s next?</Text>
-          <Text style={benefitItem}>🍵 Browse our exclusive tea collection</Text>
-          <Text style={benefitItem}>🎁 Enjoy special member-only discounts</Text>
-          <Text style={benefitItem}>📦 Track your orders in real-time</Text>
-          <Text style={benefitItem}>⭐ Share your tea experiences with reviews</Text>
+        {/* Header */}
+        <Section style={header}>
+          <Text style={logoText}>
+            <span style={logoTea}>TEA</span>
+            <span style={logoVibe}>VIBE</span>
+          </Text>
         </Section>
 
-        <Text style={text}>
-          If you have any questions, our support team is always here to help. Happy tea shopping!
-        </Text>
+        {/* Body */}
+        <Section style={bodySection}>
+          <Heading style={h1}>Welcome to {APP_NAME}, {name}!</Heading>
+          <Text style={heroText}>
+            Thank you for joining {APP_NAME}! Your account has been successfully created and you&apos;re
+            all set to explore our premium tea collection.
+          </Text>
 
-        <Section>
-          <Row style={footerLogos}>
-            <Column style={{ width: '66%' }}>
-              <Img src={`${SERVER_URL}/images/logo.jpeg`} width="80" height="80" alt="TeaVibe" />
+          <Section style={benefitsBox}>
+            <Text style={benefitsTitle}>What&apos;s next?</Text>
+            <Text style={benefitItem}>&#127861; Browse our exclusive tea collection</Text>
+            <Text style={benefitItem}>&#127873; Enjoy special member-only discounts</Text>
+            <Text style={benefitItem}>&#128230; Track your orders in real-time</Text>
+            <Text style={benefitItem}>&#11088; Share your tea experiences with reviews</Text>
+          </Section>
+
+          <Text style={text}>
+            If you have any questions, our support team is always here to help. Happy tea shopping!
+          </Text>
+        </Section>
+
+        {/* Footer */}
+        <Section style={footer}>
+          <Row>
+            <Column style={{ width: '50%' }}>
+              <Text style={footerLogoText}>
+                <span style={footerLogoTea}>TEA</span>
+                <span style={footerLogoVibe}>VIBE</span>
+              </Text>
             </Column>
-            <Column align="right">
-              <Link href="/">
-                <Img
-                  src={`${SERVER_URL}/static/slack-twitter.png`}
-                  width="32"
-                  height="32"
-                  alt="Twitter"
-                  style={socialMediaIcon}
-                />
-              </Link>
-              <Link href="/">
-                <Img
-                  src={`${SERVER_URL}/static/slack-facebook.png`}
-                  width="32"
-                  height="32"
-                  alt="Facebook"
-                  style={socialMediaIcon}
-                />
-              </Link>
-              <Link href="/">
-                <Img
-                  src={`${SERVER_URL}/static/slack-linkedin.png`}
-                  width="32"
-                  height="32"
-                  alt="LinkedIn"
-                  style={socialMediaIcon}
-                />
-              </Link>
+            <Column align="right" style={{ width: '50%', verticalAlign: 'middle' }}>
+              <Text style={footerLinks}>
+                <a href={`${SERVER_URL}/about`} style={footerLink}>About Us</a>
+                {'  |  '}
+                <a href={`${SERVER_URL}/contact`} style={footerLink}>Contact</a>
+                {'  |  '}
+                <a href={`${SERVER_URL}/help`} style={footerLink}>Help Center</a>
+              </Text>
             </Column>
           </Row>
-        </Section>
-
-        <Section>
-          <Link style={footerLink} href={`${SERVER_URL}/about`} target="_blank" rel="noopener noreferrer">
-            About Us
-          </Link>
-          &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-          <Link style={footerLink} href={`${SERVER_URL}/contact`} target="_blank" rel="noopener noreferrer">
-            Contact
-          </Link>
-          &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-          <Link style={footerLink} href={`${SERVER_URL}/help`} target="_blank" rel="noopener noreferrer">
-            Help Center
-          </Link>
           <Text style={footerText}>
-            &copy; 2025 {APP_NAME}, a Premium Tea Company. <br />
-            Larnaca, Cyprus <br />
-            <br />
-            All rights reserved.
+            &copy; 2025 {APP_NAME}, a Premium Tea Company. &nbsp;Larnaca, Cyprus &nbsp;&#183;&nbsp; All rights reserved.
           </Text>
         </Section>
       </Container>
@@ -109,84 +82,135 @@ export const RegisterWelcomeEmail = ({ name }: SignupWelcomeEmailProps) => (
 
 export default RegisterWelcomeEmail;
 
-const footerText = {
-  fontSize: '12px',
-  color: '#b7b7b7',
-  lineHeight: '15px',
-  textAlign: 'left' as const,
-  marginBottom: '50px',
-};
-
-const footerLink = {
-  color: '#b7b7b7',
-  textDecoration: 'underline',
-};
-
-const footerLogos = {
-  marginBottom: '32px',
-  paddingLeft: '8px',
-  paddingRight: '8px',
-};
-
-const socialMediaIcon = {
-  display: 'inline',
-  marginLeft: '8px',
-};
+// Brand colors
+const DARK_GREEN = '#1e3a2f';
+const GOLD = '#c2a24e';
+const BEIGE = '#f3ede4';
+const BORDER = '#ddd5c8';
+const TEXT_MUTED = '#6b7280';
+const FONT_STACK = "Arial, Helvetica, sans-serif";
 
 const main = {
-  backgroundColor: '#ffffff',
+  backgroundColor: BEIGE,
   margin: '0 auto',
-  fontFamily:
-    "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+  fontFamily: FONT_STACK,
 };
 
 const container = {
   margin: '0 auto',
-  padding: '0px 20px',
+  maxWidth: '600px',
+  backgroundColor: '#ffffff',
+  border: `1px solid ${BORDER}`,
 };
 
-const logoContainer = {
-  marginTop: '32px',
+const header = {
+  backgroundColor: DARK_GREEN,
+  padding: '28px 32px',
+  textAlign: 'center' as const,
+};
+
+const logoText = {
+  margin: '0',
+  fontSize: '28px',
+  fontWeight: '700' as const,
+  letterSpacing: '3px',
+  textAlign: 'center' as const,
+};
+
+const logoTea = {
+  color: '#ffffff',
+};
+
+const logoVibe = {
+  color: GOLD,
+};
+
+const bodySection = {
+  padding: '36px 40px 24px',
 };
 
 const h1 = {
-  color: '#1d1c1d',
-  fontSize: '36px',
-  fontWeight: '700',
-  margin: '30px 0',
+  color: DARK_GREEN,
+  fontSize: '26px',
+  fontWeight: '700' as const,
+  margin: '0 0 16px',
   padding: '0',
-  lineHeight: '42px',
+  lineHeight: '34px',
 };
 
 const heroText = {
-  fontSize: '20px',
-  lineHeight: '28px',
-  marginBottom: '30px',
+  color: DARK_GREEN,
+  fontSize: '16px',
+  lineHeight: '26px',
+  marginBottom: '28px',
 };
 
 const benefitsBox = {
-  background: 'rgb(245, 244, 245)',
+  background: BEIGE,
+  borderLeft: `4px solid ${GOLD}`,
   borderRadius: '4px',
-  marginBottom: '30px',
-  padding: '30px 20px',
+  marginBottom: '28px',
+  padding: '24px 24px 8px',
 };
 
 const benefitsTitle = {
-  fontSize: '20px',
-  fontWeight: '600',
-  marginBottom: '16px',
-  color: '#1d1c1d',
+  fontSize: '18px',
+  fontWeight: '600' as const,
+  marginBottom: '12px',
+  color: DARK_GREEN,
 };
 
 const benefitItem = {
-  fontSize: '16px',
-  lineHeight: '28px',
-  marginBottom: '8px',
-  color: '#000',
+  fontSize: '15px',
+  lineHeight: '26px',
+  marginBottom: '6px',
+  color: DARK_GREEN,
 };
 
 const text = {
-  color: '#000',
+  color: TEXT_MUTED,
   fontSize: '14px',
-  lineHeight: '24px',
+  lineHeight: '22px',
+  margin: '0',
+};
+
+const footer = {
+  backgroundColor: DARK_GREEN,
+  padding: '24px 32px 16px',
+};
+
+const footerLogoText = {
+  margin: '0 0 4px',
+  fontSize: '18px',
+  fontWeight: '700' as const,
+  letterSpacing: '2px',
+};
+
+const footerLogoTea = {
+  color: '#ffffff',
+};
+
+const footerLogoVibe = {
+  color: GOLD,
+};
+
+const footerLinks = {
+  margin: '0',
+  fontSize: '12px',
+  textAlign: 'right' as const,
+};
+
+const footerLink = {
+  color: GOLD,
+  textDecoration: 'none',
+};
+
+const footerText = {
+  fontSize: '11px',
+  color: '#a8b8af',
+  lineHeight: '18px',
+  textAlign: 'left' as const,
+  margin: '12px 0 0',
+  borderTop: `1px solid rgba(255,255,255,0.15)`,
+  paddingTop: '12px',
 };

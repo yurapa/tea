@@ -87,7 +87,7 @@ const SignUpForm = () => {
 
         <div className="text-center text-sm text-muted-foreground">
           {t('alreadyHaveAccount')}{' '}
-          <Link target="_self" className="link" href={`/sign-in?callbackUrl=${callbackUrl}`}>
+          <Link target="_self" className="text-accent hover:underline font-medium" href={`/sign-in?callbackUrl=${callbackUrl}`}>
             {t('signIn')}
           </Link>
         </div>

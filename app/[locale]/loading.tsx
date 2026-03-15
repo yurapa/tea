@@ -1,18 +1,9 @@
-import Image from 'next/image';
-import loader from '@/assets/loader.gif';
+import { Loader } from 'lucide-react';
 
 const LoadingPage = () => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        width: '100vw',
-      }}
-    >
-      <Image src={loader} width={150} height={150} unoptimized alt="Loading..." />
+    <div className="flex items-center justify-center h-[60vh]">
+      <Loader className="h-16 w-16 animate-spin text-accent" />
     </div>
   );
 };

@@ -26,8 +26,10 @@ const MainNav = ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => 
           key={item.href}
           href={item.href}
           className={cn(
-            'text-sm font-medium transition-colors hover:text-primary',
-            pathname.includes(item.href) ? '' : 'text-muted-foreground',
+            'text-sm font-medium transition-colors hover:text-foreground pb-1',
+            pathname.includes(item.href)
+              ? 'text-foreground border-b-2 border-accent'
+              : 'text-muted-foreground',
           )}
         >
           {item.title}

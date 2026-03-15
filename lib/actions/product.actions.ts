@@ -19,9 +19,11 @@ export async function getLatestProducts() {
 }
 
 export async function getProductBySlug(slug: string) {
-  return await prisma.product.findFirst({
+  const product = await prisma.product.findFirst({
     where: { slug: slug },
   });
+
+  return product ? convertToPlainObject(product) : null;
 }
 
 export async function getProductById(productId: string) {
@@ -99,10 +101,17 @@ export async function getAllProducts({
     take: limit,
   });
 
-  const dataCount = await prisma.product.count();
+  const dataCount = await prisma.product.count({
+    where: {
+      ...queryFilter,
+      ...categoryFilter,
+      ...priceFilter,
+      ...ratingFilter,
+    },
+  });
 
   return {
-    data,
+    data: convertToPlainObject(data),
     totalPages: Math.ceil(dataCount / limit),
   };
 }
@@ -169,10 +178,11 @@ export async function updateProduct(data: z.infer<typeof updateProductSchema>) {
 }
 
 export async function getAllCategories() {
-  return await prisma.product.groupBy({
+  const data = await prisma.product.groupBy({
     by: ['category'],
     _count: true,
   });
+  return data.map((item: { category: string; _count: { _all: number } }) => ({ category: item.category, count: item._count._all }));
 }
 
 export async function getFeaturedProducts() {

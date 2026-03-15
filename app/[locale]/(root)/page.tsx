@@ -1,11 +1,11 @@
 import { Metadata } from 'next';
 
 import { LATEST_PRODUCTS_LIMIT } from '@/lib/constants';
-import { getFeaturedProducts, getLatestProducts } from '@/lib/actions/product.actions';
+import { getLatestProducts } from '@/lib/actions/product.actions';
 import IconBoxes from '@/components/icon-boxes';
 import DealCountdown from '@/components/deal-countdown';
 import ProductList from '@/components/shared/product/product-list';
-import ViewAllProductsButton from '@/components/view-all-products-button';
+
 import ProductCarousel from '@/components/shared/product/product-carousel';
 
 export const metadata: Metadata = {
@@ -21,22 +21,28 @@ export const metadata: Metadata = {
   },
 };
 
-// const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
-
 const HomePage = async () => {
-  // await delay(2000);
   const latestProducts = await getLatestProducts();
-  const featuredProducts = await getFeaturedProducts();
 
   return (
     <>
-      {featuredProducts.length > 0 && <ProductCarousel data={featuredProducts} />}
-      <ProductList title="Newest Arrivals" data={latestProducts} limit={LATEST_PRODUCTS_LIMIT} />
-      <div className="my-8 flex items-center justify-center">
-        <ViewAllProductsButton label="View All Products" />
+      {/* Hero carousel — full viewport bleed */}
+      <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen -mt-24 md:-mt-20">
+        <ProductCarousel />
       </div>
-      <DealCountdown />
-      <IconBoxes />
+
+      {/* Product list section — full bleed with flat background */}
+      <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen bg-background">
+        <div className="container mx-auto px-6">
+          <ProductList title="Newest Arrivals" data={latestProducts} limit={LATEST_PRODUCTS_LIMIT} />
+        </div>
+      </div>
+
+      {/* Full-bleed sections */}
+      <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen -mb-16">
+        <DealCountdown />
+        <IconBoxes />
+      </div>
     </>
   );
 };

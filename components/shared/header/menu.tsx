@@ -1,54 +1,35 @@
 import Link from 'next/link';
-import { EllipsisVertical, ShoppingCart } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 
+import { auth } from '@/auth';
+import { getMyCart } from '@/lib/actions/cart.actions';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import ModeToggle from '@/components/shared/header/mode-toggle';
 import UserButton from '@/components/shared/header/user-button';
 import LocaleSwitch from '@/components/shared/header/locale-switch';
-import Search from './search';
 
 const Menu = async () => {
   const t = await getTranslations();
-  
-  return (
-    <div className="flex justify-end gap-3">
-      <nav className="hidden w-full max-w-xs gap-1 md:flex">
-        <ModeToggle />
-        <LocaleSwitch />
-        <Button asChild variant="ghost">
-          <Link href="/cart">
-            <ShoppingCart />
-            {t('Navigation.cart')}
-          </Link>
-        </Button>
-        <UserButton />
-      </nav>
+  const session = await auth();
+  const cart = await getMyCart().catch(() => undefined);
+  const cartCount = cart?.items?.reduce((sum: number, item: { qty: number }) => sum + item.qty, 0) ?? 0;
 
-      <nav className="md:hidden">
-        <Sheet>
-          <SheetTrigger className="align-middle">
-            <EllipsisVertical />
-          </SheetTrigger>
-          <SheetContent className="flex flex-col items-start">
-            <div className="mt-10">
-              <Search />
-            </div>
-            <SheetTitle>{t('Common.menu')}</SheetTitle>
-            <ModeToggle />
-            <LocaleSwitch />
-            <Button asChild variant="ghost">
-              <Link href="/cart">
-                <ShoppingCart />
-                {t('Navigation.cart')}
-              </Link>
-            </Button>
-            <UserButton />
-            <SheetDescription></SheetDescription>
-          </SheetContent>
-        </Sheet>
-      </nav>
+  return (
+    <div className="flex items-center gap-0.5 md:gap-1 lg:gap-2 shrink-0 ml-auto">
+      <ModeToggle />
+      <LocaleSwitch />
+      <Button asChild variant="ghost" size="icon" className="h-9 w-9 text-foreground/70 hover:text-foreground hover:bg-muted relative">
+        <Link href="/cart" aria-label={t('Navigation.cart')}>
+          <ShoppingCart className="h-5 w-5" />
+          {cartCount > 0 && (
+            <span className="absolute -top-0.5 -right-0.5 h-4 min-w-4 px-0.5 rounded-full bg-accent text-[10px] font-bold text-accent-foreground flex items-center justify-center">
+              {cartCount}
+            </span>
+          )}
+        </Link>
+      </Button>
+      <UserButton />
     </div>
   );
 };

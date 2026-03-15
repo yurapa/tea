@@ -44,9 +44,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress | null }) =
 
   return (
     <>
-      <div className="mx-auto max-w-md space-y-4">
-        <h1 className="h2-bold mt-4">Shipping Address</h1>
-        <p className="text-sm text-muted-foreground">Please enter the address that you want to ship to</p>
+      <div className="space-y-4">
         <Form {...form}>
           <form method="post" onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <div className="flex flex-col gap-5 md:flex-row">
