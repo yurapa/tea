@@ -3,110 +3,87 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-
+import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useTranslations } from 'use-intl';
 
-const TARGET_DATE = new Date('2025-03-08T00:00:00');
+const DEAL_END = new Date();
+DEAL_END.setDate(DEAL_END.getDate() + 3);
+DEAL_END.setHours(23, 59, 59, 0);
 
-const calculateTimeRemaining = (targetDate: Date) => {
-  const currentTime = new Date();
-  const timeDifference = Math.max(Number(targetDate) - Number(currentTime), 0);
-
+const getTimeLeft = (end: Date) => {
+  const diff = Math.max(0, end.getTime() - Date.now());
   return {
-    days: Math.floor(timeDifference / (1000 * 60 * 60 * 24)),
-    hours: Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-    minutes: Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60)),
-    seconds: Math.floor((timeDifference % (1000 * 60)) / 1000),
+    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+    minutes: Math.floor((diff / (1000 * 60)) % 60),
+    seconds: Math.floor((diff / 1000) % 60),
+    expired: diff === 0,
   };
 };
 
-const StatBox = ({ label, value }: { label: string; value: number }) => (
-  <li className="w-full p-4 text-center">
-    <p className="text-3xl font-bold">{value}</p>
-    <p>{label}</p>
-  </li>
+const TimeBlock = ({ value, label }: { value: number; label: string }) => (
+  <div className="flex flex-col items-center">
+    <span className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-foreground tabular-nums leading-none">
+      {String(value).padStart(2, '0')}
+    </span>
+    <span className="text-[10px] sm:text-xs uppercase tracking-widest text-primary-foreground/60 mt-1.5">
+      {label}
+    </span>
+  </div>
 );
 
 const DealCountdown = () => {
-  const [time, setTime] = useState<ReturnType<typeof calculateTimeRemaining>>();
-
-  const t = useTranslations('HomePage');
+  const [time, setTime] = useState<ReturnType<typeof getTimeLeft>>();
 
   useEffect(() => {
-    // Calculate initial time remaining on the client
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- Required for client-side timer initialization
-    setTime(calculateTimeRemaining(TARGET_DATE));
-
-    const timerInterval = setInterval(() => {
-      const newTime = calculateTimeRemaining(TARGET_DATE);
-      setTime(newTime);
-
-      // Clear when countdown is over
-      if (newTime.days === 0 && newTime.hours === 0 && newTime.minutes === 0 && newTime.seconds === 0) {
-        clearInterval(timerInterval);
-      }
-    }, 1000);
-
-    return () => clearInterval(timerInterval);
+    setTime(getTimeLeft(DEAL_END));
+    const id = setInterval(() => setTime(getTimeLeft(DEAL_END)), 1000);
+    return () => clearInterval(id);
   }, []);
 
-  // Render a loading state during hydration
   if (!time) {
     return (
-      <section className="my-20 grid grid-cols-1 md:grid-cols-2">
-        <div className="flex flex-col justify-center gap-2">
-          <h3 className="text-3xl font-bold">Loading Countdown...</h3>
-        </div>
-      </section>
-    );
-  }
-
-  // If the countdown is over, display fallback UI
-  if (time.days === 0 && time.hours === 0 && time.minutes === 0 && time.seconds === 0) {
-    return (
-      <section className="my-20 grid grid-cols-1 md:grid-cols-2">
-        <h1>{t('title')}</h1>
-
-        <div className="flex flex-col justify-center gap-2">
-          <h3 className="text-3xl font-bold">Deal Has Ended</h3>
-          <p>This deal is no longer available. Check out our latest promotions!</p>
-          <div className="mb-6 text-center">
-            <Button asChild>
-              <Link href="/search">View Products</Link>
-            </Button>
-          </div>
-        </div>
-        <div className="flex justify-center">
-          <Image src="/images/promo.png" width={310} height={300} alt="promotion" />
+      <section className="relative py-24 lg:py-32 overflow-hidden bg-primary">
+        <div className="relative z-10 container mx-auto px-6 text-center">
+          <p className="text-3xl font-bold text-primary-foreground">Loading...</p>
         </div>
       </section>
     );
   }
 
   return (
-    <section className="my-20 grid grid-cols-1 md:grid-cols-2">
-      <div className="flex flex-col justify-center gap-2">
-        <h3 className="text-3xl font-bold">Deal Of The Month</h3>
-        <p>
-          Get ready for a shopping experience like never before with our Deals of the Month! Every purchase comes with
-          exclusive perks and offers, making this month a celebration of savvy choices and amazing deals. Don&apos;t
-          miss out! 🎁🛒
+    <section className="relative py-24 lg:py-32 overflow-hidden">
+      <Image src="/images/promo-bg.jpg" fill className="object-cover" alt="Tea plantation" />
+      <div className="absolute inset-0 bg-primary/80" />
+      <div className="relative z-10 container mx-auto px-6 text-center">
+        <p className="text-sm text-accent uppercase tracking-[0.2em] font-medium mb-4">
+          ⏰ Special Deal
         </p>
-        <ul className="grid grid-cols-4">
-          <StatBox label="Days" value={time.days} />
-          <StatBox label="Hours" value={time.hours} />
-          <StatBox label="Minutes" value={time.minutes} />
-          <StatBox label="Seconds" value={time.seconds} />
-        </ul>
-        <div className="mb-6 text-center">
-          <Button asChild>
-            <Link href="/search">View Products</Link>
+        <h2 className="font-playfair text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6 max-w-2xl mx-auto leading-tight">
+          Exclusive Tea Experience Awaits
+        </h2>
+        <p className="text-primary-foreground/70 text-lg mb-10 max-w-lg mx-auto font-light">
+          Discover our hand-picked selection of rare teas from the highlands of Asia, delivered fresh to your door.
+        </p>
+
+        {!time.expired && (
+          <div className="flex items-center justify-center gap-4 sm:gap-6 lg:gap-8 mb-10">
+            <TimeBlock value={time.days} label="Days" />
+            <span className="text-2xl sm:text-3xl font-light text-primary-foreground/40 -mt-4">:</span>
+            <TimeBlock value={time.hours} label="Hours" />
+            <span className="text-2xl sm:text-3xl font-light text-primary-foreground/40 -mt-4">:</span>
+            <TimeBlock value={time.minutes} label="Min" />
+            <span className="text-2xl sm:text-3xl font-light text-primary-foreground/40 -mt-4">:</span>
+            <TimeBlock value={time.seconds} label="Sec" />
+          </div>
+        )}
+
+        <Link href="/search">
+          <Button className="bg-accent text-accent-foreground hover:bg-accent/80 rounded-none px-8 py-6 text-sm tracking-widest uppercase font-medium">
+            Explore Collection
+            <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
-        </div>
-      </div>
-      <div className="flex justify-center">
-        <Image src="/images/promo.png" width={310} height={300} alt="promotion" />
+        </Link>
       </div>
     </section>
   );

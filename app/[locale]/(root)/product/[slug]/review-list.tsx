@@ -41,20 +41,22 @@ const ReviewList = ({ userId, productId, productSlug }: { userId: string; produc
 
   return (
     <div className="space-y-4">
-      {reviews.length === 0 && <div>No reviews yet</div>}
+      {reviews.length === 0 && (
+        <p className="text-muted-foreground text-sm">No reviews yet</p>
+      )}
       {userId ? (
         <ReviewForm userId={userId} productId={productId} onReviewSubmitted={reload} />
       ) : (
-        <div>
+        <p className="text-sm text-muted-foreground">
           Please{' '}
           <Link
-            className="px-1 text-blue-700 underline hover:no-underline"
+            className="text-accent hover:underline font-medium"
             href={`/sign-in?callbackUrl=/product/${productSlug}`}
           >
-            login
+            sign in
           </Link>{' '}
           to write a review
-        </div>
+        </p>
       )}
       <div className="flex flex-col gap-3">
         {reviews.map((review) => (

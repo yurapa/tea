@@ -1,26 +1,32 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
-import { APP_NAME } from '@/lib/constants';
 import Menu from '@/components/shared/header/menu';
 import CategoriesDrawer from './categories-drawer';
 import Search from './search';
 
 const Header = () => {
   return (
-    <header className="w-full border-b">
-      <div className="wrapper flex-between">
-        <div className="flex-start">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border/50">
+      <div className="container mx-auto flex items-center gap-2 md:gap-4 px-4 lg:px-6 py-3">
+        {/* Left: Hamburger + Logo */}
+        <div className="flex items-center gap-2 shrink-0">
           <CategoriesDrawer />
-          <Link href="/" className="flex-start ml-4">
-            <Image src="/images/logo.svg" height={48} width={48} priority={true} alt={`${APP_NAME} logo`} />
-            <span className="ml-3 hidden text-2xl lg:block">{APP_NAME}</span>
+          <Link href="/" className="flex items-center">
+            <span className="font-playfair text-xl lg:text-2xl font-bold tracking-wide text-primary">
+              TEA<span className="text-accent">VIBE</span>
+            </span>
           </Link>
         </div>
-        <div className="hidden md:block">
+        {/* Center: Search (desktop only) */}
+        <div className="hidden md:flex flex-1 max-w-xl">
           <Search />
         </div>
+        {/* Right: Actions */}
         <Menu />
+      </div>
+      {/* Mobile search */}
+      <div className="md:hidden px-4 pb-3">
+        <Search />
       </div>
     </header>
   );

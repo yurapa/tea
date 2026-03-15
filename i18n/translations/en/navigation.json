@@ -3,5 +3,21 @@
   "products": "Products",
   "cart": "Cart",
   "search": "Search",
-  "categories": "Categories"
+  "categories": "Categories",
+  "shopTitle": "Shop",
+  "greenTea": "Green Tea",
+  "blackTea": "Black Tea",
+  "herbalTea": "Herbal Tea",
+  "oolongTea": "Oolong Tea",
+  "whiteTeaLink": "White Tea",
+  "allTeas": "All Teas",
+  "companyTitle": "Company",
+  "about": "About Us",
+  "contact": "Contact",
+  "faq": "FAQ",
+  "supportTitle": "Support",
+  "shipping": "Shipping",
+  "returns": "Returns",
+  "privacy": "Privacy Policy",
+  "terms": "Terms of Service"
 }

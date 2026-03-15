@@ -10,6 +10,7 @@ import deleteDialog from './delete-dialog.json';
 import toast from './toast.json';
 import pagination from './pagination.json';
 import search from './search.json';
+import pages from './pages.json';
 
 export default {
   Common: common,
@@ -24,4 +25,5 @@ export default {
   Toast: toast,
   Pagination: pagination,
   Search: search,
+  Pages: pages,
 } as const;

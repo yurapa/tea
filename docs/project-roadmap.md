@@ -15,7 +15,7 @@ TeaVibe Store is currently in **Active Development (Phase 1)** with a fully func
 
 ## Phase 1: MVP Foundation (CURRENT - March 2025)
 
-**Status:** 90% Complete
+**Status:** 95% Complete
 **Start Date:** September 2024
 **Target Completion:** March 2025
 **Progress:** On track
@@ -23,7 +23,7 @@ TeaVibe Store is currently in **Active Development (Phase 1)** with a fully func
 ### Core Features Completed
 - ✅ Product catalog with search and filtering
 - ✅ Shopping cart (guest & authenticated sessions)
-- ✅ Multi-step checkout flow (shipping → payment → confirmation)
+- ✅ Multi-step checkout flow with icon stepper (Truck → CreditCard → Package)
 - ✅ PayPal payment integration with webhook handling
 - ✅ Stripe payment integration with webhook handling
 - ✅ User authentication (signup/signin with credentials)
@@ -35,6 +35,8 @@ TeaVibe Store is currently in **Active Development (Phase 1)** with a fully func
 - ✅ File uploads (UploadThing for product images)
 - ✅ SEO optimization (sitemap, robots.txt, hreflang)
 - ✅ Admin KPI metrics (sales, orders, users, revenue)
+- ✅ UI Restyling - New design system, fixed header, footer redesign (March 2025)
+- ✅ New info/legal pages (7 pages: about, contact, faq, shipping, returns, privacy, terms)
 
 ### Remaining MVP Tasks
 - [ ] Order comment field (textarea + DB migration)

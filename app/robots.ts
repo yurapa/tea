@@ -14,17 +14,25 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: '*',
         allow: '/',
         disallow: [
-          '/admin/',           // Admin panel - requires authentication
-          '/user/',            // User account pages - requires authentication
-          '/profile/',         // User profile - requires authentication
-          '/order/',           // Order details - requires authentication & user-specific
-          '/cart',             // Shopping cart - user-specific, dynamic content
-          '/shipping-address', // Checkout step 1 - requires authentication
-          '/payment-method',   // Checkout step 2 - requires authentication
-          '/place-order',      // Checkout step 3 - requires authentication
-          '/api/',             // API routes - not meant for crawlers
-          '/sign-in',          // Login page - low SEO value
-          '/sign-up',          // Registration page - low SEO value
+          '/admin/',
+          '/user/',
+          '/order/',
+          '/cart',
+          '/shipping-address',
+          '/payment-method',
+          '/place-order',
+          '/sign-in',
+          '/sign-up',
+          '/api/',
+          '/*/admin/',
+          '/*/user/',
+          '/*/order/',
+          '/*/cart',
+          '/*/shipping-address',
+          '/*/payment-method',
+          '/*/place-order',
+          '/*/sign-in',
+          '/*/sign-up',
         ],
       },
     ],

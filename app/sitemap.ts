@@ -64,8 +64,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Homepage - highest priority, changes daily
   addUrlWithLocales('/', new Date(), 'daily', 1.0);
 
-  // Search page - high priority for discovery
+  // Search page
   addUrlWithLocales('/search', new Date(), 'daily', 0.9);
+
+  // Static pages
+  const staticPages = ['/about', '/contact', '/faq', '/privacy', '/terms', '/returns', '/shipping'];
+  staticPages.forEach((page) => {
+    addUrlWithLocales(page, new Date(), 'monthly', 0.5);
+  });
 
   // Fetch all products from database
   try {
@@ -103,17 +109,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // Add category search pages
     categories.forEach(({ category }: { category: string }) => {
-      // Convert category to URL-friendly slug
-      const categorySlug = category
-        .toLowerCase()
-        .replace(/\s+/g, '-')
-        .replace(/[^a-z0-9-]/g, '');
-
       addUrlWithLocales(
-        `/search?category=${categorySlug}`,
+        `/search?category=${encodeURIComponent(category)}`,
         new Date(),
         'daily',
-        0.7, // Medium-high priority for categories
+        0.7,
       );
     });
   } catch (error) {

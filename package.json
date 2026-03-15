@@ -1,16 +1,13 @@
 {
   "name": "tea",
-  "version": "25.09.23",
+  "version": "26.03.15",
   "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/yurapa/tea.git"
   },
-  "engines": {
-    "node": "^22.0.0"
-  },
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "email": "cp .env ./node_modules/react-email && email dev --dir email --port 3001",
@@ -39,6 +36,7 @@
     "@next/third-parties": "^16.1.6",
     "@paypal/react-paypal-js": "^8.9.2",
     "@prisma/adapter-neon": "^6.17.1",
+    "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-alert-dialog": "^1.1.6",
     "@radix-ui/react-checkbox": "^1.1.4",
     "@radix-ui/react-dialog": "^1.1.6",
@@ -46,8 +44,11 @@
     "@radix-ui/react-label": "^2.1.2",
     "@radix-ui/react-radio-group": "^1.2.3",
     "@radix-ui/react-select": "^2.1.6",
-    "@radix-ui/react-slot": "^1.1.2",
+    "@radix-ui/react-separator": "^1.1.8",
+    "@radix-ui/react-slot": "^1.2.4",
+    "@radix-ui/react-tabs": "^1.1.13",
     "@radix-ui/react-toast": "^1.2.6",
+    "@radix-ui/react-tooltip": "^1.2.8",
     "@react-email/components": "^0.5.6",
     "@react-email/render": "^1.3.2",
     "@stripe/react-stripe-js": "^3.1.1",
@@ -84,14 +85,14 @@
     "@prisma/client": "^6.17.1",
     "@react-email/preview-server": "^4.3.0",
     "@types/jest": "^30.0.0",
-    "@types/node": "^22.0.0",
-    "@types/react": "^19.2.0",
-    "@types/react-dom": "^19.2.0",
+    "@types/node": "^22.19.15",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "@types/ws": "^8.18.1",
     "bufferutil": "^4.0.9",
     "dotenv": "^17.2.3",
     "eslint": "^9.37.0",
-    "eslint-config-next": "^16.0.3",
+    "eslint-config-next": "^16.1.6",
     "eslint-config-prettier": "^10.1.8",
     "jest": "^30.1.3",
     "npm-run-all": "^4.1.5",
@@ -104,9 +105,5 @@
     "ts-node": "^10.9.2",
     "tsx": "^4.20.6",
     "typescript": "^5.0.0"
-  },
-  "overrides": {
-    "@types/react": "^19.2.0",
-    "@types/react-dom": "^19.2.0"
   }
 }

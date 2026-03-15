@@ -393,17 +393,18 @@ Review
 
 ## UI Component Library (shadcn/ui)
 
-### Installed Components (19 total)
-- Alert Dialog, Button, Card, Checkbox, Dialog
-- Dropdown Menu, Form, Input, Label, Pagination
-- Product Form, Radio Group, Select, Sheet, Sidebar
-- Textarea, Toast, Tooltip, Skeleton
+### Installed Components (25 total)
+- Accordion, Alert Dialog, Badge, Breadcrumb, Button, Card, Carousel, Checkbox, Dialog
+- Drawer, Dropdown Menu, Form, Input, Label, Pagination, Radio Group, Select
+- Sheet, Sidebar, Separator, Skeleton, Table, Tabs, Textarea, Toast, Tooltip
 
 ### Custom Components
-- **Product:** ProductList, ProductCarousel, ProductForm
-- **Admin:** AdminHeader, SidebarNav, Charts
+- **Product:** ProductList, ProductCarousel, ProductForm, ProductCard, ProductImages, ProductPrice, Rating
+- **Admin:** AdminHeader, SidebarNav, Charts, ProductForm, AdminSearch
 - **Forms:** ShippingAddressForm, PaymentMethodForm, ProductForm
-- **Shared:** Header, Footer, Navbar, SearchBar
+- **Header:** Header (fixed), Menu, Search, ModeToggle, UserButton, LocaleSwitch, CategoriesDrawer
+- **Checkout:** CheckoutSteps (icon stepper: Shipping → Payment → PlaceOrder)
+- **Other:** Footer (multi-column with social icons), DeleteDialog, Pagination, Breadcrumb
 
 ---
 
@@ -541,6 +542,31 @@ npm run prisma:deploy            # Apply migrations + generate client
 - **Jest:** Unit & integration tests
 - **Test Command:** `npm test`
 - **Coverage Target:** 70%+ (optional)
+
+---
+
+## Pages & Routes
+
+### Public Pages (New & Restyled)
+All pages use fullscreen hero carousel, styled product cards with hover effects, and teal/cream/amber palette.
+
+**Info & Legal Pages (7 new):**
+- `/about` - Brand story, values, mission
+- `/contact` - Contact form with email integration
+- `/faq` - FAQ accordion with common questions
+- `/shipping` - Shipping policy and timeline
+- `/returns` - Return & refund policy
+- `/privacy` - Privacy policy compliance
+- `/terms` - Terms of service and conditions
+
+**E-Commerce Pages:**
+- `/` (homepage) - Hero carousel, featured products, CTAs
+- `/product/[slug]` - Product detail, reviews, related items
+- `/search` - Product search & filtering
+- `/cart` - Shopping cart review, item management
+- `/place-order` - Multi-step checkout (CheckoutSteps component)
+- `/order/[id]` - Order confirmation & tracking
+- `/user/profile` - User dashboard (authenticated)
 
 ---
 

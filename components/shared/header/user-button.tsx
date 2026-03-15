@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { UserIcon } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 
 import { auth } from '@/auth';
@@ -10,6 +9,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
@@ -20,66 +20,68 @@ const UserButton = async () => {
   if (!session) {
     return (
       <Link href="/sign-in">
-        <Button>
-          <UserIcon /> {t('Auth.signIn')}
+        <Button variant="outline" size="sm" className="h-9">
+          {t('Auth.signIn')}
         </Button>
       </Link>
     );
   }
 
-  const firstInitial = session.user?.name?.charAt(0).toUpperCase() ?? '';
+  const name = session.user?.name ?? '';
+  const initials = name
+    .split(' ')
+    .map((part) => part.charAt(0).toUpperCase())
+    .slice(0, 2)
+    .join('');
 
   return (
-    <div className="flex items-center gap-2">
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <div className="flex items-center">
-            <Button
-              variant="ghost"
-              className="relative ml-2 flex h-8 w-8 items-center justify-center rounded-full bg-gray-300"
-            >
-              {firstInitial}
-            </Button>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant="ghost"
+          className="h-9 w-9 rounded-full bg-muted text-foreground font-semibold text-sm p-0 hover:bg-muted/80"
+        >
+          {initials}
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56" align="end" forceMount>
+        <DropdownMenuLabel className="font-normal">
+          <div className="flex flex-col space-y-1">
+            <p className="text-sm font-medium leading-none">{session.user?.name}</p>
+            <p className="text-xs leading-none text-muted-foreground">{session.user?.email}</p>
           </div>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-56" align="end" forceMount>
-          <DropdownMenuLabel className="font-normal">
-            <div className="flex flex-col space-y-1">
-              <p className="text-sm font-medium leading-none">{session.user?.name}</p>
-              <p className="text-xs leading-none text-muted-foreground">{session.user?.email}</p>
-            </div>
-          </DropdownMenuLabel>
-
-          <DropdownMenuItem>
-            <Link href="/user/profile" className="w-full">
-              Edit Profile
-            </Link>
-          </DropdownMenuItem>
-
-          <DropdownMenuItem>
-            <Link href="/user/orders" className="w-full">
-              Order History
-            </Link>
-          </DropdownMenuItem>
-
-          {(session?.user?.role === 'admin' || session?.user?.role === 'editor') && (
-            <DropdownMenuItem>
-              <Link className="w-full" href="/admin/overview">
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem asChild>
+          <Link href="/user/profile" className="w-full cursor-pointer">
+            Profile
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href="/user/orders" className="w-full cursor-pointer">
+            Orders
+          </Link>
+        </DropdownMenuItem>
+        {(session?.user?.role === 'admin' || session?.user?.role === 'editor') && (
+          <>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem asChild>
+              <Link href="/admin/overview" className="w-full cursor-pointer">
                 Admin
               </Link>
             </DropdownMenuItem>
-          )}
-
-          <DropdownMenuItem className="mb-1 p-0">
-            <form action={signOutUser} className="w-full">
-              <Button className="h-4 w-full justify-start px-2 py-4" variant="ghost">
-                {t('Auth.signOut')}
-              </Button>
-            </form>
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </div>
+          </>
+        )}
+        <DropdownMenuSeparator />
+        <DropdownMenuItem className="p-0">
+          <form action={signOutUser} className="w-full">
+            <Button className="h-8 w-full justify-start px-2" variant="ghost">
+              {t('Auth.signOut')}
+            </Button>
+          </form>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 

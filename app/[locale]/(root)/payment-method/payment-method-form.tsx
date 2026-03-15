@@ -46,11 +46,9 @@ const PaymentMethodForm = ({ preferredPaymentMethod }: { preferredPaymentMethod:
   }
 
   return (
-    <div className="mx-auto max-w-md">
+    <div className="space-y-4">
       <Form {...form}>
         <form method="post" onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          <h1 className="h2-bold mt-4">Payment Method</h1>
-          <p className="text-sm text-muted-foreground">Please select your preferred payment method</p>
           <div className="flex flex-col gap-5 md:flex-row">
             <FormField
               control={form.control}

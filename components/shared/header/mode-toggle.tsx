@@ -2,17 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
-import { MoonIcon, SunMoon, SunIcon } from 'lucide-react';
+import { Sun, Moon } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuContent,
-  DropdownMenuCheckboxItem,
-} from '@/components/ui/dropdown-menu';
+import { cn } from '@/lib/utils';
 
 const ModeToggle = () => {
   const { theme, setTheme } = useTheme();
@@ -24,30 +16,34 @@ const ModeToggle = () => {
   }, []);
 
   if (!mounted) {
-    return null;
+    return <div className="h-8 w-[60px] rounded-full bg-muted border border-border/60 shrink-0" />;
   }
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="focus-visible:ring-0 focus-visible:ring-offset-0">
-          {theme === 'system' ? <SunMoon /> : theme === 'dark' ? <MoonIcon /> : <SunIcon />}
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <DropdownMenuLabel>Appearance</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuCheckboxItem checked={theme === 'system'} onClick={() => setTheme('system')}>
-          System
-        </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem checked={theme === 'dark'} onClick={() => setTheme('dark')}>
-          Dark
-        </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem checked={theme === 'light'} onClick={() => setTheme('light')}>
-          Light
-        </DropdownMenuCheckboxItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <button
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      className="relative flex items-center justify-between h-8 w-[60px] rounded-full bg-muted border border-border/60 px-1.5 cursor-pointer transition-colors shrink-0"
+      aria-label="Toggle theme"
+    >
+      <span
+        className={cn(
+          'absolute top-0.5 left-0.5 h-7 w-7 rounded-full bg-foreground shadow-md transition-transform duration-300 ease-in-out',
+          theme === 'dark' ? 'translate-x-[28px]' : 'translate-x-0',
+        )}
+      />
+      <Sun
+        className={cn(
+          'relative z-10 h-4 w-4 transition-colors',
+          theme === 'dark' ? 'text-muted-foreground' : 'text-background',
+        )}
+      />
+      <Moon
+        className={cn(
+          'relative z-10 h-4 w-4 transition-colors',
+          theme === 'dark' ? 'text-background' : 'text-muted-foreground',
+        )}
+      />
+    </button>
   );
 };
 

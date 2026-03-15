@@ -4,7 +4,7 @@
 
 @layer utilities {
   .wrapper {
-    @apply w-full max-w-7xl p-5 md:px-10 lg:mx-auto;
+    @apply container mx-auto px-4 lg:px-6;
   }
 
   .flex-start {
@@ -34,64 +34,74 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --background: 36 33% 94%;
+    --foreground: 160 27% 18%;
+    --card: 40 30% 97%;
+    --card-foreground: 160 27% 18%;
+    --popover: 40 30% 97%;
+    --popover-foreground: 160 27% 18%;
+    --primary: 160 27% 27%;
+    --primary-foreground: 36 33% 94%;
+    --secondary: 36 25% 88%;
+    --secondary-foreground: 160 27% 18%;
+    --muted: 36 20% 90%;
+    --muted-foreground: 160 10% 45%;
+    --accent: 41 50% 56%;
+    --accent-foreground: 160 27% 12%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 36 20% 85%;
+    --input: 36 20% 85%;
+    --ring: 160 27% 27%;
+    --radius: 0.5rem;
+    --sidebar-background: 160 27% 18%;
+    --sidebar-foreground: 36 33% 94%;
+    --sidebar-primary: 41 50% 56%;
+    --sidebar-primary-foreground: 160 27% 12%;
+    --sidebar-accent: 160 20% 25%;
+    --sidebar-accent-foreground: 36 33% 94%;
+    --sidebar-border: 160 20% 25%;
+    --sidebar-ring: 41 50% 56%;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --background: 160 27% 8%;
+    --foreground: 36 33% 94%;
+    --card: 160 27% 12%;
+    --card-foreground: 36 33% 94%;
+    --popover: 160 27% 12%;
+    --popover-foreground: 36 33% 94%;
+    --primary: 36 33% 94%;
+    --primary-foreground: 160 27% 18%;
+    --secondary: 160 20% 18%;
+    --secondary-foreground: 36 33% 94%;
+    --muted: 160 15% 18%;
+    --muted-foreground: 36 15% 65%;
+    --accent: 41 50% 56%;
+    --accent-foreground: 160 27% 8%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 160 15% 20%;
+    --input: 160 15% 20%;
+    --ring: 36 33% 94%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
-  }
-}
-
-@layer base {
-  body {
-    @apply bg-background text-foreground;
+    --sidebar-background: 160 27% 6%;
+    --sidebar-foreground: 36 33% 94%;
+    --sidebar-primary: 41 50% 56%;
+    --sidebar-primary-foreground: 160 27% 8%;
+    --sidebar-accent: 160 20% 12%;
+    --sidebar-accent-foreground: 36 33% 94%;
+    --sidebar-border: 160 20% 12%;
+    --sidebar-ring: 41 50% 56%;
   }
 }
 
@@ -99,8 +109,20 @@
   * {
     @apply border-border;
   }
+
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    font-family: var(--font-inter), 'Inter', sans-serif;
+    background-color: hsl(36 33% 94%);
+    min-height: 100vh;
+  }
+
+  .dark body {
+    background-color: hsl(160 27% 8%);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-playfair), 'Playfair Display', serif;
   }
 }
 
